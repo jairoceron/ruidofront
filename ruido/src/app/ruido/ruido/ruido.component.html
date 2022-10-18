@@ -1,0 +1,24 @@
+<!-- app-header></app-header>
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label></mat-label>
+        <input matInput [matDatepicker]="fechaIn" [(ngModel)]="fechaInicial" />
+        <mat-hint>Fecha Inicial</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="fechaIn"></mat-datepicker-toggle>
+        <mat-datepicker #fechaIn></mat-datepicker>
+      </mat-form-field>
+    
+      <mat-form-field appearance="fill">
+        <mat-label></mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaFinal" >
+        <mat-hint>Fecha Final</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    
+      <button mtype="button" class="btn btn-primary" (click)="consultaVariables()">
+        Consulta
+      </button>
+    
+    </div>
+    <app-footer></app-footer -->

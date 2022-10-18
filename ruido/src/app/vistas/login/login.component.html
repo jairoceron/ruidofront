@@ -1,0 +1,28 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+
+<div class="wrapper fadeInDown">
+   
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <img src="assets\cabezote-verde.png" id="icon" alt="User Icon" />
+    <!-- Icon -->
+    <div class="fadeIn first">
+     
+    </div>
+
+    <!-- Login Form -->
+    <form novalidate [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)" >
+      <input type="text"  class="fadeIn second" formControlName="username" placeholder="login">
+      <input type="password"  class="fadeIn third" formControlName="password" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div class="alert alert-danger" *ngIf="errorStatus">
+      <p>{{errorMsj}}</p>
+    </div>
+
+  </div>
+</div>

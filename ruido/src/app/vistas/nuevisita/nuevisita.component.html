@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div>
+  Radicado
+
+  <div>
+    <h1>
+      <ng-container *ngComponentOutlet="dummyComponent"></ng-container>
+    </h1>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label></mat-label>
+    <input matInput [matDatepicker]="fechaIn" [(ngModel)]="fechaInicial" />
+    <mat-hint>Fecha Visita</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="fechaIn"></mat-datepicker-toggle>
+    <mat-datepicker #fechaIn></mat-datepicker>
+  </mat-form-field>
+  &nbsp;&nbsp;
+
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Profesional</mat-label>
+    <mat-select [(ngModel)]="profesional" name="food">
+      <mat-option *ngFor="let profesionalX of listProfesional" [value]="profesionalX.idProfesional">
+        {{profesionalX.nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

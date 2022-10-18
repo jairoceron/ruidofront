@@ -1,0 +1,54 @@
+
+<div class="">
+<button mat-raised-button color="primary" (click)="nuevaVisita()">Ingresar Nueva Visita
+
+  <mat-icon>supervised_user_circle</mat-icon>
+</button>
+<br/> 
+    
+<div class="example-container mat-elevation-z8">
+      
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="Fecha">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.ano}} - {{row.mes}} </mat-cell>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="Profesional">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Profesional </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.profesional_encargado}}</mat-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="Dirección">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.direccion__numero_}} </mat-cell>
+      </ng-container>
+  
+      <!-- Color Column -->
+      <ng-container matColumnDef="Observación">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Observación </mat-header-cell>
+        <mat-cell *matCellDef="let row" > {{row.observaciones_al_motivo}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="estado_de_la_visita">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> estado_de_la_visita </mat-header-cell>
+        <mat-cell *matCellDef="let row" > {{row.estado_de_la_visita}} </mat-cell>
+      </ng-container>
+      
+                          
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  
+
+</div>
+<app-footer></app-footer>

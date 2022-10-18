@@ -1,0 +1,30 @@
+<button mat-button [matMenuTriggerFor]="aboveMenu">Principal</button>
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+  <button mat-menu-item (click)="irPrincipal()">Administración</button>
+  <button mat-menu-item>ArcGis</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="aboveMenu">Radicados</button>
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+  <button mat-menu-item>Nuevo</button>
+  <button mat-menu-item>Consulta</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="belowMenu">Visitas</button>
+<mat-menu #belowMenu="matMenu" yPosition="below">
+  <button mat-menu-item>Nueva</button>
+  <button mat-menu-item>Consulta</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="beforeMenu">Administración</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+  <button mat-menu-item>Nuevo Funcionario</button>
+  <button mat-menu-item>General</button>
+</mat-menu>
+
+
+<button mat-button [matMenuTriggerFor]="afterMenu">Salir</button>
+<mat-menu #afterMenu="matMenu" xPosition="after">
+  <button mat-menu-item>Salir</button>
+  <button mat-menu-item>|----</button>
+</mat-menu>
