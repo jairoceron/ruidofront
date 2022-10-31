@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
   checkLocalStorage() {
       console.log('que trae esto ??? ' , localStorage.getItem("token"));
       if(localStorage.getItem("token")) {
-        this.router.navigate(['dashboard']);
+        // this.router.navigate(['dashboard']);  
+        // 
       } else {
         this.router.navigate(['login']);
       }
@@ -54,7 +55,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("token",data.jwt);
       localStorage.setItem("username",fCUsername?.value);
       console.log('Hasta aqui va bien ... ');
-      this.router.navigate(['dashboard']);
+     // this.router.navigate(['dashboard']);  // si es un usuario válido debe ingresar al menú. 99999999
+     this.router.navigate(['encabezado']);
       this.errorStatus=false;
       // if (dataResponse.status="ok") {
 

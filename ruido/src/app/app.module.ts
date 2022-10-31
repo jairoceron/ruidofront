@@ -35,7 +35,9 @@ import { RadicadoComponent } from './vistas/radicado/radicado.component';
 import { MenuComponent } from './vistas/menu/menu.component';
 import {ToastrModule} from 'ngx-toastr';
 import { NuevisitaComponent } from './vistas/nuevisita/nuevisita.component';
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import { VisitaprofesionalComponent } from './vistas/visitaprofesional/visitaprofesional.component';
+import { UpdvisitprofesComponent } from './vistas/updvisitprofes/updvisitprofes.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { NuevisitaComponent } from './vistas/nuevisita/nuevisita.component';
     VisitaComponent,
     RadicadoComponent,
     MenuComponent,
-    NuevisitaComponent, 
+    NuevisitaComponent,
+    VisitaprofesionalComponent,
+    UpdvisitprofesComponent, 
     
 
   ],
@@ -78,7 +82,9 @@ import { NuevisitaComponent } from './vistas/nuevisita/nuevisita.component';
     MatTableModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule,
+    
   ],
   entryComponents: [RuidoComponent, EtiquetadoComponent,VacioComponent],
   providers: [],

@@ -26,6 +26,23 @@ export class RadicadoService {
 
   }
 
+  
+
+  consultaRadicado(strRadicado : string) {
+    let direccion = this.url + "consultaRadicado";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();       
+    customHeaders =customHeaders.append('content-type','application/json');
+    customHeaders =customHeaders.append('Authorization', lineax);
+    let pqrs : Pqrs = {radicado:strRadicado} 
+
+// 9999999999999999999999999
+
+    return this.http.post<Pqrs>(direccion, pqrs, {
+      'headers':customHeaders ,
+     });
+  }
+
 
 
 }

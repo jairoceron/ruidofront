@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+  
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      
+ 
+      
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+  
+      
+      <ng-container matColumnDef="profesional_encargado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> profesional </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.profesional_encargado}} </mat-cell>
+      </ng-container>
+  
+      
+      <ng-container matColumnDef="radicado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> radicado </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.radicado}} </mat-cell>
+      </ng-container>
+  
+      
+      <ng-container matColumnDef="fechavisita">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> fechavisita </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.fechavisita}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="estado_de_la_visita">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> estadovisita </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.estado_de_lavisita}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="numero_de_expediente">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> numeroexpediente </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.numero_de_expediente}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="horario_de_la_visita">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> horariovisita </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.horario_de_la_visita}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="direccion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> direccion </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.direccion}} </mat-cell>
+      </ng-container>      
+
+      <ng-container matColumnDef="latitud">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> latitud </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.latitud}} </mat-cell>
+      </ng-container> 
+
+      <ng-container matColumnDef="longitud">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> longitud </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.longitud"> {{row.longitud}} </mat-cell>
+      </ng-container> 
+
+      <ng-container matColumnDef="accion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Acción </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.longitud"> 
+          <button mat-mini-fab  aria-label="acción sobre las visitas" (click)="actualizaVisita(row)" >
+            <mat-icon >center_focus_weak</mat-icon> 
+          </button>
+        </mat-cell>
+      </ng-container> 
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <app-updvisitprofes></app-updvisitprofes>
+  
+  

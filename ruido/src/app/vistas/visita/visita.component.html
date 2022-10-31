@@ -1,10 +1,12 @@
 
 <div class="">
+
+  {{pqrsActual.radicado}} - 
 <button mat-raised-button color="primary" (click)="nuevaVisita()">Ingresar Nueva Visita
 
   <mat-icon>supervised_user_circle</mat-icon>
-</button>
-<br/> 
+</button> 
+<br/>  
     
 <div class="example-container mat-elevation-z8">
       
@@ -13,7 +15,7 @@
       <!-- ID Column -->
       <ng-container matColumnDef="Fecha">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.ano}} - {{row.mes}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.fechavisita}} </mat-cell>
       </ng-container>
   
       <!-- Progress Column -->
@@ -25,18 +27,18 @@
       <!-- Name Column -->
       <ng-container matColumnDef="Dirección">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.direccion__numero_}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.direccion}} </mat-cell>
       </ng-container>
   
       <!-- Color Column -->
       <ng-container matColumnDef="Observación">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Observación </mat-header-cell>
-        <mat-cell *matCellDef="let row" > {{row.observaciones_al_motivo}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Razón Social </mat-header-cell>
+        <mat-cell *matCellDef="let row" > {{row.razon_social}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="estado_de_la_visita">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> estado_de_la_visita </mat-header-cell>
-        <mat-cell *matCellDef="let row" > {{row.estado_de_la_visita}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Representante Legal </mat-header-cell>
+        <mat-cell *matCellDef="let row" > {{row.representante_legal}} </mat-cell>
       </ng-container>
       
                           
@@ -46,7 +48,7 @@
       </mat-row>
     </mat-table>
   
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>   
   </div>
   
 
