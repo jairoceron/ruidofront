@@ -14,6 +14,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { VisitaruidoService } from 'src/app/servicios/visitaruido.service';
 import { RadicadoService } from 'src/app/servicios/radicado.service';
+import { ConsultaService } from 'src/app/servicios/consulta.service';
+import { ExcelService } from 'src/app/servicios/excel.service';
+import { timeHours } from 'd3';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +29,7 @@ export class DashboardComponent implements OnInit {
   dummyComponent: any;    //VacioComponent;
   pqrs: Pqrs[] = [];
   pqrsActual : Pqrs = {radicado:''};
+  vistaSistema : string = '';
   dataSource: MatTableDataSource<Pqrs> = new MatTableDataSource(this.pqrs);
   displayedColumns = ['radicado', 'asunto_de_radicacion', 'año', 'mes', 'razon_social_del_establecimient', 'localidad', 'direcciones', 'visita'];
 
@@ -40,11 +44,12 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(
-    
-    private variaSesion: VarSesionService,
+    private excelService : ExcelService,
+    private variaSesionService: VarSesionService,
     private router: Router,
     private visitaService: VisitaruidoService,
-    private radicadoService: RadicadoService) { }
+    private radicadoService: RadicadoService,
+    private consultaService: ConsultaService) { }
 
   actualizaVisita() {
     console.log('actualizacion de la visita :: ');
@@ -61,7 +66,7 @@ export class DashboardComponent implements OnInit {
   consultaVariables() {
 
     let username: string = localStorage.getItem("username") || '';
-    this.variaSesion.encuentraModulo(username).subscribe(x => {
+    this.variaSesionService.encuentraModulo(username).subscribe(x => {
       console.log('Este xx es el objeto de sesion 00..... ');
       this.varSesionI = x;
       // this.varSesionI.modulo
@@ -97,17 +102,21 @@ export class DashboardComponent implements OnInit {
 
   // fechaInicialX : Date, fechaFinalX : Date
   actualizaElDetalle(radicadoX: string) {
+
+    console.log('EstadoTrámite ', this.vistaSistema);
    
-    let consultaVisita: ConsultaVisita = { fechaInicial: this.fechaInicial, fechaFinal: this.fechaFinal, radicado: radicadoX };
+    let consultaVisita: ConsultaVisita = { fechaInicial: this.fechaInicial, fechaFinal: this.fechaFinal, radicado: radicadoX, vistaSistema:'' };
    
     console.log('Actualiza el detalle ..consultaVisita . xxx ',consultaVisita );
+
+    this.consultaService.setConsultaActual(consultaVisita);
     
     this.radicadoService.consultaRadicado(radicadoX).subscribe( x => {
         x;
         this.pqrsActual = x;
         console.log('PQRS actal .. ' , this.pqrsActual);
         this.visitaService.pqrsActual(this.pqrsActual);
-        let consultaVisita : ConsultaVisita = {fechaInicial:new Date(), fechaFinal:new Date(), radicado:x.radicado};
+        let consultaVisita : ConsultaVisita = {fechaInicial:new Date(), fechaFinal:new Date(), radicado:x.radicado, vistaSistema:''};
         this.visitaService.setConsultaVisitaV(consultaVisita);
         this.visitaService.actualizaInfoVisiPorRadicado(consultaVisita);
 //9999999999999999999999
@@ -116,18 +125,36 @@ export class DashboardComponent implements OnInit {
     
 
     this.visitaService.actualizaInfoVisiPorRadicado(consultaVisita);
-    33333333333333333333
+  //  33333333333333333333
     // VisitaruidoService
   }
 
   consultaVisitas() {
-    let consultaVisita: ConsultaVisita = { fechaInicial: this.fechaInicial, fechaFinal: this.fechaFinal, radicado: '2021ER82639' };
-    this.variaSesion.consultaVisita(consultaVisita).subscribe(x => {
-      this.pqrs = x;
-      this.dataSource = new MatTableDataSource(this.pqrs);
-      this.dataSource.paginator = this.paginator;
+    console.log('b1 Estado trámite :. ', this.vistaSistema);
+    let consultaVisita: ConsultaVisita = { 
+      fechaInicial: this.fechaInicial, 
+      fechaFinal: this.fechaFinal, 
+      radicado: '2021ER82639', 
+      vistaSistema:this.vistaSistema
+    };
 
-    });
+    this.consultaService.setConsultaActual(consultaVisita);
+    console.log('b2');
+    //***********
+    this.consultaService.consultaObserv.subscribe(x1 => {
+      console.log('b3');
+      x1;
+      this.variaSesionService.consultaVisita(x1).subscribe(x => {
+        console.log('b4 ', x);
+        this.pqrs = x;
+        this.dataSource = new MatTableDataSource(this.pqrs);
+        this.dataSource.paginator = this.paginator;
+  
+      });
+    } );
+
+    console.log('b5');
+    
   }
 
   applyFilter(filterValue: string) {
@@ -143,6 +170,26 @@ export class DashboardComponent implements OnInit {
 
   ingresarRadicado() {
     this.router.navigate(['radicado']);
+  }
+
+  descargaExcel() {
+    console.log('Descarga Excel');
+    let data: any = [{
+      eid: 'e101',
+      ename: 'ravi',
+      esal: 1000
+    },
+    {
+      eid: 'e102',
+      ename: 'ram',
+      esal: 2000
+    },
+    {
+      eid: 'e103',
+      ename: 'rajesh',
+      esal: 3000
+    }];
+    this.excelService.exportAsExcelFile(this.pqrs,'ruido.xls')
   }
 
 }

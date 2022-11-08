@@ -4,6 +4,7 @@ export interface ConsultaVisita {
   fechaInicial: Date;
   fechaFinal: Date;
   radicado: string;
+  vistaSistema: string;  /* la vista del sistema puede ser: "PQRS por Localidad" -- "Estado Del Trámite"  -- "Provisionales" */
 }
 
 export interface RuiSector {
@@ -34,6 +35,17 @@ export interface RuiLocalidad {
   idSector: number;
   nombre: string;
 }
+
+export interface ChartLocalidad{
+  name : string;
+  value : number;
+}
+
+export interface ChartGenerico {
+  name : string;
+  value : number;
+}
+
 export interface RdoVisita {
   idvisita?: number;
   profesional: string;

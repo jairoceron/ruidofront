@@ -1,85 +1,107 @@
-
 <app-header></app-header>
-<div>
-  <ng-container *ngFor="let menX of varSesionI.menu; let j=index">
-    
-  <button mtype="button" class="btn btn-primary" (click)="assignComponent(menX)" >
-    <mat-icon aria-hidden="false" aria-label=" filter icon">filter_alt</mat-icon>   
-    {{menX}}
-  </button>
-    
-</ng-container>
-<div>
-  <h1><ng-container *ngComponentOutlet="dummyComponent"></ng-container></h1>
-</div>
+<div class="d-flex flex-column bd-highlight mb-6">
+  <div class="p-2 bd-highlight">
+    <ng-container *ngFor="let menX of varSesionI.menu; let j=index">
+
+      <button mtype="button" class="btn btn-primary" (click)="assignComponent(menX)">
+        <mat-icon aria-hidden="false" aria-label=" filter icon">filter_alt</mat-icon>
+        {{menX}}
+      </button>
+
+    </ng-container>
+
 
     <mat-form-field appearance="fill">
-        <mat-label></mat-label>
-        <input matInput [matDatepicker]="fechaIn" [(ngModel)]="fechaInicial" />
-        <mat-hint>Fecha Inicial</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="fechaIn"></mat-datepicker-toggle>
-        <mat-datepicker #fechaIn></mat-datepicker>
-      </mat-form-field>
+      <mat-label></mat-label>
+      <input matInput [matDatepicker]="fechaIn" [(ngModel)]="fechaInicial" />
+      <mat-hint>Fecha Inicial</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="fechaIn"></mat-datepicker-toggle>
+      <mat-datepicker #fechaIn></mat-datepicker>
+    </mat-form-field>
     &nbsp;&nbsp;
-      <mat-form-field appearance="fill">
-        <mat-label></mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaFinal" >
-        <mat-hint>Fecha Final</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      &nbsp;&nbsp;
-      <mat-form-field  appearance="fill">
-        <mat-label>Radicado</mat-label>
-        <input matInput placeholder="2021ER66889" >
-      </mat-form-field>
-      &nbsp;&nbsp;
-      <button mtype="button" class="btn btn-primary" mat-raised-button color="primary" (click)="consultaVariables()">
-        Consulta
-      </button>
-      &nbsp;&nbsp;
-      <button mtype="button" class="btn btn-primary" mat-raised-button color="primary" (click)="consultaVisitas()">
-        Consulta DA 
-      </button>  
-      &nbsp;&nbsp;
+    <mat-form-field appearance="fill">
+      <mat-label></mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="fechaFinal">
+      <mat-hint>Fecha Final</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    &nbsp;&nbsp;
+    <mat-form-field appearance="fill">
+      <mat-label>Radicado</mat-label>
+      <input matInput placeholder="2021ER66889">
+    </mat-form-field>
+    &nbsp;&nbsp;
+    <mat-form-field appearance="fill">
+      <mat-label>Estadística</mat-label>
+      <mat-select [(ngModel)]="vistaSistema">
+        <mat-option value="PQRS por Localidad">PQRS por Localidad</mat-option>
+        <mat-option value="Estado Del Trámite">Estado Del Trámite</mat-option>
+        <mat-option value="Provisionales">Provisionales</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-      <button mtype="button" class="btn btn-primary" mat-raised-button color="primary" (click)="ingresarRadicado()">
-        Ingresar Radicado 
-      </button> 
-    </div>
+    <!--
+    <button mtype="button" class="btn btn-primary" mat-raised-button color="primary" (click)="consultaVariables()">
+      Consulta
+    </button>
+    -->
+
+    <!-- 
+    <button mtype="button" class="btn btn-primary" mat-raised-button color="primary" (click)="consultaVisitas()">
+      Consulta DA
+    </button>
+    -->
+    <input type="submit" class="btn btn-default" value="Consulta !" (click)="consultaVisitas()">
+   
+    
+      <input type="submit" class="btn btn-default" value="Descarga" (click)="descargaExcel()">
+    
+  </div>
+
+
+
+
+  <div class="p-2 bd-highlight">
+    <app-chartlocalidad *ngIf="vistaSistema === '' || vistaSistema === 'PQRS por Localidad' "></app-chartlocalidad>
+    <app-chartestadotramite *ngIf="vistaSistema === 'Estado Del Trámite'"></app-chartestadotramite>
+  </div>
+
+  <div class="p-2 bd-highlight">
     &nbsp;&nbsp;
     <div class="example-header">
       <mat-form-field>
-        <input matInput  placeholder="Filter">
+        <input matInput placeholder="Filter">
       </mat-form-field>
     </div>
     &nbsp;&nbsp;
+
     <div class="example-container mat-elevation-z8">
-    
+
       <mat-table [dataSource]="dataSource" matSort>
-    
+
         <!-- ID Column -->
         <ng-container matColumnDef="radicado">
           <mat-header-cell *matHeaderCellDef mat-sort-header> radicado </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.radicado}} </mat-cell>
         </ng-container>
-    
+
         <!-- Progress Column -->
         <ng-container matColumnDef="asunto_de_radicacion">
           <mat-header-cell *matHeaderCellDef mat-sort-header> asunto_de_radicacion </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.asunto_de_radicacion}}</mat-cell>
         </ng-container>
-    
+
         <!-- Name Column -->
         <ng-container matColumnDef="año">
           <mat-header-cell *matHeaderCellDef mat-sort-header> año </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.ano}} </mat-cell>
         </ng-container>
-    
+
         <!-- Color Column -->
         <ng-container matColumnDef="mes">
           <mat-header-cell *matHeaderCellDef mat-sort-header> mes </mat-header-cell>
-          <mat-cell *matCellDef="let row" > {{row.mes}} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{row.mes}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="razon_social_del_establecimient">
           <mat-header-cell *matHeaderCellDef mat-sort-header> razon_social_del_establecimient </mat-header-cell>
@@ -87,29 +109,33 @@
         </ng-container>
         <ng-container matColumnDef="localidad">
           <mat-header-cell *matHeaderCellDef mat-sort-header> localidad </mat-header-cell>
-          <mat-cell *matCellDef="let row" > {{row.localidad}} </mat-cell>
-        </ng-container>    
+          <mat-cell *matCellDef="let row"> {{row.localidad}} </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="direcciones">
           <mat-header-cell *matHeaderCellDef mat-sort-header> direcciones </mat-header-cell>
-          <mat-cell *matCellDef="let row" > {{row.direcciones}} </mat-cell>
-        </ng-container>  
+          <mat-cell *matCellDef="let row"> {{row.direcciones}} </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="visita">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Visitas </mat-header-cell>
-          <mat-cell *matCellDef="let row" > 
-            <button mat-mini-fab  aria-label="Example icon button with a home icon" (click)="actualizaElDetalle(row.radicado)" >
-            <mat-icon >center_focus_weak</mat-icon> 
-          </button>
-        </mat-cell>
-        </ng-container>                     
-    
+          <mat-cell *matCellDef="let row">
+            <button mat-mini-fab aria-label="Example icon button with a home icon"
+              (click)="actualizaElDetalle(row.radicado)">
+              <mat-icon>center_focus_weak</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;">
         </mat-row>
       </mat-table>
-    
+
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
-    <br/><br/>
-    <app-visita></app-visita>
+  </div>
 
-    <!--app-footer></app-footer -->
+  <br /><br />
+  <app-visita></app-visita>
+</div>
+
+<!--app-footer></app-footer -->

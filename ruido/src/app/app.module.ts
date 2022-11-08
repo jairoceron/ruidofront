@@ -38,6 +38,10 @@ import { NuevisitaComponent } from './vistas/nuevisita/nuevisita.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { VisitaprofesionalComponent } from './vistas/visitaprofesional/visitaprofesional.component';
 import { UpdvisitprofesComponent } from './vistas/updvisitprofes/updvisitprofes.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ChartlocalidadComponent } from './vistas/chartlocalidad/chartlocalidad.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { ChartestadotramiteComponent } from './vistas/chartestadotramite/chartestadotramite.component';
 
 
 @NgModule({
@@ -55,7 +59,9 @@ import { UpdvisitprofesComponent } from './vistas/updvisitprofes/updvisitprofes.
     MenuComponent,
     NuevisitaComponent,
     VisitaprofesionalComponent,
-    UpdvisitprofesComponent, 
+    UpdvisitprofesComponent,
+    ChartlocalidadComponent,
+    ChartestadotramiteComponent, 
     
 
   ],
@@ -84,7 +90,8 @@ import { UpdvisitprofesComponent } from './vistas/updvisitprofes/updvisitprofes.
     MatCheckboxModule,
     MatMenuModule,
     MatGridListModule,
-    
+    NgChartsModule,
+    NgxChartsModule,
   ],
   entryComponents: [RuidoComponent, EtiquetadoComponent,VacioComponent],
   providers: [],
