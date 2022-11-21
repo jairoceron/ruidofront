@@ -42,7 +42,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { ChartlocalidadComponent } from './vistas/chartlocalidad/chartlocalidad.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ChartestadotramiteComponent } from './vistas/chartestadotramite/chartestadotramite.component';
-
+import { PoligonruidoComponent } from './vistas/poligonruido/poligonruido.component';
+import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ChartestadotramiteComponent } from './vistas/chartestadotramite/chartes
     VisitaprofesionalComponent,
     UpdvisitprofesComponent,
     ChartlocalidadComponent,
-    ChartestadotramiteComponent, 
+    ChartestadotramiteComponent,
+    PoligonruidoComponent, 
     
 
   ],
@@ -92,6 +94,7 @@ import { ChartestadotramiteComponent } from './vistas/chartestadotramite/chartes
     MatGridListModule,
     NgChartsModule,
     NgxChartsModule,
+    LeafletMarkerClusterModule
   ],
   entryComponents: [RuidoComponent, EtiquetadoComponent,VacioComponent],
   providers: [],

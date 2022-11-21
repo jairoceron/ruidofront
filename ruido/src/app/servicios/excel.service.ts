@@ -10,7 +10,7 @@ const EXCEL_EXTENSION = '.xlsx';
   providedIn: 'root'
 })
 export class ExcelService {
-
+  excelData:any;
   constructor() { }
 
   public exportAsExcelFile(json: any[], excelFileName: string): void {

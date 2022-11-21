@@ -35,6 +35,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Estadística</mat-label>
       <mat-select [(ngModel)]="vistaSistema">
+        <mat-option value="Polígono Consulta">Polígono Consulta</mat-option>
         <mat-option value="PQRS por Localidad">PQRS por Localidad</mat-option>
         <mat-option value="Estado Del Trámite">Estado Del Trámite</mat-option>
         <mat-option value="Provisionales">Provisionales</mat-option>
@@ -64,6 +65,7 @@
 
   <div class="p-2 bd-highlight">
     <app-chartlocalidad *ngIf="vistaSistema === '' || vistaSistema === 'PQRS por Localidad' "></app-chartlocalidad>
+    <app-poligonruido *ngIf="vistaSistema === 'Polígono Consulta' "></app-poligonruido>
     <app-chartestadotramite *ngIf="vistaSistema === 'Estado Del Trámite'"></app-chartestadotramite>
   </div>
 
