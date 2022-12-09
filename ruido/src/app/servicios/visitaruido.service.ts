@@ -22,7 +22,13 @@ export class VisitaruidoService {
   public  pqrObserv : Observable<Pqrs> = this.pqrBehSub.asObservable();
 
 
-  public consultaVisitaV : ConsultaVisita = {fechaInicial:new Date(), fechaFinal:new Date(), radicado:'' , vistaSistema:''};
+  public consultaVisitaV : ConsultaVisita = {
+    fechaInicial:new Date(),
+     fechaFinal:new Date(), 
+     radicado:'' , 
+     vistaSistema:'',
+    direccion:''
+    };
 
   constructor(private http:HttpClient) { }
 

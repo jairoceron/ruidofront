@@ -1,4 +1,9 @@
 <app-header></app-header>
+
+<div>Archivo de visitas : <input type="file" (change)="readExcel($event)">  </div>
+
+<div>Archivo de PQRS : <input type="file" (change)="readExcelPQRS($event)"> </div>
+
 <div class="d-flex flex-column bd-highlight mb-6">
   <div class="p-2 bd-highlight">
     <ng-container *ngFor="let menX of varSesionI.menu; let j=index">
@@ -35,6 +40,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Estadística</mat-label>
       <mat-select [(ngModel)]="vistaSistema">
+        
+        <mat-option value="Consulta por Dirección">Consulta por Dirección</mat-option>
         <mat-option value="Polígono Consulta">Polígono Consulta</mat-option>
         <mat-option value="PQRS por Localidad">PQRS por Localidad</mat-option>
         <mat-option value="Estado Del Trámite">Estado Del Trámite</mat-option>
@@ -67,6 +74,7 @@
     <app-chartlocalidad *ngIf="vistaSistema === '' || vistaSistema === 'PQRS por Localidad' "></app-chartlocalidad>
     <app-poligonruido *ngIf="vistaSistema === 'Polígono Consulta' "></app-poligonruido>
     <app-chartestadotramite *ngIf="vistaSistema === 'Estado Del Trámite'"></app-chartestadotramite>
+    <app-consdirecc *ngIf="vistaSistema === 'Consulta por Dirección'"></app-consdirecc>
   </div>
 
   <div class="p-2 bd-highlight">
@@ -80,56 +88,116 @@
 
     <div class="example-container mat-elevation-z8">
 
-      <mat-table [dataSource]="dataSource" matSort>
+      <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
         <!-- ID Column -->
         <ng-container matColumnDef="radicado">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> radicado </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.radicado}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Radicado </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <button type="button" class="btn btn-default" aria-label="Left Align"  (click)="(expandedElement = expandedElement === element ? null : element);" 
+                value={{element.radicado}}  >  
+                {{element.radicado}} 
+            </button>
+          </mat-cell>
         </ng-container>
 
         <!-- Progress Column -->
         <ng-container matColumnDef="asunto_de_radicacion">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> asunto_de_radicacion </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.asunto_de_radicacion}}</mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Asunto </mat-header-cell>
+         
+
+            <div class="example-element-detail"  >
+          <mat-cell *matCellDef="let row"    > {{row.asunto_de_radicacion}}
+          </mat-cell>
+         
+          </div>
+
+         
         </ng-container>
+        <ng-container matColumnDef="expandedDetail">
+          <mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length"  > 
+            <div
+            class="example-element-detail"
+            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+          >
+            <div class="example-element-diagram">
+         
+
+            <!-- ID Column -->
+            <ng-container >
+              Profesionl Asignado
+              {{element.profesional_asignado_primera_as}}  <span></span>
+              Sector : {{element.sector_reportado}}  <span></span>
+              Localidad: {{element.localidad}}  <span></span>
+              Causante del Origen Quejoso:{{element.causante_del_origen_quejoso}} <span></span> 
+              Estado del Trámite:{{element.estado_del_tramite}}  <span></span>
+              Observaciones Generales:{{element.observaciones_generales}}  <span></span>
+              
+              Profesional que diligencia: {{element.profesional_que_diligencia}}  <span></span><p> </p>
+              Origen Fid: {{element.orig_fid}}  <span></span>
+              Fecha del Radicado:{{element.fecha_del_radicado}}  <span></span>
+              Fecha Primera Asignación:{{element.fecha_primera_asignacion}}  <span></span>
+              Fecha Segunda Asignación:{{element.fecha_segunda_asignacion}}  <span></span>
+              Profesional Segunda Asignación:{{element.profesional_asignado_segunda_as}}  <span></span>
+            </ng-container>
+
+          </div>
+      </div>       
+        </mat-cell>
+      </ng-container>  
+
+         
+
 
         <!-- Name Column -->
+       <!--
         <ng-container matColumnDef="año">
           <mat-header-cell *matHeaderCellDef mat-sort-header> año </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.ano}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.ano}} </mat-cell>
         </ng-container>
-
+-->
         <!-- Color Column -->
+   <!--
         <ng-container matColumnDef="mes">
           <mat-header-cell *matHeaderCellDef mat-sort-header> mes </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.mes}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.mes}} </mat-cell>
         </ng-container>
+-->
+
         <ng-container matColumnDef="razon_social_del_establecimient">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> razon_social_del_establecimient </mat-header-cell>
-          <mat-cell *matCellDef="let row" [style.color]="row.razon_social_del_establecimient"> {{row.mes}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Razón Social </mat-header-cell>
+          <mat-cell *matCellDef="let element" [style.color]="element.razon_social_del_establecimient"> {{element.razon_social_del_establecimient}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="localidad">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> localidad </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.localidad}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Localidad </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.localidad}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="direcciones">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> direcciones </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.direcciones}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Direcciones </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.direcciones}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="visita">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Visitas </mat-header-cell>
-          <mat-cell *matCellDef="let row">
+          <mat-cell *matCellDef="let element">
             <button mat-mini-fab aria-label="Example icon button with a home icon"
-              (click)="actualizaElDetalle(row.radicado)">
+              (click)="actualizaElDetalle(element.radicado)">
               <mat-icon>center_focus_weak</mat-icon>
             </button>
           </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;">
-        </mat-row>
+
+
+        <mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="example-element-row" [class.example-expanded-row]="expandedElement === element" ></mat-row>
+        
+    <mat-row  *matRowDef="let row; columns: ['expandedDetail']"
+    class="example-detail-row" ></mat-row>
+    
+
+
+
       </mat-table>
 
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

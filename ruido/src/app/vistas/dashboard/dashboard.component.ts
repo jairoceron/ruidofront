@@ -17,21 +17,36 @@ import { RadicadoService } from 'src/app/servicios/radicado.service';
 import { ConsultaService } from 'src/app/servicios/consulta.service';
 import { ExcelService } from 'src/app/servicios/excel.service';
 import { timeHours } from 'd3';
+import * as XLSX from 'xlsx';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import {  animate,  state,  style,  transition,  trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  animations: [
+    trigger("detailExpand", [
+      state("collapsed", style({ height: "0px", minHeight: "0" })),
+      state("expanded", style({ height: "*" })),
+      transition(
+        "expanded <=> collapsed",
+        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
+      )
+    ])
+  ]
 })
 export class DashboardComponent implements OnInit {
-
+  excelData : any;
   varSesionI: VariableSesionI = { username: '', modulo: [], menu: [] };
   dummyComponent: any;    //VacioComponent;
   pqrs: Pqrs[] = [];
   pqrsActual : Pqrs = {radicado:''};
   vistaSistema : string = '';
   dataSource: MatTableDataSource<Pqrs> = new MatTableDataSource(this.pqrs);
-  displayedColumns = ['radicado', 'asunto_de_radicacion', 'año', 'mes', 'razon_social_del_establecimient', 'localidad', 'direcciones', 'visita'];
+  displayedColumns = ['radicado', 'asunto_de_radicacion',  'razon_social_del_establecimient', 'localidad', 'direcciones', 'visita'];
+  expandDisplayedColumns = ["optionName", "optionDescription"];
 
   @ViewChild(MatPaginator, { static: false })
   paginator!: MatPaginator;
@@ -42,8 +57,37 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatSlideToggle, { static: true })
   stoggle!: MatSlideToggle;
 
+  //http://localhost:8080/cimab/tablero/authenticate
+  // url:string ='http://localhost:8080/cimab/tablero/';
+  private url = environment.ruidoURL;
+  expandedElement: Pqrs | null = {objectid : 0,
+      //  ano : string;
+      mes : '',
+      x : '',
+      y : '',
+      radicado: '',
+      asunto_de_radicacion : '',
+      direcciones : '',
+      complemento_de_direcciones   : '',
+      razon_social_del_establecimient : '',
+      sector_reportado : '',
+      localidad : '',
+      causante_del_origen_quejoso : '',
+      estado_del_tramite : 0,
+      observaciones_generales : '',
+      profesional_asignado_primera_as : '',
+      profesional_que_diligencia   : '',
+      orig_fid  : 0,
+      fecha_del_radicado  : new Date,
+      fecha_primera_asignacion : new Date,
+      fecha_segunda_asignacion : 0,
+      profesional_asignado_segunda_as : '',
+      globalid : '',
+  };
+
 
   constructor(
+    
     private excelService : ExcelService,
     private variaSesionService: VarSesionService,
     private router: Router,
@@ -105,7 +149,13 @@ export class DashboardComponent implements OnInit {
 
     console.log('EstadoTrámite ', this.vistaSistema);
    
-    let consultaVisita: ConsultaVisita = { fechaInicial: this.fechaInicial, fechaFinal: this.fechaFinal, radicado: radicadoX, vistaSistema:'' };
+    let consultaVisita: ConsultaVisita = { 
+      fechaInicial: this.fechaInicial,
+       fechaFinal: this.fechaFinal,
+        radicado: radicadoX,
+         vistaSistema:'' ,
+         direccion:'' ,
+        };
    
     console.log('Actualiza el detalle ..consultaVisita . xxx ',consultaVisita );
 
@@ -116,7 +166,13 @@ export class DashboardComponent implements OnInit {
         this.pqrsActual = x;
         console.log('PQRS actal .. ' , this.pqrsActual);
         this.visitaService.pqrsActual(this.pqrsActual);
-        let consultaVisita : ConsultaVisita = {fechaInicial:new Date(), fechaFinal:new Date(), radicado:x.radicado, vistaSistema:''};
+        let consultaVisita : ConsultaVisita = {
+          fechaInicial:new Date(),
+           fechaFinal:new Date(), 
+           radicado:x.radicado, 
+           vistaSistema:'',
+           direccion:''
+          };
         this.visitaService.setConsultaVisitaV(consultaVisita);
         this.visitaService.actualizaInfoVisiPorRadicado(consultaVisita);
 //9999999999999999999999
@@ -131,19 +187,30 @@ export class DashboardComponent implements OnInit {
 
   consultaVisitas() {
     console.log('b1 Estado trámite :. ', this.vistaSistema);
-    let consultaVisita: ConsultaVisita = { 
-      fechaInicial: this.fechaInicial, 
-      fechaFinal: this.fechaFinal, 
-      radicado: '2021ER82639', 
-      vistaSistema:this.vistaSistema
-    };
+    // let consultaVisita: ConsultaVisita = { 
+    //  fechaInicial: this.fechaInicial, 
+    //  fechaFinal: this.fechaFinal, 
+    //  radicado: '2021ER82639', 
+    //  vistaSistema:this.vistaSistema,      
+    //  direccion:'',
+    //};
+
+    let consultaVisita: ConsultaVisita = new ConsultaVisita();
+    consultaVisita.fechaFinal = this.fechaFinal;
+    consultaVisita.fechaInicial = this.fechaInicial;
+    consultaVisita.vistaSistema = this.vistaSistema;
 
     this.consultaService.setConsultaActual(consultaVisita);
+
+
+
     console.log('b2');
     //***********
+
+
     this.consultaService.consultaObserv.subscribe(x1 => {
       console.log('b3');
-      x1;
+      x1; // trae el objeto ConsultaVisita actual
       this.variaSesionService.consultaVisita(x1).subscribe(x => {
         console.log('b4 ', x);
         this.pqrs = x;
@@ -190,6 +257,52 @@ export class DashboardComponent implements OnInit {
       esal: 3000
     }];
     this.excelService.exportAsExcelFile(this.pqrs,'ruido.xls')
+  }
+
+  readExcel(event:any) {
+    console.log('a1');
+    let file = event.target.files[0];
+    console.log('a2');
+    let fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
+    console.log('a3');
+    fileReader.onload = (e) => {
+      console.log('a4');
+      var workBook = XLSX.read(fileReader.result, {type:'binary'});
+      console.log('a5');
+      var sheetNames = workBook.SheetNames;
+      console.log('a6');
+      this.excelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])
+      console.log('a7');
+      console.log(this.excelData);
+      this.excelService.cargaDataExcel(this.excelData).subscribe(x => 
+        { x ;}
+      );
+      
+    }
+  }
+
+  readExcelPQRS(event:any) {
+    console.log('a1');
+    let file = event.target.files[0];
+    console.log('a2');
+    let fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
+    console.log('a3');
+    fileReader.onload = (e) => {
+      console.log('a4');
+      var workBook = XLSX.read(fileReader.result, {type:'binary'});
+      console.log('a5');
+      var sheetNames = workBook.SheetNames;
+      console.log('a6');
+      this.excelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])
+      console.log('a7');
+      console.log(this.excelData);
+      this.excelService.cargaDataExcelPQRS(this.excelData).subscribe(x => 
+        { x ;}
+      );
+      
+    }
   }
 
 }

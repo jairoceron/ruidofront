@@ -1,10 +1,20 @@
 import { timestamp } from "rxjs";
 
+/*
 export interface ConsultaVisita {
   fechaInicial: Date;
   fechaFinal: Date;
   radicado: string;
-  vistaSistema: string;  /* la vista del sistema puede ser: "PQRS por Localidad" -- "Estado Del Trámite"  -- "Provisionales" */
+  vistaSistema: string;  // la vista del sistema puede ser: "PQRS por Localidad" -- "Estado Del Trámite"  -- "Provisionales" 
+  direccion: string;    //  dirección de ubicación:  CL 52 No. 23 - 25  
+} */
+
+export class ConsultaVisita {
+  fechaInicial: Date = new Date();
+  fechaFinal: Date = new Date();;
+  radicado: string = '';
+  vistaSistema: string = '';  // la vista del sistema puede ser: "PQRS por Localidad" -- "Estado Del Trámite"  -- "Provisionales" 
+  direccion: string = '';    //  dirección de ubicación:  CL 52 No. 23 - 25  
 }
 
 export interface RuiSector {

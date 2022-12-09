@@ -12,13 +12,46 @@ export class ConsultaService {
   // consultaVisita: ConsultaVisita
 // {fechaInicial:new Date, fechaFinal:new Date, radicado:'xx'}
 
-  private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( {fechaInicial:new Date, fechaFinal:new Date, radicado:'xx', vistaSistema:''});   
+ /* 
+consultaVisita : ConsultaVisita = {fechaInicial:new Date,
+  fechaFinal:new Date, 
+  radicado:'xx',
+  vistaSistema:'',
+  direccion:'',}*/
+
+  consultaVisita : ConsultaVisita = new ConsultaVisita();
+
+  /*
+private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( {
+    fechaInicial:new Date,
+    fechaFinal:new Date, 
+    radicado:'xx',
+    vistaSistema:'',
+    direccion:'',
+    });    */
+
+    private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( 
+      new ConsultaVisita()
+    );  
+
+
   public  consultaObserv : Observable<ConsultaVisita> = this.consultaBehSub.asObservable();
 
   constructor() { }
 
   setConsultaActual(consultaVisita: ConsultaVisita) {
-    this.consultaBehSub.next(consultaVisita);
+    this.consultaVisita.fechaFinal = consultaVisita.fechaFinal;
+    this.consultaVisita.fechaInicial = consultaVisita.fechaInicial;
+    this.consultaBehSub.next(this.consultaVisita);
+  }
+
+  updateDireccion(direccion : string) {
+    console.log('la consulta::: ' , this.consultaVisita);
+    this.consultaVisita.direccion = direccion;
+  }
+  
+  setVistaSistema(vistaSistema : string) {
+    this.consultaVisita.vistaSistema = vistaSistema;
   }
 
 }

@@ -49,10 +49,17 @@ export class VarSesionService {
 
     // 999999999999999999999999999
     let direccion = this.url + "consultaVisita";
+
+    if (consultaVisita.vistaSistema === 'Consulta por Dirección') {
+      // direccion = this.url + "consultaDirecVisita";
+      direccion = this.url + "consultaDirecPqrs";
+    }
+
     let lineax = "Bearer " + localStorage.getItem("token");
     let customHeaders = new HttpHeaders();
     customHeaders = customHeaders.append('content-type', 'application/json');
     customHeaders = customHeaders.append('Authorization', lineax);
+    console.log('Con esto me voy :::::>> ' + consultaVisita.fechaFinal + ' --- direccion :: ' + consultaVisita.direccion);
 
     return this.http.post<Pqrs[]>(direccion, consultaVisita, {
       'headers': customHeaders,

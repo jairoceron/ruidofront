@@ -44,6 +44,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ChartestadotramiteComponent } from './vistas/chartestadotramite/chartestadotramite.component';
 import { PoligonruidoComponent } from './vistas/poligonruido/poligonruido.component';
 import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
+import { ConsdireccComponent } from './vistas/consdirecc/consdirecc.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluste
     UpdvisitprofesComponent,
     ChartlocalidadComponent,
     ChartestadotramiteComponent,
-    PoligonruidoComponent, 
+    PoligonruidoComponent,
+    ConsdireccComponent, 
     
 
   ],

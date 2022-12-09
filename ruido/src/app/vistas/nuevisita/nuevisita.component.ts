@@ -145,7 +145,11 @@ export class NuevisitaComponent implements OnInit {
         let options= { closeButton:true, tapToDismiss:false, titleClass:'red' ,  timeOut: 3000, progressBar:true, enableHtml:true};
         
         this.toastrService.success('Visita Guardada', visita.radicado, options).onTap.subscribe(() => this.toasterClickedHandler());
-        let consultaVisita : ConsultaVisita = {fechaInicial:new Date(), fechaFinal:new Date(), radicado : visita.radicado, vistaSistema:''};
+        let consultaVisita : ConsultaVisita = {fechaInicial:new Date(), 
+          fechaFinal:new Date(), 
+          radicado : visita.radicado,
+           vistaSistema:'',
+          direccion:''};
         this.visitaRuidoService.setConsultaVisitaV(consultaVisita);
         this.visitaRuidoService.actualizaInfoVisiPorRadicado(consultaVisita);
 
