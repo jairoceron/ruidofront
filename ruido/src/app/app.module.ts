@@ -45,6 +45,11 @@ import { ChartestadotramiteComponent } from './vistas/chartestadotramite/chartes
 import { PoligonruidoComponent } from './vistas/poligonruido/poligonruido.component';
 import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
 import { ConsdireccComponent } from './vistas/consdirecc/consdirecc.component';
+import { ConslocalidadComponent } from './vistas/conslocalidad/conslocalidad.component';
+import { ConsestramiteComponent } from './vistas/consestramite/consestramite.component';
+import { ConstipopredioComponent } from './vistas/constipopredio/constipopredio.component';
+import { ChartgenericoComponent } from './vistas/chartgenerico/chartgenerico.component';
+import { Chart2DgenericoComponent } from './vistas/chart2-dgenerico/chart2-dgenerico.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +70,12 @@ import { ConsdireccComponent } from './vistas/consdirecc/consdirecc.component';
     ChartlocalidadComponent,
     ChartestadotramiteComponent,
     PoligonruidoComponent,
-    ConsdireccComponent, 
+    ConsdireccComponent,
+    ConslocalidadComponent,
+    ConsestramiteComponent,
+    ConstipopredioComponent,
+    ChartgenericoComponent,
+    Chart2DgenericoComponent, 
     
 
   ],

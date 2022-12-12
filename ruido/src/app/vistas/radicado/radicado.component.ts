@@ -35,7 +35,7 @@ export class RadicadoComponent implements OnInit {
   public fechaRadicado : Date = new Date(); 
 
   listRuiSector: RuiSector[] = [ ];
-  listRuiLocalidad: RuiSector[] = [ ];
+  listRuiLocalidad: RuiLocalidad[] = [ ];
   listRdoAsunto: RdoAsunto[] = [ ];
   listRdoEstado: RdoEstado[] = [ ];
   listProfesional: RdoProfesional[] = [ ];
@@ -107,7 +107,7 @@ export class RadicadoComponent implements OnInit {
   }
 
   consultaListaLocalidades() {
-    let localidad : RuiLocalidad ={ idSector:1, nombre:'xxx'};
+    let localidad : RuiLocalidad ={ idLocalidad:1, nombre:'xxx'};
     this.localidadService.consultaLocalidad(localidad).subscribe( x => { 
    
      x;

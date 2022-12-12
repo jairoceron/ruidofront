@@ -54,4 +54,17 @@ private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( 
     this.consultaVisita.vistaSistema = vistaSistema;
   }
 
+  updateLocalidad(localidad : string) {
+    this.consultaVisita.localidad = localidad;
+  }
+
+  updateEstadoTramite(estadoTramite : string) {
+    this.consultaVisita.estadoTramite = estadoTramite;
+  }
+
+  updateTipoPredio(tipoPredio : string) {
+    this.consultaVisita.tipoPredio = tipoPredio;
+   // ****************
+  }
+
 }

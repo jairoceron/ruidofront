@@ -1,0 +1,12 @@
+<h4>Tipo de Predio</h4>
+
+
+<mat-form-field appearance="fill">
+  <mat-label>Tipo de Predio</mat-label>
+  
+  <mat-select placeholder="Tipo de Predio ..." [(ngModel)]="tipoPrediox" (ngModelChange)="onTipoPredioSelection()">
+    <mat-option *ngFor="let tpredio of listTPredio" [value]="tpredio.nombre">
+      {{tpredio.nombre}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

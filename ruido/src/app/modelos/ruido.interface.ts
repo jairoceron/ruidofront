@@ -15,6 +15,9 @@ export class ConsultaVisita {
   radicado: string = '';
   vistaSistema: string = '';  // la vista del sistema puede ser: "PQRS por Localidad" -- "Estado Del Trámite"  -- "Provisionales" 
   direccion: string = '';    //  dirección de ubicación:  CL 52 No. 23 - 25  
+  localidad: string = '';    // localidad: Usme, Ciudad Bolivar
+  estadoTramite : string = '';
+  tipoPredio : string = '';
 }
 
 export interface RuiSector {
@@ -42,7 +45,12 @@ export interface Modulousuario {
 
 
 export interface RuiLocalidad {
-  idSector: number;
+  idLocalidad : number, 
+  nombre: string;
+}
+
+export interface RdoTipopredio {
+  idtipopredio : number, 
   nombre: string;
 }
 
@@ -55,6 +63,11 @@ export interface ChartGenerico {
   name : string;
   value : number;
 }
+
+export interface ChartBarVertical2D {
+  name : string;
+  series : ChartGenerico[] ;
+}  
 
 export interface RdoVisita {
   idvisita?: number;
@@ -154,3 +167,15 @@ export interface Visitas {
   globalid: string;
   fechavisita:Date;
 }   
+
+
+export const PQRS_POR_LOCALIDAD: string = 'PQRS por Localidad :: PQR';
+export const CONS_POR_DIRECCION: string = 'Consulta por Dirección :: PQR';
+export const CONS_POR_ESTADOTRA: string = 'Estado Del Trámite ::  PQR'; 
+export const CONSUL_TIPO_PREDIO: string = 'Tipo de Predio :: Visita';
+export const CONS_NO_ES_COMPETE: string = 'Estado Del Trámite NO es competencia ::  PQR';  
+export const CON_PROVISIONAL_ET: string = 'Estado Del Trámite Provisional ::  PQR'; 
+export const PREDIO2D_NORMATIVI: string = 'Cumplimiento Normativo - Predio Generador ::  Visita'; 
+
+//export const CONSUL_po: string = 'PQRS por Localidad'; 
+

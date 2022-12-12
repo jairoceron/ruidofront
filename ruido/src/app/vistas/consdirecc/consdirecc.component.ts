@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConsultaVisita } from 'src/app/modelos/ruido.interface';
+import { ConsultaVisita, CONS_POR_DIRECCION } from 'src/app/modelos/ruido.interface';
 import { ConsultaService } from 'src/app/servicios/consulta.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class ConsdireccComponent implements OnInit {
 
 actualizarDireccionServicio() {
   this.consultaService.updateDireccion(this.consultaVisita.direccion);  
-  this.consultaService.setVistaSistema('Consulta por Dirección');
+  this.consultaService.setVistaSistema(CONS_POR_DIRECCION);
   //.setConsultaActual(consultaVisita);
 
 }

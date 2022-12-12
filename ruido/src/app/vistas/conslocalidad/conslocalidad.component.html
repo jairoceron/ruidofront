@@ -1,0 +1,12 @@
+<h4>Localidad</h4>
+
+
+<mat-form-field appearance="fill">
+  <mat-label>Localidad</mat-label>
+  
+  <mat-select placeholder="Localidad ..." [(ngModel)]="localidadx" (ngModelChange)="onLocalidadSelection()">
+    <mat-option *ngFor="let localidad of listRuiLocalidad" [value]="localidad.nombre">
+      {{localidad.nombre}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

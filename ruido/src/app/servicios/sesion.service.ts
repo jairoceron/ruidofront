@@ -4,7 +4,7 @@ import { ResponseI, VariableSesionI } from '../modelos/response.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
-import { ConsultaVisita, Pqrs } from '../modelos/ruido.interface';
+import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, Pqrs, PQRS_POR_LOCALIDAD } from '../modelos/ruido.interface';
 
 
 
@@ -50,10 +50,34 @@ export class VarSesionService {
     // 999999999999999999999999999
     let direccion = this.url + "consultaVisita";
 
-    if (consultaVisita.vistaSistema === 'Consulta por Dirección') {
+    if (consultaVisita.vistaSistema === CONS_POR_DIRECCION) {
       // direccion = this.url + "consultaDirecVisita";
       direccion = this.url + "consultaDirecPqrs";
     }
+
+    if (consultaVisita.vistaSistema === PQRS_POR_LOCALIDAD) {
+      // direccion = this.url + "consultaDirecVisita";
+      direccion = this.url + "consultaPorLocalidad";
+     
+    } 
+
+    if (consultaVisita.vistaSistema === CONS_POR_ESTADOTRA) {
+      // direccion = this.url + "consultaDirecVisita";
+      direccion = this.url + "consultaPorEstadoTramite";
+     // *****************************
+     
+    } 
+
+    if (consultaVisita.vistaSistema === CONSUL_TIPO_PREDIO) {
+      // direccion = this.url + "consultaDirecVisita";
+      direccion = this.url + "consultaPorTipoPredioVisita";
+     // *****************************
+     
+    } 
+
+    
+    
+    
 
     let lineax = "Bearer " + localStorage.getItem("token");
     let customHeaders = new HttpHeaders();

@@ -24,10 +24,13 @@ export class VisitaruidoService {
 
   public consultaVisitaV : ConsultaVisita = {
     fechaInicial:new Date(),
-     fechaFinal:new Date(), 
-     radicado:'' , 
-     vistaSistema:'',
-    direccion:''
+    fechaFinal:new Date(), 
+    radicado:'' , 
+    vistaSistema:'',
+    direccion:'',
+    localidad:'',
+    estadoTramite:'',
+    tipoPredio:'',
     };
 
   constructor(private http:HttpClient) { }

@@ -7,7 +7,7 @@ import { EtiquetadoComponent } from 'src/app/etiquetado/etiquetado/etiquetado.co
 import { RuidoComponent } from 'src/app/ruido/ruido/ruido.component';
 import { VacioComponent } from 'src/app/vacio/vacio.component';
 import { MatInputModule } from '@angular/material/input';
-import { ConsultaVisita, Pqrs } from 'src/app/modelos/ruido.interface';
+import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_NO_ES_COMPETE, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, CON_PROVISIONAL_ET, Pqrs, PQRS_POR_LOCALIDAD, PREDIO2D_NORMATIVI } from 'src/app/modelos/ruido.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,6 +21,7 @@ import * as XLSX from 'xlsx';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {  animate,  state,  style,  transition,  trigger} from "@angular/animations";
+
 
 @Component({
   selector: 'app-dashboard',
@@ -38,6 +39,16 @@ import {  animate,  state,  style,  transition,  trigger} from "@angular/animati
   ]
 })
 export class DashboardComponent implements OnInit {
+
+  consDireccionLabel = CONS_POR_DIRECCION;
+  estadoTramiteLabel = CONS_POR_ESTADOTRA ;
+  tipoDePredioLabel = CONSUL_TIPO_PREDIO; 
+  pqrsLocalidaLabel = PQRS_POR_LOCALIDAD;
+  noEsCompetencia_et = CONS_NO_ES_COMPETE;
+  conProvisionEsTra =  CON_PROVISIONAL_ET;
+  predio2D_normativi = PREDIO2D_NORMATIVI;
+
+
   excelData : any;
   varSesionI: VariableSesionI = { username: '', modulo: [], menu: [] };
   dummyComponent: any;    //VacioComponent;
@@ -45,7 +56,7 @@ export class DashboardComponent implements OnInit {
   pqrsActual : Pqrs = {radicado:''};
   vistaSistema : string = '';
   dataSource: MatTableDataSource<Pqrs> = new MatTableDataSource(this.pqrs);
-  displayedColumns = ['radicado', 'asunto_de_radicacion',  'razon_social_del_establecimient', 'localidad', 'direcciones', 'visita'];
+  displayedColumns = ['radicado', 'asunto_de_radicacion',  'razon_social_del_establecimient', 'localidad', 'direcciones', 'visita','estadoTramite'];
   expandDisplayedColumns = ["optionName", "optionDescription"];
 
   @ViewChild(MatPaginator, { static: false })
@@ -97,6 +108,7 @@ export class DashboardComponent implements OnInit {
 
   actualizaVisita() {
     console.log('actualizacion de la visita :: ');
+    
   }
 
   ngOnInit(): void {
@@ -155,6 +167,9 @@ export class DashboardComponent implements OnInit {
         radicado: radicadoX,
          vistaSistema:'' ,
          direccion:'' ,
+         localidad:'',
+         estadoTramite:'',
+         tipoPredio:'',
         };
    
     console.log('Actualiza el detalle ..consultaVisita . xxx ',consultaVisita );
@@ -171,7 +186,10 @@ export class DashboardComponent implements OnInit {
            fechaFinal:new Date(), 
            radicado:x.radicado, 
            vistaSistema:'',
-           direccion:''
+           direccion:'',
+           localidad:'',
+           estadoTramite:'',
+           tipoPredio:'',
           };
         this.visitaService.setConsultaVisitaV(consultaVisita);
         this.visitaService.actualizaInfoVisiPorRadicado(consultaVisita);

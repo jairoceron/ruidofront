@@ -38,14 +38,18 @@
     </mat-form-field>
     &nbsp;&nbsp;
     <mat-form-field appearance="fill">
-      <mat-label>Estadística</mat-label>
+      <mat-label>Módulo de Consulta</mat-label>
       <mat-select [(ngModel)]="vistaSistema">
         
-        <mat-option value="Consulta por Dirección">Consulta por Dirección</mat-option>
-        <mat-option value="Polígono Consulta">Polígono Consulta</mat-option>
-        <mat-option value="PQRS por Localidad">PQRS por Localidad</mat-option>
-        <mat-option value="Estado Del Trámite">Estado Del Trámite</mat-option>
-        <mat-option value="Provisionales">Provisionales</mat-option>
+        <mat-option value={{consDireccionLabel}}>{{consDireccionLabel}}</mat-option>        
+        <mat-option value={{pqrsLocalidaLabel}}>{{pqrsLocalidaLabel}}</mat-option>
+        <mat-option value={{estadoTramiteLabel}}>{{estadoTramiteLabel}}</mat-option>
+        
+        <mat-option value={{tipoDePredioLabel}}>{{tipoDePredioLabel}}</mat-option>
+        <mat-option value={{noEsCompetencia_et}}>{{noEsCompetencia_et}}</mat-option> 
+        <mat-option value={{conProvisionEsTra}}>{{conProvisionEsTra}}</mat-option>
+        <mat-option value={{predio2D_normativi}}>{{predio2D_normativi}}</mat-option>
+        <mat-option value="Polígono Consulta">Polígono Consulta</mat-option >
       </mat-select>
     </mat-form-field>
 
@@ -71,10 +75,17 @@
 
 
   <div class="p-2 bd-highlight">
-    <app-chartlocalidad *ngIf="vistaSistema === '' || vistaSistema === 'PQRS por Localidad' "></app-chartlocalidad>
-    <app-poligonruido *ngIf="vistaSistema === 'Polígono Consulta' "></app-poligonruido>
-    <app-chartestadotramite *ngIf="vistaSistema === 'Estado Del Trámite'"></app-chartestadotramite>
-    <app-consdirecc *ngIf="vistaSistema === 'Consulta por Dirección'"></app-consdirecc>
+    <app-chartlocalidad *ngIf="vistaSistema === '' || vistaSistema === pqrsLocalidaLabel "></app-chartlocalidad>
+    <app-conslocalidad *ngIf="vistaSistema === pqrsLocalidaLabel " ></app-conslocalidad>
+    
+    <app-chartestadotramite *ngIf="vistaSistema === estadoTramiteLabel"></app-chartestadotramite>
+    <app-consdirecc *ngIf="vistaSistema === consDireccionLabel"></app-consdirecc>
+    <app-consestramite *ngIf="vistaSistema === estadoTramiteLabel  "></app-consestramite>  
+    <app-constipopredio *ngIf="vistaSistema === tipoDePredioLabel"></app-constipopredio>
+    <app-chartgenerico *ngIf="vistaSistema === noEsCompetencia_et" ></app-chartgenerico>    
+    <app-chartgenerico *ngIf="vistaSistema === conProvisionEsTra" ></app-chartgenerico> 
+    <app-chart2-dgenerico *ngIf="vistaSistema === predio2D_normativi" ></app-chart2-dgenerico> 
+    <app-poligonruido *ngIf="vistaSistema === 'Polígono Consulta' "></app-poligonruido>     
   </div>
 
   <div class="p-2 bd-highlight">
@@ -175,6 +186,10 @@
         <ng-container matColumnDef="direcciones">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Direcciones </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.direcciones}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="estadoTramite">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Estado Trámite </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.estado_del_tramite}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="visita">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Visitas </mat-header-cell>

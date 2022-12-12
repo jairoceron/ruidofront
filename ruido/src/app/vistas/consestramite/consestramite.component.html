@@ -1,0 +1,12 @@
+<h4>Estado trámite</h4>
+
+
+<mat-form-field appearance="fill">
+  <mat-label>Estado trámite</mat-label>
+  
+  <mat-select placeholder="Estado trámite ..." [(ngModel)]="estadoTramitex" (ngModelChange)="onEstTramiteSelection()">
+    <mat-option *ngFor="let estadoTramitex of listEstadoTramitex" [value]="estadoTramitex.nombre">
+      {{estadoTramitex.nombre}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
