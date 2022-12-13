@@ -15,7 +15,7 @@ export class Chart2DgenericoService {
  
     let direccion = this.url + "chart2dTipoPredioCumpliNorma";
 
-    if (consultaVisita.vistaSistema = PREDIO2D_NORMATIVI) {
+    if (consultaVisita.vistaSistema === PREDIO2D_NORMATIVI) {
       direccion = this.url + "chart2dTipoPredioCumpliNorma";
     }
 

@@ -1,8 +1,8 @@
 <app-header></app-header>
 
-<div>Archivo de visitas : <input type="file" (change)="readExcel($event)">  </div>
+<!-- div>Archivo de visitas : <input type="file" (change)="readExcel($event)">  </div -->
 
-<div>Archivo de PQRS : <input type="file" (change)="readExcelPQRS($event)"> </div>
+<!-- div>Archivo de PQRS : <input type="file" (change)="readExcelPQRS($event)"> </div -->
 
 <div class="d-flex flex-column bd-highlight mb-6">
   <div class="p-2 bd-highlight">
@@ -49,6 +49,7 @@
         <mat-option value={{noEsCompetencia_et}}>{{noEsCompetencia_et}}</mat-option> 
         <mat-option value={{conProvisionEsTra}}>{{conProvisionEsTra}}</mat-option>
         <mat-option value={{predio2D_normativi}}>{{predio2D_normativi}}</mat-option>
+        <mat-option value={{organismo_control_}}>{{organismo_control_}}</mat-option>
         <mat-option value="Polígono Consulta">Polígono Consulta</mat-option >
       </mat-select>
     </mat-form-field>
@@ -85,6 +86,7 @@
     <app-chartgenerico *ngIf="vistaSistema === noEsCompetencia_et" ></app-chartgenerico>    
     <app-chartgenerico *ngIf="vistaSistema === conProvisionEsTra" ></app-chartgenerico> 
     <app-chart2-dgenerico *ngIf="vistaSistema === predio2D_normativi" ></app-chart2-dgenerico> 
+   
     <app-poligonruido *ngIf="vistaSistema === 'Polígono Consulta' "></app-poligonruido>     
   </div>
 
@@ -92,7 +94,7 @@
     &nbsp;&nbsp;
     <div class="example-header">
       <mat-form-field>
-        <input matInput placeholder="Filter">
+        <input matInput placeholder="Filtro" (keyup)="applyFilter($event )" placeholder="Filter">
       </mat-form-field>
     </div>
     &nbsp;&nbsp;
@@ -200,12 +202,17 @@
             </button>
           </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="fecha_del_radicado">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha del Radicado </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.fecha_del_radicado}} </mat-cell>
+        </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
 
         <mat-row *matRowDef="let element; columns: displayedColumns;"
-        class="example-element-row" [class.example-expanded-row]="expandedElement === element" ></mat-row>
+        [ngClass]="{'make-gold': element.entidad_control == 'SI'}"
+        class="hover" [class.example-expanded-row]="expandedElement === element"></mat-row>
         
     <mat-row  *matRowDef="let row; columns: ['expandedDetail']"
     class="example-detail-row" ></mat-row>

@@ -15,10 +15,10 @@ export class ChartgenericoService {
   chartLoad(consultaVisita: ConsultaVisita): Observable<ChartGenerico[]> {
     let direccion = this.url + "chartNoEsCompetencia";
 
-    if (consultaVisita.vistaSistema = CONS_NO_ES_COMPETE) {
+    if (consultaVisita.vistaSistema === CONS_NO_ES_COMPETE) {
       direccion = this.url + "chartNoEsCompetencia";
     }
-    if (consultaVisita.vistaSistema = CON_PROVISIONAL_ET) {
+    if (consultaVisita.vistaSistema === CON_PROVISIONAL_ET) {
       direccion = this.url + "chartProvisionalET";
     }
 

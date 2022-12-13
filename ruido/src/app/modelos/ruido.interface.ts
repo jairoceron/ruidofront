@@ -176,6 +176,7 @@ export const CONSUL_TIPO_PREDIO: string = 'Tipo de Predio :: Visita';
 export const CONS_NO_ES_COMPETE: string = 'Estado Del Trámite NO es competencia ::  PQR';  
 export const CON_PROVISIONAL_ET: string = 'Estado Del Trámite Provisional ::  PQR'; 
 export const PREDIO2D_NORMATIVI: string = 'Cumplimiento Normativo - Predio Generador ::  Visita'; 
+export const CS_ORGANIS_CONTROL: string = 'Organismo de Control ::  PQR'; 
 
 //export const CONSUL_po: string = 'PQRS por Localidad'; 
 

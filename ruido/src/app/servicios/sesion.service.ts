@@ -4,7 +4,7 @@ import { ResponseI, VariableSesionI } from '../modelos/response.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
-import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, Pqrs, PQRS_POR_LOCALIDAD } from '../modelos/ruido.interface';
+import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, CS_ORGANIS_CONTROL, Pqrs, PQRS_POR_LOCALIDAD } from '../modelos/ruido.interface';
 
 
 
@@ -75,8 +75,11 @@ export class VarSesionService {
      
     } 
 
-    
-    
+    if (consultaVisita.vistaSistema === CS_ORGANIS_CONTROL) {      
+      direccion = this.url + "consultaOrganismoDeControl";           
+    } 
+    console.log( ' --- Vista Sistema:: ' + consultaVisita.vistaSistema  );
+    console.log( ' --- direccion :: ' + direccion );
     
 
     let lineax = "Bearer " + localStorage.getItem("token");

@@ -361,5 +361,23 @@ html {
   .example-element-description-attribution {
     opacity: 0.5;
   }
+
+  
+  .make-gold {
+    background-color: gold;
+  }
+  
+  tr:hover {
+    opacity: 0.5;
+  }
+
+  .mat-table .mat-row:hover {
+    border-bottom: 1px solid #ddd;
+    opacity: 0.5;
+    background-color: rgb(231, 250, 228);
+ 
+  }
+
+  
   
   

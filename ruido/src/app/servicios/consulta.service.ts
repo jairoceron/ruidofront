@@ -42,6 +42,7 @@ private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( 
   setConsultaActual(consultaVisita: ConsultaVisita) {
     this.consultaVisita.fechaFinal = consultaVisita.fechaFinal;
     this.consultaVisita.fechaInicial = consultaVisita.fechaInicial;
+    this.consultaVisita.vistaSistema = consultaVisita.vistaSistema;
     this.consultaBehSub.next(this.consultaVisita);
   }
 
