@@ -1,12 +1,33 @@
-<nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-text">
-      
-      
-      <form novalidate [formGroup]="checkOutForm" (ngSubmit)="checOutFun(checkOutForm.value)" >
-        <img src="assets\cabezote-verde.png" id="icon" alt="User Icon" />&nbsp;&nbsp;&nbsp;&nbsp;CIMAB &nbsp;&nbsp;&nbsp; {{username}}
-        <input type="submit" class="fadeIn fourth" value="Salir">
-      </form>
+<div style="background-color: #ededf3">
+  <span class="navbar-text">
+    <div class="row">
+      <div class="col-md-3" align="center" sytle="position: relative;">
+        <div>
+          <img  style="position: relative;" src="assets/cropped-logoCIMAB_100.png" alt="User Icon"/>
+        </div>
+      </div>
+      <div class="col-md-6" align="center">
+      </div>
+
+      <div class="col-md-3" align="left" sytle="position: absolute">
+        <div class="row">
+         <div class="col-md-6">
+        <div class="bi bi-person" style="position: relative;top: 10%;"> {{username}}</div>
+         <div style="position: relative;top: 15%;">
+           <a type="button" (click)="checOutFun(checkOutForm.value)" class=" mr-1 mb-1">
+            <i class="bi bi-box-arrow-left"></i>
+            salir
+          </a>
+        </div>
+      </div>
+        <div class="col-md-6" align="left">
+          <img src="assets/intro.png" alt="User Icon"/>
+      </div>
+        </div>
+      </div>
+  </div>
     </span>
-  </nav> 
-  
+</div>
+<div>
   <app-menu></app-menu>
+</div>
