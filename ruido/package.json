@@ -28,6 +28,8 @@
     "jquery": "^3.6.1",
     "leaflet": "^1.9.2",
     "leaflet-geosearch": "^3.7.0",
+    "leaflet-gesture-handling": "^1.2.2",
+    "leaflet-routing-machine": "^3.2.12",
     "moment": "^2.29.4",
     "ng2-charts": "^4.0.1",
     "ngx-toastr": "^15.2.0",
