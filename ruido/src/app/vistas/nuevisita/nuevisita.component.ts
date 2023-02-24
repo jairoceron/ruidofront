@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ConsultaVisita, Pqrs, RdoProfesional, RdoVisita, Visitas } from 'src/app/modelos/ruido.interface';
+import { ConsultaVisita, GRAFICA_TIPO_PIE, Pqrs, RdoProfesional, RdoVisita, Visitas } from 'src/app/modelos/ruido.interface';
 import { ProfesionalService } from 'src/app/servicios/profesional.service';
 import { VisitaruidoService } from 'src/app/servicios/visitaruido.service';
 import {  ToastContainerDirective, ToastrService } from 'ngx-toastr';
@@ -154,6 +154,7 @@ export class NuevisitaComponent implements OnInit {
           localidad:'',
           estadoTramite:'',
           tipoPredio:'',
+          tipoChart:GRAFICA_TIPO_PIE,
         };
         this.visitaRuidoService.setConsultaVisitaV(consultaVisita);
         this.visitaRuidoService.actualizaInfoVisiPorRadicado(consultaVisita);

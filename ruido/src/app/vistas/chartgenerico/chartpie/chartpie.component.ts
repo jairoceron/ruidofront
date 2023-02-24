@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartLocalidad, ConsultaVisita } from 'src/app/modelos/ruido.interface';
+import { ChartGenerico } from 'src/app/modelos/ruido.interface';
+import { ChartgenericoService } from 'src/app/servicios/chartgenerico.service';
 import { ConsultaService } from 'src/app/servicios/consulta.service';
 import { EstadoService } from 'src/app/servicios/estado.service';
-import { LocalidadService } from 'src/app/servicios/localidad.service';
 import { VarSesionService } from 'src/app/servicios/sesion.service';
 
 @Component({
-  selector: 'app-chartlocalidad',
-  templateUrl: './chartlocalidad.component.html',
-  styleUrls: ['./chartlocalidad.component.scss']
+  selector: 'app-chartpie',
+  templateUrl: './chartpie.component.html',
+  styleUrls: ['./chartpie.component.scss']
 })
-export class ChartlocalidadComponent implements OnInit {
-
-
-
-
+export class ChartpieComponent implements OnInit {
 
   ngOnInit(): void {
+    console.log('Inicializa el contenedor de ChartPieComponent...');
     this.loadData();
   }
-  single: ChartLocalidad[] = [];
+  single: ChartGenerico[] = [];
+  colorScheme = {
+    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
+  };
+  comboBarScheme = {
+    name: 'singleLightBlue',
+    selectable: true,
+    group: 'Ordinal',
+    domain: ['#01579b']
+  };
 
   view: [number,number] = [1000, 400];
 
@@ -57,45 +63,51 @@ export class ChartlocalidadComponent implements OnInit {
  
 
   constructor(
-    private localidadService : LocalidadService,
     private estadoService : EstadoService,
+    // private localidadService : LocalidadService,
     private varSesionService : VarSesionService,
     private consultaService : ConsultaService,
+    private chartgenericoService : ChartgenericoService,
+
     ) {
   //  Object.assign(this, { single });
   }
   //onResize(event:any) { this.view = [1900, 1080 ]; }
   onSelect(data:any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    console.log('ChartgenericoComponent   ::   Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data:any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    console.log('ChartgenericoComponent   ::  Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data:any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    console.log('ChartgenericoComponent   ::  Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
   loadData() {
-    console.log('a1');
- //   let consultaVisita :ConsultaVisita = { fechaFinal:new Date(), fechaInicial:new Date(), radicado:'000' }
-    console.log('a2');
+    console.log('ChartgenericoComponent   ::  a1');
+ 
+    console.log('ChartgenericoComponent   ::  a2');
+
+
+
+
     this.consultaService.consultaObserv.subscribe(x => {
-      console.log('a3');
+      console.log('ChartgenericoComponent   ::  a3');
       console.log(x);
       x;
-      this.localidadService.consultaChartLocalidad(x ).subscribe(x => {
-        console.log('a4');
+      this.chartgenericoService.chartLoad(x).subscribe(x => {
+        console.log('ChartgenericoComponent   ::  a4');
         this.single = x;
-        console.log('chart Localidad <<<<<<<<<< ');
+        console.log('ChartgenericoComponent   ::  <<<<<<<<<< ');
      });
- 
+
     });
 
-// ****************
-   
-    //999999999999999999999999
+
   }
+
+
 
 }

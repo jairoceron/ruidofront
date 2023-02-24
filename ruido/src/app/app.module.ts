@@ -50,6 +50,10 @@ import { ConsestramiteComponent } from './vistas/consestramite/consestramite.com
 import { ConstipopredioComponent } from './vistas/constipopredio/constipopredio.component';
 import { ChartgenericoComponent } from './vistas/chartgenerico/chartgenerico.component';
 import { Chart2DgenericoComponent } from './vistas/chart2-dgenerico/chart2-dgenerico.component';
+import { AiresbcComponent } from './vistas/airesbc/airesbc.component';
+import { ChartpieComponent } from './vistas/chartgenerico/chartpie/chartpie.component';
+import { CumpnormaComponent } from './vistas/cumpnorma/cumpnorma.component';
+
 
 @NgModule({
   declarations: [
@@ -75,7 +79,11 @@ import { Chart2DgenericoComponent } from './vistas/chart2-dgenerico/chart2-dgene
     ConsestramiteComponent,
     ConstipopredioComponent,
     ChartgenericoComponent,
-    Chart2DgenericoComponent, 
+    Chart2DgenericoComponent,
+    AiresbcComponent,
+    ChartpieComponent,
+    CumpnormaComponent,
+  
     
 
   ],

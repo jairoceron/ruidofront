@@ -68,4 +68,8 @@ private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( 
    // ****************
   }
 
+  setTipoGrafica(tipoGrafica : string) {
+    this.consultaVisita.tipoChart = tipoGrafica;
+  }
+
 }

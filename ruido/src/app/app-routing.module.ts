@@ -9,6 +9,7 @@ import { RadicadoComponent } from './vistas/radicado/radicado.component';
 import { NuevisitaComponent } from './vistas/nuevisita/nuevisita.component';
 import { HeaderComponent } from './plantillas/header/header.component';
 import { VisitaprofesionalComponent } from './vistas/visitaprofesional/visitaprofesional.component';
+import { AiresbcComponent } from './vistas/airesbc/airesbc.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'login', pathMatch:'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path:'dashboard', component:DashboardComponent},
   { path:'etiquetado', component:EtiquetadoComponent},
   { path:'ruido', component:RuidoComponent},
+  { path:'airesbc', component:AiresbcComponent},
   { path:'visita', component:VisitaComponent},
   { path:'radicado', component:RadicadoComponent},
   { path:'nueVisita', component:NuevisitaComponent}, 

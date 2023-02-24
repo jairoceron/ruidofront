@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ConsultaVisita, Pqrs, RdoVisita, Visitas } from '../modelos/ruido.interface';
+import { ConsultaVisita, GRAFICA_TIPO_PIE, Pqrs, RdoVisita, Visitas } from '../modelos/ruido.interface';
 
 //+++++++++++++++++++++++++++++
 
@@ -31,6 +31,7 @@ export class VisitaruidoService {
     localidad:'',
     estadoTramite:'',
     tipoPredio:'',
+    tipoChart :GRAFICA_TIPO_PIE,
     };
 
   constructor(private http:HttpClient) { }

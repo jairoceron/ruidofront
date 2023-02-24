@@ -92,7 +92,7 @@ export class ChartgenericoComponent implements OnInit {
       this.chartgenericoService.chartLoad(x).subscribe(x => {
         console.log('ChartgenericoComponent   ::  a4');
         this.single = x;
-        console.log('ChartgenericoComponent   ::  <<<<<<<<<< ',x);
+        console.log('ChartgenericoComponent   ::  <<<<<<<<<< ');
      });
 
     });

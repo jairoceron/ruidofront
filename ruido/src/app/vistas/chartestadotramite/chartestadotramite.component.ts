@@ -76,17 +76,17 @@ export class ChartestadotramiteComponent implements OnInit {
   }
 
   loadData() {
-    console.log('a1');
+ //   console.log('a1');
  //   let consultaVisita :ConsultaVisita = { fechaFinal:new Date(), fechaInicial:new Date(), radicado:'000' }
-    console.log('a2');
+ //   console.log('a2');
     this.consultaService.consultaObserv.subscribe(x => {
-      console.log('a3');
-      console.log(x);
+    //  console.log('a3');
+    //  console.log(x);
       x;
       this.estadoService.chartEstadoTramite(x ).subscribe(x => {
-        console.log('a4');
+      //  console.log('a4');
         this.single = x;
-        console.log('<<<<<<<<<< ',x);
+        console.log('chartEstadoTramite <<<<<<<<<< ');
      });
  
     });

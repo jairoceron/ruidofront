@@ -7,7 +7,7 @@ import { EtiquetadoComponent } from 'src/app/etiquetado/etiquetado/etiquetado.co
 import { RuidoComponent } from 'src/app/ruido/ruido/ruido.component';
 import { VacioComponent } from 'src/app/vacio/vacio.component';
 import { MatInputModule } from '@angular/material/input';
-import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_NO_ES_COMPETE, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, CON_PROVISIONAL_ET, CS_ORGANIS_CONTROL, Pqrs, PQRS_POR_LOCALIDAD, PREDIO2D_NORMATIVI } from 'src/app/modelos/ruido.interface';
+import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_NO_ES_COMPETE, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, CON_PROVISIONAL_ET, CS_ORGANIS_CONTROL, GRAFICA_TIPO_BAR, GRAFICA_TIPO_PIE, Pqrs, PQRS_POR_LOCALIDAD, PREDIO2D_NORMATIVI } from 'src/app/modelos/ruido.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,6 +21,7 @@ import * as XLSX from 'xlsx';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {  animate,  state,  style,  transition,  trigger} from "@angular/animations";
+import { AiresbcComponent } from '../airesbc/airesbc.component';
 
 
 @Component({
@@ -40,6 +41,20 @@ import {  animate,  state,  style,  transition,  trigger} from "@angular/animati
 })
 export class DashboardComponent implements OnInit {
 
+  graficaPie : string = GRAFICA_TIPO_PIE;
+  graficaBar : string = GRAFICA_TIPO_BAR;
+
+  consultaVisitaGen: ConsultaVisita = { 
+        fechaInicial: new Date,
+        fechaFinal: new Date,
+        radicado: '',
+        vistaSistema:'' ,
+        direccion:'' ,
+        localidad:'',
+        estadoTramite:'',
+        tipoPredio:'',
+        tipoChart :GRAFICA_TIPO_PIE,
+  }
   consDireccionLabel = CONS_POR_DIRECCION;
   estadoTramiteLabel = CONS_POR_ESTADOTRA ;
   tipoDePredioLabel = CONSUL_TIPO_PREDIO; 
@@ -150,9 +165,12 @@ export class DashboardComponent implements OnInit {
     console.log('Esto funciona bien  fechaFinal   ', this.fechaFinal);
   }
 
+  
   assignComponent(component: string) {
+    console.log('Este es el componente !!!! ... ' , component);
     if (component === "consultavisita") this.dummyComponent = RuidoComponent;
     else if (component === "generarindice") this.dummyComponent = EtiquetadoComponent;
+    else if (component === "airesbc") this.dummyComponent = AiresbcComponent;
     else this.dummyComponent = VacioComponent;
   }
 
@@ -171,6 +189,7 @@ export class DashboardComponent implements OnInit {
          localidad:'',
          estadoTramite:'',
          tipoPredio:'',
+         tipoChart :GRAFICA_TIPO_PIE,
         };
    
     console.log('Actualiza el detalle ..consultaVisita . xxx ',consultaVisita );
@@ -191,17 +210,15 @@ export class DashboardComponent implements OnInit {
            localidad:'',
            estadoTramite:'',
            tipoPredio:'',
+           tipoChart :GRAFICA_TIPO_PIE,
           };
         this.visitaService.setConsultaVisitaV(consultaVisita);
         this.visitaService.actualizaInfoVisiPorRadicado(consultaVisita);
-//9999999999999999999999
+
     });
 
-    
-
     this.visitaService.actualizaInfoVisiPorRadicado(consultaVisita);
-  //  33333333333333333333
-    // VisitaruidoService
+
   }
 
   consultaVisitas() {
@@ -223,7 +240,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-    console.log('b2');
+   // console.log('b2');
     //***********
 
 
@@ -231,7 +248,7 @@ export class DashboardComponent implements OnInit {
       console.log('dashboard.component.ts  ::  b3 consultaVisita :: ' , x1);
       x1; // trae el objeto ConsultaVisita actual
       this.variaSesionService.consultaVisita(x1).subscribe(x => {
-        console.log('b4 ', x);
+        console.log('dashboard ...... ', x);
         this.pqrs = x;
         this.dataSource = new MatTableDataSource(this.pqrs);
         this.dataSource.paginator = this.paginator;
@@ -323,6 +340,16 @@ export class DashboardComponent implements OnInit {
       );
       
     }
+  }
+
+  asignarTipoGraficaTorta() {  
+    this.consultaService.setTipoGrafica(GRAFICA_TIPO_PIE );
+    this.consultaVisitaGen.tipoChart = GRAFICA_TIPO_PIE;
+  }
+
+  asignarTipoGraficaBar() {
+    this.consultaService.setTipoGrafica(GRAFICA_TIPO_BAR );
+    this.consultaVisitaGen.tipoChart = GRAFICA_TIPO_BAR;
   }
 
 }

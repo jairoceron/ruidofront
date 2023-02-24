@@ -1,0 +1,31 @@
+<h3>Cumplimiento Normativo</h3>
+
+<!-- *ngIf="vistaSistema === predio2D_normativi" -->
+<mat-form-field appearance="fill">
+    <mat-label>Localidad</mat-label>
+    <mat-select [(ngModel)]="localidad" name="localidad"  (ngModelChange)="onTipoPredioSelection()">
+        <mat-option *ngFor="let localidadX of listRuiLocalidad" [value]="localidadX.idLocalidad">
+            {{localidadX.nombre}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+&nbsp;&nbsp;
+<mat-form-field appearance="fill">
+    <mat-label>Tipo de Predio</mat-label>
+
+    <mat-select placeholder="Tipo de Predio ..." [(ngModel)]="tipoPrediox" (ngModelChange)="onTipoPredioSelection()">
+        <mat-option *ngFor="let tpredio of listTPredio" [value]="tpredio.nombre">
+            {{tpredio.nombre}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<div>
+      <button (click)="asignarTipoGraficaBar()">
+        <mat-icon> bar_chart</mat-icon>
+      </button>&nbsp;
+      <button (click)="asignarTipoGraficaTorta()">
+        <mat-icon> insert_chart</mat-icon>
+      </button>
+    </div>
+<app-chartgenerico *ngIf="vistaSistema === cumplimientoNormativo && consultaVisitaGen.tipoChart === graficaBar "></app-chartgenerico>
+<app-chart2-dgenerico *ngIf=" consultaVisitaGen.tipoChart === graficaPie " ></app-chart2-dgenerico>

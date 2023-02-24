@@ -19,9 +19,6 @@ export class RuidoComponent implements OnInit {
   consultaVariables() {
 
     let username : string = localStorage.getItem("username") || '';
-   
-      
-
 
     console.log('Esto funciona bien  fechaInicial ', this.fechaInicial);
     console.log('Esto funciona bien  fechaFinal   ', this.fechaFinal);

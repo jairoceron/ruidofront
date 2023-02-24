@@ -11,13 +11,13 @@ import { TipopredioService } from 'src/app/servicios/tipopredio.service';
 })
 export class ConstipopredioComponent implements OnInit {
 
-  listTPredio : RdoTipopredio[] = [];
-  tipoPrediox : string = '';
+  listTPredio: RdoTipopredio[] = [];
+  tipoPrediox: string = '';
 
   constructor(
-    private tipoPredioService : TipopredioService,
-    private consultaService : ConsultaService
-    ) { }
+    private tipoPredioService: TipopredioService,
+    private consultaService: ConsultaService
+  ) { }
 
 
   ngOnInit(): void {
@@ -27,22 +27,22 @@ export class ConstipopredioComponent implements OnInit {
 
   listLocalidad() {
     console.log("Consulta por localidad 1b ");
-    let rdoTipoPredio: RdoTipopredio = {idtipopredio : 1, nombre : ''}
+    let rdoTipoPredio: RdoTipopredio = { idtipopredio: 1, nombre: '' }
     console.log("Consulta por localidad 1c ");
-    this.tipoPredioService.consultaLocalidad(rdoTipoPredio).subscribe( 
+    this.tipoPredioService.consultaLocalidad(rdoTipoPredio).subscribe(
       x => {
-        x; 
+        x;
         this.listTPredio = x;
-        console.log('las localidades :: ' , x);
+        console.log('las localidades :: ', x);
 
-    });
+      });
     console.log("Consulta por localidad 1d ");
   }
- 
+
   onTipoPredioSelection() {
-    console.log("localidad seleccionada .... " , this.tipoPrediox );
-    this.consultaService.updateTipoPredio(this.tipoPrediox ); // ***********
+    console.log("localidad seleccionada .... ", this.tipoPrediox);
+    this.consultaService.updateTipoPredio(this.tipoPrediox); // ***********
     this.consultaService.setVistaSistema(CONSUL_TIPO_PREDIO); // *****************
 
-}
+  }
 }

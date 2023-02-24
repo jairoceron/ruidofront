@@ -1,0 +1,97 @@
+<app-header></app-header>
+<h3>Calidad del Aire</h3>
+
+
+<!-- BACKUP C:\trabajo\secretariaMedioAmbiente\backupSBC -->
+
+<mat-form-field appearance="fill">
+  <mat-label></mat-label>
+  <input matInput [matDatepicker]="fechaIn" [(ngModel)]="fechaInicial" />
+  <mat-hint>Fecha Inicial</mat-hint>
+  <mat-datepicker-toggle matSuffix [for]="fechaIn"></mat-datepicker-toggle>
+  <mat-datepicker #fechaIn></mat-datepicker>
+</mat-form-field>
+&nbsp;&nbsp;
+<mat-form-field appearance="fill">
+  <mat-label></mat-label>
+  <input matInput [matDatepicker]="picker" [(ngModel)]="fechaFinal">
+  <mat-hint>Fecha Final</mat-hint>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+&nbsp;&nbsp;
+<mat-form-field appearance="fill">
+  <mat-label>Variables</mat-label>
+  <mat-select [(ngModel)]="variable">
+
+    <mat-option value="PM10">PM10</mat-option>
+    <mat-option value="PM1">PM1</mat-option>
+    <mat-option value="PM25">PM25</mat-option>
+    <mat-option value="TEMPERATURA">TEMPERATURA</mat-option>
+    <mat-option value="HUMEDAD RELATIVA">HUMEDAD RELATIVA</mat-option>
+
+  </mat-select>
+</mat-form-field>
+<div>
+
+
+
+
+</div>
+<div>
+
+
+
+</div>
+<div>
+
+
+
+</div>
+
+
+
+<mat-table [dataSource]="detailDS" matSort multiTemplateDataRows class="detail-table">
+
+  <ng-container matColumnDef="variable">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Variable </mat-header-cell>
+    <div class="example-element-detail">
+      <mat-cell *matCellDef="let row"> {{row.variable}}
+      </mat-cell>
+    </div>
+  </ng-container>
+
+  <ng-container matColumnDef="valormaximo">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Máximo </mat-header-cell>
+    <div class="example-element-detail">
+      <mat-cell *matCellDef="let row"> {{row.valormaximo}}
+      </mat-cell>
+    </div>
+  </ng-container>
+
+  <ng-container matColumnDef="valorminimo">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Mínimo </mat-header-cell>
+    <div class="example-element-detail">
+      <mat-cell *matCellDef="let row"> {{row.valorminimo}}
+      </mat-cell>
+    </div>
+  </ng-container>
+  <ng-container matColumnDef="ejecutarProceso">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+    <div class="example-element-detail">
+      <mat-cell *matCellDef="let row">
+        <button mat-mini-fab aria-label="Example icon button with a home icon" (click)="correrProceso(row.variable)">
+          <mat-icon>center_focus_weak</mat-icon>
+        </button>
+      </mat-cell>
+
+    </div>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;">
+  </mat-row>
+
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
