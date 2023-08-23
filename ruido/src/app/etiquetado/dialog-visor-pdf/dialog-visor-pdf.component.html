@@ -1,0 +1,39 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>Documento PDF de Etiqueta</h1>
+ 
+  <div mat-dialog-content>
+
+    <div fxLayout='col'>
+
+
+
+
+
+      <!-- ngx-extended-pdf-viewer [src]="'./assets/documents/Quimica/2018/instructivo.pdf'" useBrowserLocale="true" height="80vh" -->
+      <!--Statico funciona -->
+      <!-- ngx-extended-pdf-viewer [src]="srcPdf" useBrowserLocale="true" height="80vh"></!-- ngx-extended-pdf-viewer -->
+      <!-- 
+                  <ngx-extended-pdf-viewer *ngIf="currentPdf"
+                      [src]="currentPdf" useBrowserLocale="false"
+                      style="height: 100%; width: 100%"
+                      [delayFirstView]="1000"
+                      [showHandToolButton]="true"
+                      [handTool] = false>
+                  </ngx-extended-pdf-viewer>
+                  -->
+
+      <!-- ngx-extended-pdf-viewer [src]="currentPdf" [useBrowserLocale]="true" height="180vh" [showHandToolButton]="true">
+                    [src]="currentPdf"
+                    [height]="'auto'" 
+                    [useBrowserLocale]="true" 
+                    [textLayer]="true" 
+                    [showHandToolButton]="true">
+                  </ngx-extended-pdf-viewer -->
+
+      <ngx-extended-pdf-viewer [src]="currentPdf" [height]="'auto'" [useBrowserLocale]="true" [textLayer]="true"
+        [showHandToolButton]="true">
+      </ngx-extended-pdf-viewer>
+
+
+
+    </div>
+  </div>

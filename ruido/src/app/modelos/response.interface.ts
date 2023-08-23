@@ -9,3 +9,15 @@ export interface VariableSesionI {
     modulo:string[];
     menu:string[];
 }
+
+
+export interface VariableAmbientalI {
+    idVariableAmbiental: number;
+    nombre:string;    
+}
+
+export interface FuenteDatoI{
+    idFuenteDato: number;
+    nombre:string;    
+}
+

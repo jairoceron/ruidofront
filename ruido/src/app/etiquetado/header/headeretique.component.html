@@ -1,0 +1,38 @@
+<div style="height: 10vh;">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Etiquetado Vehicular Ambiental</span>
+      <span class="menu-spacer"></span>
+      <div>
+        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+
+
+
+        <a href="#" mat-button>Código QR</a>
+        <a mat-button mat-raised-button (click)="datosVehiculo()">Datos Vehiculo</a>
+        <a mat-button (click)="propietarioVehiculo()">Datos Propietario del Vehiculo</a>
+        <a mat-button (click)="imprimirEtiqHolograma()"><mat-icon>qr_code_scanner</mat-icon></a>
+        <a mat-button (click)="ayuda()"><mat-icon>help</mat-icon></a>
+        <!-- a href="#" mat-button>Menu Item 3</a>
+          <a href="#" mat-button>Menu Item 4</a>
+          <a href="#" mat-button>Menu Item 5</a>
+          <a href="#" mat-button>Menu Item 6</a -->
+      </div>
+
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Placa Vehiculo</mat-label>
+        <input matInput type="text" [(ngModel)]="placa" (keyup)="actualizaObservador($event )">
+        <button *ngIf="placa" matSuffix mat-icon-button aria-label="Clear" (click)="generarPDFetiquetado()">
+          <mat-icon>picture_as_pdf</mat-icon>
+        </button>
+      </mat-form-field>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+</div>

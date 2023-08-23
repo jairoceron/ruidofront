@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { loadModules } from 'esri-loader';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  name = 'Angular';
+
   
 }
 

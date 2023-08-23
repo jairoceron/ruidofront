@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CategoriaI, CilindradaI, ClaseVehiculoI, EstadoEmisionI, LoginI, PesoVehiculoI, TipoCombustibleI } from 'src/app/modelos/login.interface';
 import { ApiService } from 'src/app/servicios/api.service';
 import { EtiquetadoService } from 'src/app/servicios/etiquetado.service';
+//import { slideInAnimation } from './animations';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+import { style, animate, animation, animateChild, useAnimation, group, sequence, transition, state, trigger, query as q, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-etiquetado',
   templateUrl: './etiquetado.component.html',
-  styleUrls: ['./etiquetado.component.scss']
+  styleUrls: ['./etiquetado.component.scss'],
+  animations: [
+    
+    // animation triggers go here
+  ]
 })
 export class EtiquetadoComponent implements OnInit {
+
+
+  value : string = 'XXX000';
+  placa : string = 'XXX000';
 
   listPesoVehiculo : PesoVehiculoI[] = [];
   selectedPesoVehiculo : PesoVehiculoI = {idpesovehiculo:0, idclasevehiculo:0, nombre:''}
@@ -38,7 +50,8 @@ export class EtiquetadoComponent implements OnInit {
     pesovehiculo  : new FormControl('',Validators.required),
   });
   
-  constructor(private etService:EtiquetadoService) { }
+  constructor(private etService:EtiquetadoService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.etService.listClaseVehiculo().subscribe( x => { 
@@ -48,6 +61,13 @@ export class EtiquetadoComponent implements OnInit {
   }
 
   onEtiquetado(form:LoginI) {
+  }
+
+  generarPDFetiquetado() {
+    this.etService.generarPDFetiquetado(this.placa).subscribe( x => {
+       x;
+       console.log(x);
+      });
   }
 
   onChangeClaseVehiculo(selectedClaseVehiculo: ClaseVehiculoI ) {
@@ -112,4 +132,14 @@ export class EtiquetadoComponent implements OnInit {
 
   }
 
+  propietarioVehiculo() {    
+    this.router.navigate(['/propvehiculo']);    
+  }
+
+  datosVehiculo() {
+    console.log('El siguiente paso es mas duro que este ..... (1)');
+    this.router.navigate(['/infoVehic']);
+    console.log('El siguiente paso es mas duro que este ..... (2)');
+  }
+//*********************************
 }

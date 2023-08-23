@@ -185,6 +185,7 @@ export const CONS_NO_ES_COMPETE: string = 'Estado Del Trámite NO es competencia
 export const CON_PROVISIONAL_ET: string = 'Estado Del Trámite Provisional ::  PQR'; 
 export const PREDIO2D_NORMATIVI: string = 'Cumplimiento Normativo - Predio Generador ::  Visita'; 
 export const CS_ORGANIS_CONTROL: string = 'Organismo de Control ::  PQR'; 
+export const CS_MODULO_ALERTAS: string = 'Módulo de Alertas :: '; 
 export const GRAFICA_TIPO_PIE: string = 'Torta'; 
 export const GRAFICA_TIPO_BAR: string = 'Barra'; 
 

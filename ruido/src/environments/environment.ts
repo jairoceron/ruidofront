@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ruidoURL: 'http://localhost:8080/cimab/ruido/'
+  ruidoURL: 'http://localhost:8082/cimab/ruido/'
 };
 
 /*

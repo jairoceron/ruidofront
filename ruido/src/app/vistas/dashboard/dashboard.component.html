@@ -1,3 +1,5 @@
+
+
 <app-header></app-header>
 
 <!-- div>Archivo de visitas : <input type="file" (change)="readExcel($event)">  </div -->
@@ -52,6 +54,7 @@
         <mat-option value={{conProvisionEsTra}}>{{conProvisionEsTra}}</mat-option>
         <mat-option value={{predio2D_normativi}}>{{predio2D_normativi}}</mat-option>
         <mat-option value={{organismo_control_}}>{{organismo_control_}}</mat-option>
+        <mat-option value={{modulo_alertas_}}>{{modulo_alertas_}}</mat-option>
         <!--mat-option value="Polígono Consulta">Polígono Consulta</mat-option -->
       </mat-select>
     </mat-form-field>
@@ -95,7 +98,7 @@
 
 
     <app-conslocalidad *ngIf="vistaSistema === pqrsLocalidaLabel "></app-conslocalidad>
-
+    <app-esri *ngIf="vistaSistema === modulo_alertas_ "></app-esri>
 
 
     <app-chartestadotramite

@@ -1,85 +1,69 @@
+<app-headeretique></app-headeretique>
 
-<!------ Include the above in your HEAD tag ---------->
+<!-- Login Form -->
+<form novalidate [formGroup]="indiceVehicForm" (ngSubmit)="onEtiquetado(indiceVehicForm.value)">
+  <!-- mat-form-field -->
 
-
-
-   
-
-      
-      
-  
-      <!-- Login Form -->
-      <form novalidate [formGroup]="indiceVehicForm" (ngSubmit)="onEtiquetado(indiceVehicForm.value)" >
-        <!-- mat-form-field -->
-       
-        <label for="claseVehiculo" class="form-label">Clase de Vehículo</label>
-            <select formControlName="claseVehiculo"  [(ngModel)]="selectedClaseVehiculo" class="form-select form-select-sm"
-               aria-label=".form-select-sm example" style="width:auto;"s id="claseVehiculo"
-               (change)="onChangeClaseVehiculo(selectedClaseVehiculo)">
-                <option *ngFor="let lClVeh of listClaVehi" [value]="lClVeh" [ngValue]="lClVeh" >
-                    {{lClVeh.nombre}}
-                  </option>
-                
-    </select>
-
-    <label for="tipoCombustible" class="form-label">Tipo de Combustible</label>
-    <select formControlName="tipoCombustible"   [(ngModel)]="selectedTipoCombustible"   
-    class="form-select form-select-sm" aria-label=".form-select-sm example"
-    style="width:auto;"s id="tipoCombustible"
-    (change)="onChangeTipoCombustible(selectedTipoCombustible)" >
-      <option *ngFor="let lClVeh of listTipoCom" [value]="lClVeh" [ngValue]="lClVeh">
-          {{lClVeh.nombre}}
-        </option>
-</select>
- 
-<label for="estandarEmision" class="form-label">Estándar de Emisión</label>
-<select formControlName="estandarEmision"   [(ngModel)]="selectedEstandarEmision"   
-class="form-select form-select-sm" aria-label=".form-select-sm example"
-style="width:auto;"s id="estandarEmision"
-(change)="onChangeEstandarEmision(selectedEstandarEmision)" >
-  <option *ngFor="let lClVeh of listEstandarEmision" [value]="lClVeh" [ngValue]="lClVeh">
+  <label for="claseVehiculo" class="form-label">Clase de Vehículo</label>
+  <select formControlName="claseVehiculo" [(ngModel)]="selectedClaseVehiculo" class="form-select form-select-sm"
+    aria-label=".form-select-sm example" style="width:auto;" s id="claseVehiculo"
+    (change)="onChangeClaseVehiculo(selectedClaseVehiculo)">
+    <option *ngFor="let lClVeh of listClaVehi" [value]="lClVeh" [ngValue]="lClVeh">
       {{lClVeh.nombre}}
     </option>
-</select>
 
-<label for="cilindrada" class="form-label">Cilindrada</label>
-<select formControlName="cilindrada"   [(ngModel)]="selectedCilindrada"   
-class="form-select form-select-sm" aria-label=".form-select-sm example"
-style="width:auto;"s id="cilindrada"
-(change)="onChangeCilindrada(selectedCilindrada)" >
-  <option *ngFor="let lClVeh of listCilindrada" [value]="lClVeh" [ngValue]="lClVeh">
+  </select>
+
+  <label for="tipoCombustible" class="form-label">Tipo de Combustible</label>
+  <select formControlName="tipoCombustible" [(ngModel)]="selectedTipoCombustible" class="form-select form-select-sm"
+    aria-label=".form-select-sm example" style="width:auto;" s id="tipoCombustible"
+    (change)="onChangeTipoCombustible(selectedTipoCombustible)">
+    <option *ngFor="let lClVeh of listTipoCom" [value]="lClVeh" [ngValue]="lClVeh">
       {{lClVeh.nombre}}
     </option>
-</select>
+  </select>
 
-<label for="categoria" class="form-label">Categoria</label>
-<select formControlName="categoria"   [(ngModel)]="selectedCategoria"   
-class="form-select form-select-sm" aria-label=".form-select-sm example"
-style="width:auto;"s id="categoria"
-(change)="onChangeCategoria(selectedCategoria)" >
-  <option *ngFor="let lClVeh of listCategoria" [value]="lClVeh" [ngValue]="lClVeh">
+  <label for="estandarEmision" class="form-label">Estándar de Emisión</label>
+  <select formControlName="estandarEmision" [(ngModel)]="selectedEstandarEmision" class="form-select form-select-sm"
+    aria-label=".form-select-sm example" style="width:auto;" s id="estandarEmision"
+    (change)="onChangeEstandarEmision(selectedEstandarEmision)">
+    <option *ngFor="let lClVeh of listEstandarEmision" [value]="lClVeh" [ngValue]="lClVeh">
       {{lClVeh.nombre}}
     </option>
-</select>
+  </select>
 
-<label for="pesovehiculo" class="form-label">Peso Vehículo</label>
-<select formControlName="pesovehiculo"   [(ngModel)]="selectedPesoVehiculo"   
-class="form-select form-select-sm" aria-label=".form-select-sm example"
-style="width:auto;"s id="pesovehiculo"
-(change)="onChangePesoVehiculo(selectedPesoVehiculo)" >
-  <option *ngFor="let lClVeh of listPesoVehiculo" [value]="lClVeh" [ngValue]="lClVeh">
+  <label for="cilindrada" class="form-label">Cilindrada</label>
+  <select formControlName="cilindrada" [(ngModel)]="selectedCilindrada" class="form-select form-select-sm"
+    aria-label=".form-select-sm example" style="width:auto;" s id="cilindrada"
+    (change)="onChangeCilindrada(selectedCilindrada)">
+    <option *ngFor="let lClVeh of listCilindrada" [value]="lClVeh" [ngValue]="lClVeh">
       {{lClVeh.nombre}}
     </option>
-</select>
+  </select>
 
-  <div class="container w-25">       
-   
-</div>
-    <!-- /mat-form-field -->
-        <input type="submit"  value="Consulta Indice">
-      </form>
-  
-      <!-- Remind Passowrd -->
-      
+  <label for="categoria" class="form-label">Categoria</label>
+  <select formControlName="categoria" [(ngModel)]="selectedCategoria" class="form-select form-select-sm"
+    aria-label=".form-select-sm example" style="width:auto;" s id="categoria"
+    (change)="onChangeCategoria(selectedCategoria)">
+    <option *ngFor="let lClVeh of listCategoria" [value]="lClVeh" [ngValue]="lClVeh">
+      {{lClVeh.nombre}}
+    </option>
+  </select>
 
+  <label for="pesovehiculo" class="form-label">Peso Vehículo</label>
+  <select formControlName="pesovehiculo" [(ngModel)]="selectedPesoVehiculo" class="form-select form-select-sm"
+    aria-label=".form-select-sm example" style="width:auto;" s id="pesovehiculo"
+    (change)="onChangePesoVehiculo(selectedPesoVehiculo)">
+    <option *ngFor="let lClVeh of listPesoVehiculo" [value]="lClVeh" [ngValue]="lClVeh">
+      {{lClVeh.nombre}}
+    </option>
+  </select>
 
+  <div class="container w-25">
+
+  </div>
+  <!-- /mat-form-field -->
+  <input type="submit" value="Consulta Indice">
+</form>
+
+<!-- Remind Passowrd -->

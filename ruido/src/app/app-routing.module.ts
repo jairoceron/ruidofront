@@ -10,6 +10,13 @@ import { NuevisitaComponent } from './vistas/nuevisita/nuevisita.component';
 import { HeaderComponent } from './plantillas/header/header.component';
 import { VisitaprofesionalComponent } from './vistas/visitaprofesional/visitaprofesional.component';
 import { AiresbcComponent } from './vistas/airesbc/airesbc.component';
+import { PropvehiculoComponent } from './etiquetado/propvehiculo/propvehiculo.component';
+import { PlacaComponent } from './etiquetado/placa/placa.component';
+import { InfovehiculoComponent } from './etiquetado/infovehiculo/infovehiculo.component';
+import { ObjetoplacaComponent } from './etiquetado/objetoplaca/objetoplaca.component';
+import { VariableComponent } from './datalake/variable/variable.component';
+import { DatabaseComponent } from './util/database/database.component';
+import { AyudaComponent } from './etiquetado/ayuda/ayuda.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'login', pathMatch:'full'},
@@ -23,7 +30,14 @@ const routes: Routes = [
   { path:'nueVisita', component:NuevisitaComponent}, 
   { path:'encabezado', component:HeaderComponent}, 
   { path:'visitaRuido', component:VisitaprofesionalComponent},
-];
+  { path:'propvehiculo', component:PropvehiculoComponent},
+  { path:'listPlaca', component:PlacaComponent},
+  { path:'infoVehic', component:InfovehiculoComponent},
+  { path:'objetoPlaca', component: ObjetoplacaComponent},
+  { path:'dataLake', component: VariableComponent},
+  { path:'utilitario', component: DatabaseComponent},
+  { path:'ayuda', component: AyudaComponent}, 
+]; 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

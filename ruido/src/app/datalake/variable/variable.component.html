@@ -1,0 +1,42 @@
+<table>
+    <tr>
+        <td>
+            <img src="./assets/images/data-ingestion-icon-0.jpg" style="max-width: 300px" />
+        </td>
+        <td>
+           <h1>Lago de Datos - Secretaría de Ambiente</h1>
+           <table>
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label for="variable" class="form-label">Variable</mat-label>
+                        <mat-select [(ngModel)]="selectedVariable" id="marca"
+                            (ngModelChange)="onChangeVariable(selectedVariable)">
+                            <mat-option *ngFor="let lClVeh of listVariable" [value]="lClVeh">
+                                {{lClVeh.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label for="variable" class="form-label">Fuentes de Datos</mat-label>
+                            <mat-select [(ngModel)]="selectedFuenteDato" id="marca"
+                                (ngModelChange)="onChangeFuenteDato(selectedFuenteDato)">
+                                <mat-option *ngFor="let lClVeh of listFuenteDato" [value]="lClVeh">
+                                    {{lClVeh.nombre}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    </tr>
+           </table>
+
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+</table>

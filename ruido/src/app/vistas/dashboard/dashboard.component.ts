@@ -7,7 +7,7 @@ import { EtiquetadoComponent } from 'src/app/etiquetado/etiquetado/etiquetado.co
 import { RuidoComponent } from 'src/app/ruido/ruido/ruido.component';
 import { VacioComponent } from 'src/app/vacio/vacio.component';
 import { MatInputModule } from '@angular/material/input';
-import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_NO_ES_COMPETE, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, CON_PROVISIONAL_ET, CS_ORGANIS_CONTROL, GRAFICA_TIPO_BAR, GRAFICA_TIPO_PIE, Pqrs, PQRS_POR_LOCALIDAD, PREDIO2D_NORMATIVI } from 'src/app/modelos/ruido.interface';
+import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_NO_ES_COMPETE, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, CON_PROVISIONAL_ET, CS_MODULO_ALERTAS, CS_ORGANIS_CONTROL, GRAFICA_TIPO_BAR, GRAFICA_TIPO_PIE, Pqrs, PQRS_POR_LOCALIDAD, PREDIO2D_NORMATIVI } from 'src/app/modelos/ruido.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -63,6 +63,7 @@ export class DashboardComponent implements OnInit {
   conProvisionEsTra =  CON_PROVISIONAL_ET;
   predio2D_normativi = PREDIO2D_NORMATIVI;
   organismo_control_ = CS_ORGANIS_CONTROL;
+  modulo_alertas_ =  CS_MODULO_ALERTAS;
 
 
   excelData : any;
@@ -72,7 +73,8 @@ export class DashboardComponent implements OnInit {
   pqrsActual : Pqrs = {radicado:''};
   vistaSistema : string = '';
   dataSource: MatTableDataSource<Pqrs> = new MatTableDataSource(this.pqrs);
-  displayedColumns = ['radicado', 'asunto_de_radicacion',  'razon_social_del_establecimient', 'localidad', 'direcciones', 'visita','estadoTramite', 'fecha_del_radicado'];
+  displayedColumns = ['radicado', 'asunto_de_radicacion',  'razon_social_del_establecimient', 'localidad', 
+     'direcciones', 'visita','estadoTramite', 'fecha_del_radicado'];
   expandDisplayedColumns = ["optionName", "optionDescription"];
 
   @ViewChild(MatPaginator, { static: false })

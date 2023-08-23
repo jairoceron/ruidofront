@@ -1,0 +1,39 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.mat-column-apellido1 {
+    width: 220px;
+  }
+
+.mat-column-apellido2 {
+  width: 220px;
+}
+
+.mat-column-nombre2 {
+    width: 220px;
+  }
+
+  .mat-column-idevapropvehi {
+    width: 100px;
+  }
+
+  .mat-column-placa {
+    width: 100px;
+  }
+
+
+  .mat-column-identificacion {
+    width: 150px;
+  }
+
+
+.mat-column-title,
+.mat-column-userId {
+  .mat-form-field{
+    width: calc(100% - 15px);
+  }
+}

@@ -1,0 +1,17 @@
+<p>Utilitario para la creación de base de datos</p>
+
+<p>
+    <mat-form-field appearance="outline">
+      <mat-label>Digite el campo de la base de datos</mat-label>
+      <input matInput placeholder="S006T60" [(ngModel)]="tableName">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Hint</mat-hint>
+
+      <button mat-button *ngIf="tableName" matSuffix mat-icon-button aria-label="Clear" (click)="generarEntityTablename()">
+        <mat-icon>backup_table</mat-icon>
+      </button>
+
+    </mat-form-field>
+  </p>
+
+  <!--   site:stackblitz.com input matInput button     -->

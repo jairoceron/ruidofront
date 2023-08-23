@@ -1,0 +1,251 @@
+<app-headeretique></app-headeretique>
+
+{{mensajeDeError}}
+<mat-card>
+    <div>
+        <span class="example-input-label">--Información General del Vehículo {{placa}}</span>
+    </div>
+    <div class="example-container">
+
+        <!--
+            <mat-label>Tipologia Vehicular</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.tipologiaVehicular">
+-->
+
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label for="claseVehiculo" class="form-label">Clase de Vehículo</mat-label>
+            <mat-select [(ngModel)]="selectedClaseVehiculo" id="claseVehiculo"
+                (ngModelChange)="onChangeClaseVehiculo(selectedClaseVehiculo)">
+                <mat-option *ngFor="let lClVeh of listClaVehi" [value]="lClVeh">
+                    {{lClVeh.nombre}}
+                </mat-option>
+
+            </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <!-- mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Tipo de Servicio</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.tipoServicio">
+        </mat-form-field -->
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label for="tipoServicio" class="form-label">Tipo de Servicio</mat-label>
+            <mat-select [(ngModel)]="selectedTipoServicio" id="tipoServicio"
+                (change)="onChangeTipoServicio(selectedTipoServicio)">
+                <mat-option *ngFor="let lClVeh of listTipoServicio" [value]="lClVeh">
+                    {{lClVeh.nombre}}
+                </mat-option>
+
+            </mat-select>
+        </mat-form-field>
+        &nbsp;
+
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label for="tipoCombustible" class="form-label">Tipo de Combustible</mat-label>
+            <!-- input matInput placeholder="" [(ngModel)]="informacionvehiculo.tipoCombustible" -->
+            <mat-select [(ngModel)]="selectedTipoCombustible" id="tipoServicio"
+                (ngModelChange)="onChangeTipoServicio(selectedTipoServicio)">
+                <mat-option *ngFor="let lClVeh of listTipoCom" [value]="lClVeh">
+                    {{lClVeh.nombre}}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+        &nbsp;
+
+
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label for="cilindraje" class="form-label">Cilindraje</mat-label>
+            <mat-select [(ngModel)]="selectedCilindrada" id="cilindraje"
+                (ngModelChange)="onChangeCilindrada(selectedCilindrada)">
+                <mat-option *ngFor="let lClVeh of listCilindrada" [value]="lClVeh">
+                    {{lClVeh.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;
+
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label for="marca" class="form-label">Marca</mat-label>
+            <mat-select [(ngModel)]="selectedMarca" id="marca" (ngModelChange)="onChangeMarca(selectedMarca)">
+                <mat-option *ngFor="let lClVeh of listMarca" [value]="lClVeh">
+                    {{lClVeh.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;
+
+
+
+        <!-- mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Marca</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.marca">
+        </mat-form-field -->
+
+
+
+
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Linea</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.linea">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Año / Modelo</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.modelo">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" >
+            <mat-label>Fecha Importación</mat-label>
+            <input matInput
+              [matDatepicker]="picker"
+              placeholder="Fecha Importación"
+              (dateChange)="setDate($event.value)" [(ngModel)]="informacionvehiculo.fechaImportacion">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Capacidad Carga</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.capacidadCarga">
+        </mat-form-field>
+
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Número de Motor</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.numeroMotor">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>vin</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.vin">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Ciudad Matrícula</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.ciudadMatricula">
+
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Vigencia RTM</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.vigenciaRTM">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Tecnología Reducción Emisiones</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.tecnRedEmision">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Estándar Emisión Vehículo</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.estEmisiVehic">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Subsistema Control de Emisiones</mat-label>
+            <input matInput placeholder="" [(ngModel)]="informacionvehiculo.subContEmision">
+        </mat-form-field>
+
+        <div>
+            <mat-label>
+                Adjunte en PDF el certificado de aprobación vigente de la Revisión Técnico Mecánica y
+                de Emisiones Contaminantes - RTM - EC*
+            </mat-label>
+            <button mat-icon-button matPrefix (click)="f_input.click()">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+
+            <input type="file" hidden #f_input />
+        </div>
+
+        <div>
+            <mat-label>
+                Adjunte en PDF el certificado de Emisiones por Prueba Dinámica (CEPD) Y visto bueno por
+                Protocolo de Montreal
+            </mat-label>
+            <button mat-icon-button matPrefix (click)="pdfCEPD.click()">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+
+            <input type="file" hidden #pdfCEPD />
+        </div>
+
+        <div>
+            <mat-label>
+                Resultados de las pruebas estáticas de emisiones realizadas por parte de un laboratorio ambiental
+                autorizado por el IDEAM
+            </mat-label>
+            <button mat-icon-button matPrefix (click)="pdfTecMecan.click()">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+
+            <input type="file" hidden #pdfTecMecan />
+        </div>
+
+        <div>
+            <mat-label>
+                PDF Registro fotográfico de la Tarjeta de Propiedad  (ambas caras)
+            </mat-label>
+            <button mat-icon-button matPrefix (click)="pdfTecMecan.click()">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+
+            <input type="file" hidden #pdfTecMecan />
+        </div>
+
+        <div>
+            <mat-label>
+                En el caso de contar con alguna modificación o tecnología para la reducción de emisiones en
+                su vehículo por favor describalas a continuación
+            </mat-label>
+            <button mat-icon-button matPrefix (click)="pdfTecMecan.click()">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+
+            <input type="file" hidden #pdfTecMecan />
+        </div>
+
+        <div class="example-container">
+            <mat-label>
+                
+            </mat-label>
+        </div>
+        <div>&nbsp;</div>
+        <mat-form-field>
+            <textarea matInput placeholder="Tecnología de reducción de emisiones"></textarea>
+        </mat-form-field>
+
+        <div>&nbsp;</div>
+        <div class="form-group form-check">
+            <input
+              type="checkbox"
+              
+              class="form-check-input"
+              [ngClass]="{ 'is-invalid': submitted  }"
+            />
+            <label for="acceptTerms" class="form-check-label"
+              >Autorización para el tratamiento de datos personales, en cumplimiento de las disposiciones 
+              de la Ley 1581 de 2012 y del Decreto reglamentario 1377 de 2013 que desarrollan el
+              derecho de habeas data.</label
+            >
+            <div *ngIf="submitted " class="invalid-feedback">
+                
+            </div>
+          </div>
+
+
+        <div>&nbsp;</div>
+
+        &nbsp;
+        <button class="btn btn-success" (click)="guardaInfoVehiculo()" cdkFocusInitial>Guardar Información
+            Vehículo</button>
+        &nbsp;
+        <button class="btn btn-success" (click)="generarEtiquetaEVA()" cdkFocusInitial>Generar Etiqueta
+            EVA</button>
+
+    </div>
+</mat-card>

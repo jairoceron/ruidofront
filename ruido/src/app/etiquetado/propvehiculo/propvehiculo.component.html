@@ -1,0 +1,93 @@
+<app-headeretique></app-headeretique>
+<p>Información del Propietario del Vehículo Placa : {{placa}}</p>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="register-form">
+        <div class="container">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Primer nombre del propietario</mat-label>
+                <input matInput placeholder="" formControlName="primerNombre">
+            </mat-form-field>
+           
+
+            <mat-form-field appearance="outline">
+                <mat-label>Segundo nombre del propietario</mat-label>
+                <input matInput placeholder="" formControlName="segundoNombre">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Primer apellido del propietario</mat-label>
+                <input matInput placeholder="" formControlName="primerApellido">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Segundo apellido del propietario</mat-label>
+                <input matInput placeholder="" formControlName="segundoApellido">
+            </mat-form-field>
+        </div>
+
+        <div class="container">
+            
+                <mat-radio-group formControlName="tpIdentificacion" appearance="outline">
+                    <mat-radio-button value="1">Cédula Ciudadanía&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-radio-button>
+                    <mat-radio-button value="2">Nit</mat-radio-button>
+                </mat-radio-group>
+            
+
+            <mat-form-field appearance="outline">
+                <mat-label>Número del documento:</mat-label>
+                <input matInput placeholder="" formControlName="numeroIdentificacion">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input matInput placeholder="" formControlName="telefono">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput placeholder="" formControlName="correoElectronico">
+            </mat-form-field>
+
+            <div class="form-group form-check">
+                <input
+                  type="checkbox"
+                  
+                  class="form-check-input"
+                  [ngClass]="{ 'is-invalid': submitted  }"
+                />
+                <label for="acceptTerms" class="form-check-label"
+                  > Autorización para el tratamiento de datos personales, en cumplimiento de las disposiciones 
+                  de la Ley 1581 de 2012 y del Decreto reglamentario 1377 de 2013 que desarrollan el
+                  derecho de habeas data.</label
+                >
+                <div *ngIf="submitted " class="invalid-feedback">
+                   
+                </div>
+              </div>
+
+        </div>
+        <div class="container">
+            <!-- button class="btn btn-success" (click)="guardarPropVehiculo()" cdkFocusInitial>Guardar Propietario
+                Vehiculo</button>
+
+            <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                Reset
+            </button >
+        </div>
+        <div class="form-group" -->
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                Limpiar
+            </button>
+        </div>
+    </div>
+
+  
+
+
+
+    
+</form>
