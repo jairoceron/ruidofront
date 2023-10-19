@@ -82,6 +82,8 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { AyudaComponent } from './etiquetado/ayuda/ayuda.component';
+import { DatagenComponent } from './etiquetado/datagen/datagen.component';
+import { EstaticComponent } from './etiquetado/estatic/estatic.component';
 
 
 
@@ -124,7 +126,7 @@ import { AyudaComponent } from './etiquetado/ayuda/ayuda.component';
     HeaderComponent, ObjetoplacaComponent,
      DialogVisorPdfComponent, ExamplePdfViewerComponent, 
      VariableComponent, DatabaseComponent,
-    DialogVisorPdfComponent, HeaderetiqueComponent, AyudaComponent
+    DialogVisorPdfComponent, HeaderetiqueComponent, AyudaComponent, DatagenComponent, EstaticComponent
   ],
   imports: [
     DragDropModule,

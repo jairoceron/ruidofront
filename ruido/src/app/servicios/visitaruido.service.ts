@@ -18,7 +18,14 @@ export class VisitaruidoService {
   public visitaObser : Observable<Visitas[]> = this.visitaBehSub.asObservable();
 
 
-  private pqrBehSub : BehaviorSubject<Pqrs> = new BehaviorSubject<Pqrs>({radicado:''});
+  private pqrBehSub : BehaviorSubject<Pqrs> = new BehaviorSubject<Pqrs>({
+    objectid : -1,
+    radicado:'', 
+  asunto_radicacion : '', sector_reportado : '' , localidad : '', estado_tramite :1,
+  observaciones_estado_tramite : '',
+  fecha_radicado : new Date() ,
+
+});
   public  pqrObserv : Observable<Pqrs> = this.pqrBehSub.asObservable();
 
 
@@ -32,6 +39,11 @@ export class VisitaruidoService {
     estadoTramite:'',
     tipoPredio:'',
     tipoChart :GRAFICA_TIPO_PIE,
+    isCbCVencido : false,
+    isCbCPxVenci : false,
+    isCbCPxSinVe : false,
+    peticionario : '',
+    observacionEstadoTramite :  '',
     };
 
   constructor(private http:HttpClient) { }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CONSUL_TIPO_PREDIO, PQRS_POR_LOCALIDAD, RdoTipopredio, RuiLocalidad } from 'src/app/modelos/ruido.interface';
+import { CONSUL_TIPO_PREDIO, PQRS_POR_LOCALIDAD, RdoTipopredio, RuiLocalidad, SectorReportadoPqrs } from 'src/app/modelos/ruido.interface';
 import { ConsultaService } from 'src/app/servicios/consulta.service';
 import { LocalidadService } from 'src/app/servicios/localidad.service';
 import { TipopredioService } from 'src/app/servicios/tipopredio.service';
@@ -11,7 +11,7 @@ import { TipopredioService } from 'src/app/servicios/tipopredio.service';
 })
 export class ConstipopredioComponent implements OnInit {
 
-  listTPredio: RdoTipopredio[] = [];
+  listTPredio: SectorReportadoPqrs[] = [];
   tipoPrediox: string = '';
 
   constructor(
@@ -27,7 +27,7 @@ export class ConstipopredioComponent implements OnInit {
 
   listLocalidad() {
     console.log("Consulta por localidad 1b ");
-    let rdoTipoPredio: RdoTipopredio = { idtipopredio: 1, nombre: '' }
+    let rdoTipoPredio: SectorReportadoPqrs  = { Id: 1, sector_reportado: '' }
     console.log("Consulta por localidad 1c ");
     this.tipoPredioService.consultaLocalidad(rdoTipoPredio).subscribe(
       x => {

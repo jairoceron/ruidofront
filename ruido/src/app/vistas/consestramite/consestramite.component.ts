@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CONS_POR_ESTADOTRA, PQRS_POR_LOCALIDAD, RdoEstado, RuiLocalidad } from 'src/app/modelos/ruido.interface';
+import { CONS_POR_ESTADOTRA, PQRS_POR_LOCALIDAD, RdoEstado, RdoEstadoTramite, RuiLocalidad } from 'src/app/modelos/ruido.interface';
 import { ConsultaService } from 'src/app/servicios/consulta.service';
 import { EstadoService } from 'src/app/servicios/estado.service';
 
@@ -10,7 +10,7 @@ import { EstadoService } from 'src/app/servicios/estado.service';
 })
 export class ConsestramiteComponent implements OnInit {
 
-  listEstadoTramitex : RdoEstado[] = [];
+  listEstadoTramitex : RdoEstadoTramite[] = [];
   estadoTramitex : string = '';
 
   constructor(
@@ -26,7 +26,7 @@ export class ConsestramiteComponent implements OnInit {
 
   listLocalidad() {
     console.log("Consulta por localidad 1b ");
-    let rdoEstado: RdoEstado = {idEstado : 1, nombre : ''}
+    let rdoEstado: RdoEstadoTramite = {id : 1, nombre : ''}
     console.log("Consulta por localidad 1c ");
 
     // consultaEstado(estado: RdoEstado): Observable<RdoEstado[]> {

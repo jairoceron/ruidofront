@@ -1,0 +1,96 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>Información Pruebas Estáticas
+    {{data.dataVehiculo.placa}}</h1>
+
+<mat-card>
+    <p>Pruebas Estaticas</p>
+
+    <div>
+        Vehículos livianos, medianos y pesados con motor de encendido por compresión que cumplan con el Estándar Euro
+        4/IV, equivalente o superior y cuya fecha de importación o de ensamble sea posterior al 31 de diciembre de 2014.
+    </div>
+    <div>
+        Vehículos livianos y medianos con motor de encendido por chispa dedicados a gas natural o GLP que cumplan con el
+        estándar Euro 6, equivalente o superior y cuya fecha de importación o de ensamble sea posterior al 1 de enero de
+        2023.
+    </div>
+    <div>
+        Vehículos pesados con motor de encendido por chispa dedicados a gas natural o GLP que cumplan con el estándar
+        Euro IV, equivalente o superior y cuya fecha de importación o de ensamble sea posterior al 31 de diciembre de
+        2014.
+    </div>
+    <div>
+        Vehículos livianos, medianos y pesados con motor de encendido por chispa a gasolina y sus mezclas establecidas
+        en la normatividad vigente; que cumplan con el estándar Euro 4/IV, equivalente o superior y cuya fecha de
+        importación o de ensamble sea posterior al 08 de agosto de 2023.
+    </div>
+
+    <mat-radio-group aria-label="Select an option"  [(ngModel)]="determinarFavSeleccionado">
+        <mat-radio-button value="SI">Si</mat-radio-button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-radio-button value="NO">No</mat-radio-button>
+    </mat-radio-group>
+
+    <div>
+        <div>
+            De acuerdo a la información suministrada por el usuario y su respectiva validación, el vehículo se asocia a
+            un
+            FAV y por ende a una categoría (color)?
+        </div>
+        <mat-radio-group aria-label="Select an option"    [(ngModel)]="asoc_FAV_colorSeleccionado" >
+            <mat-radio-button value="SI">Si</mat-radio-button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-radio-button value="NO">No</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div>
+        <div>
+            Verificación de cumplimiento densidad de humo a vehíclos de motor encendido por comprensión límites EVA.
+        </div>
+        <mat-form-field class="example-full-width" >
+            <mat-label>Densidad de Humo</mat-label>
+            <input matInput placeholder="Densidad de Humo" value="0.0"  [(ngModel)]="densidadHumo" >
+        </mat-form-field>
+    </div>
+    <div>
+        ¿El vehículo cumple con los límites de densidad de humo establecidos en el EVA?
+    </div>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="limiteDensidadSeleccionado" >
+        <mat-radio-button value="SI">Si</mat-radio-button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-radio-button value="NO">No</mat-radio-button>
+    </mat-radio-group>
+    <div>
+        Verificación de cumplimiento de número de partículas y concentración de material particulado límites EVA.
+    </div>
+    
+    <div>
+        Diligencie el resultado de concentración de número de partículas (# / cm3)
+    </div>
+    <mat-form-field class="example-full-width">
+        <mat-label>Número de particulas</mat-label>
+        <input matInput placeholder="Densidad de Humo" value="0.0"  [(ngModel)]="numeroParticulas"  >
+    </mat-form-field>
+
+    <div>
+        Diligencie el resultado de concentración del material particulado (# / cm3)
+    </div>
+    <div class="example-button-row">
+    <mat-form-field class="example-full-width">
+        <mat-label>Concentración Material Particulado</mat-label>
+        <input matInput placeholder="Densidad de Humo" value="0.0"   [(ngModel)]="materialParticulado" >
+    </mat-form-field>
+
+    &nbsp;
+
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label for="marca" class="form-label">FAV Color Etiqueta</mat-label>
+            <mat-select [(ngModel)]="selectedColorEtiqueta.nombre" id="marca" >
+                <mat-option *ngFor="let lClVeh of listColorEtiqueta" [value]="lClVeh.nombre">
+                    {{lClVeh.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+    <button mat-button color="primary" class="btn btn-success" (click)="guardarComplemento()">Guardar</button>
+    </div>
+</mat-card>

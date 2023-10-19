@@ -4,8 +4,8 @@
 <mat-form-field appearance="fill">
     <mat-label>Localidad</mat-label>
     <mat-select [(ngModel)]="localidad" name="localidad"  (ngModelChange)="onTipoPredioSelection()">
-        <mat-option *ngFor="let localidadX of listRuiLocalidad" [value]="localidadX.idLocalidad">
-            {{localidadX.nombre}}
+        <mat-option *ngFor="let localidadX of listRuiLocalidad" [value]="localidadX.value">
+            {{localidadX.viewValue}
         </mat-option>
     </mat-select>
 </mat-form-field>
@@ -14,8 +14,8 @@
     <mat-label>Tipo de Predio</mat-label>
 
     <mat-select placeholder="Tipo de Predio ..." [(ngModel)]="tipoPrediox" (ngModelChange)="onTipoPredioSelection()">
-        <mat-option *ngFor="let tpredio of listTPredio" [value]="tpredio.nombre">
-            {{tpredio.nombre}}
+        <mat-option *ngFor="let tpredio of listTPredio" [value]="tpredio.sector_reportado">
+            {{tpredio.sector_reportado}}
         </mat-option>
     </mat-select>
 </mat-form-field>

@@ -18,4 +18,11 @@ export class PqrsService {
 
 
   constructor() { }
+
+
+  consultaPorRadicado(radicado : string) {
+
+    
+  }
+
 }

@@ -1,122 +1,165 @@
+<!-- app-header></app-header -->
 
-<app-header></app-header>
+<!-- h4>Ingreso de Radicados</h4 -->
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>Actualización del Radicado ::
+  Plataforma Ruido :: SDA</h1>
 
-<h4>Ingreso de Radicados</h4>
-<mat-form-field  appearance="fill">
-    <mat-label>Radicado</mat-label>
-    <input matInput placeholder="2021ER66889" [(ngModel)]="radicado">
-</mat-form-field>
-&nbsp;&nbsp;
 
-  
-<mat-form-field appearance="fill">
-  <mat-label>Asunto</mat-label>
-  <mat-select [(ngModel)]="asunto" name="asunto">
-    <mat-option *ngFor="let asuntoX of listRdoAsunto" [value]="asuntoX.idAsunto">
-      {{asuntoX.nombre}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-&nbsp;&nbsp;
 
-  
-  <mat-form-field  appearance="fill">
+
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+
+  <!-- mat-form-field appearance="fill">
+  <mat-label>Radicado</mat-label>
+  <input matInput placeholder="2021ER66889" [(ngModel)]="radicado">
+</mat-form-field -->
+  <div class="example-element-symbol">
+    {{data.radicado}}
+  </div>
+
+  <div>&nbsp;<div>
+
+    <!-- mat-form-field>
+      <mat-select 
+           [ngModel]="selectedFoods" 
+           (ngModelChane)="selectedFoods" placeholder="Favorite food" multiple>
+        <mat-option *ngFor="let food of allfoods" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field  -->
+
+
+    <!--
+      {{asuntoN.value}}
+      {{asuntoN.viewValue}}
+      -->
+
+
+    
+      <mat-form-field>
+        
+        <mat-select [(ngModel)]="asuntoSelected.value" (change)="asuntoSelected"  placeholder="Asunto de Radicación"    >
+          
+          <mat-option *ngFor="let asuntoX of listRdoAsunto" [value]="asuntoX.value">
+            {{asuntoX.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;
+   
+
+      <!-- mat-form-field  appearance="fill">
     <mat-label>Dirección</mat-label>
     <input matInput placeholder="direccion" [(ngModel)]="direccion">
-</mat-form-field>
-&nbsp;&nbsp;
+</mat-form-field -->
+      &nbsp;&nbsp;
 
- 
-  
-  
-<mat-form-field  appearance="fill">
+
+
+
+      <!-- mat-form-field  appearance="fill">
     <mat-label>Razón Social Del Establecimiento</mat-label>
     <input matInput placeholder="Razón Social" [(ngModel)]="razonSocial">
-</mat-form-field>
-&nbsp;&nbsp; 
+</mat-form-field -->
+      &nbsp;&nbsp;
 
-  <mat-form-field  appearance="fill">
+      <!-- mat-form-field  appearance="fill">
     <mat-label>X</mat-label>
     <input matInput placeholder="x" [(ngModel)]="x">
-</mat-form-field>
-&nbsp;&nbsp;
+</mat-form-field -->
+      &nbsp;&nbsp;
 
-  
 
-  <mat-form-field  appearance="fill">
+
+      <!-- mat-form-field  appearance="fill">
     <mat-label>Y</mat-label>
     <input matInput placeholder="y" [(ngModel)]="y">
-</mat-form-field>
-&nbsp;&nbsp;
+</mat-form-field  -->
+      &nbsp;&nbsp;
 
-<mat-form-field  appearance="fill">
+      <!-- mat-form-field  appearance="fill">
     <mat-label>Causante Origen Queja</mat-label>
     <input matInput placeholder="sector" [(ngModel)]="causante">
-</mat-form-field>
-&nbsp;&nbsp;
+</mat-form-field -->
+      &nbsp;&nbsp;
 
 
-<mat-form-field appearance="fill">
-  <mat-label>Sector</mat-label>
-  <mat-select [(ngModel)]="sector" name="sector">
-    <mat-option *ngFor="let sectorX of listRuiSector" [value]="sectorX.idSector">
-      {{sectorX.nombre}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-&nbsp;&nbsp;
-  
-<mat-form-field appearance="fill">
-  <mat-label>Localidad</mat-label>
-  <mat-select [(ngModel)]="localidad" name="localidad">
-    <mat-option *ngFor="let localidadX of listRuiLocalidad" [value]="localidadX.idLocalidad">
-      {{localidadX.nombre}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-&nbsp;&nbsp;
+      <mat-form-field appearance="fill">
+        <mat-label>Sector</mat-label>
+        <mat-select [(ngModel)]="sectorSelected.value" name="sector"   (ngModelChane)="sectorSelected"  placeholder="sector"   >
+          <mat-option *ngFor="let sectorX of listRuiSector" [value]="sectorX.value">
+            {{sectorX.viewValue}}
+           
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;
 
-  
+      <mat-form-field appearance="fill">
+        <mat-label>Localidad :: </mat-label>
+        <mat-select [(ngModel)]="localidadSelected.value" name="localidad"  (ngModelChane)="localidadSelected"  placeholder="localidad"   >
+          <mat-option *ngFor="let localidadX of listRuiLocalidad" [value]="localidadX.value">
+            {{localidadX.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;
 
 
-  
-<mat-form-field appearance="fill">
-  <mat-label>Estado del Trámite</mat-label>
-  <mat-select [(ngModel)]="estado" name="estado">
-    <mat-option *ngFor="let estadoX of listRdoEstado" [value]="estadoX.idEstado">
-      {{estadoX.nombre}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-&nbsp;&nbsp;
 
-  
-  <mat-form-field  appearance="fill">
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Estado del Trámite</mat-label>
+        <mat-select [(ngModel)]="estadoTramiteSelected.id" name="estadoSelected"    (ngModelChange)="onEstadoSelection1()"  placeholder="estado"  >
+          <mat-option *ngFor="let estadoX of listRdoEstado" [value]="estadoX.id">
+            {{estadoX.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;
+
+      <mat-form-field appearance="fill">
+        <mat-label>Observación Estado del Trámite</mat-label>
+        <mat-select [(ngModel)]="estObserSelected.observacion" name="observEstado"    placeholder="Observacion"   >
+          <mat-option *ngFor="let estadoX of listObsEstadoTramite" [value]="estadoX.observacion">
+            {{estadoX.observacion}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+
+      <!-- mat-form-field  appearance="fill">
     <mat-label>observaciones</mat-label>
     <input matInput placeholder="Observaciones" [(ngModel)]="observacion">
-</mat-form-field>
-&nbsp;&nbsp;
+</mat-form-field -->
+      &nbsp;&nbsp;
 
-  
-<mat-form-field appearance="fill">
+      <mat-form-field appearance="fill">
+        <mat-label></mat-label>
+        <input matInput [matDatepicker]="fechaRad" [(ngModel)]="fechaRadicacion" />
+        <mat-hint>Fecha Radicacion</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="fechaRad"></mat-datepicker-toggle>
+        <mat-datepicker #fechaRad></mat-datepicker>
+      </mat-form-field>
+
+
+      <!-- mat-form-field appearance="fill">
   <mat-label>Profesional Asignado</mat-label>
   <mat-select [(ngModel)]="profesional" name="profesional">
     <mat-option *ngFor="let profesionalX of listProfesional" [value]="profesionalX.idProfesional">
       {{profesionalX.nombre}}
     </mat-option>
   </mat-select>
-</mat-form-field>
-&nbsp;&nbsp;
+</mat-form-field -->
+      &nbsp;&nbsp;
 
 
-<!--
-<button mtype="button" class="btn btn-primary" mat-raised-button color="primary" (click)="guardarRadicado()">
-    Ingresar Radicado 
-    <mat-icon>save</mat-icon>
-  </button>
--->
-  
-  
-  
 
-
+      <button mtype="button" class="btn btn-primary" mat-raised-button color="primary" (click)="actualizaRadicado()">
+        Actualiza Radicado
+        <mat-icon>save</mat-icon>
+      </button>

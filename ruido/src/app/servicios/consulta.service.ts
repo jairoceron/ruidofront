@@ -10,16 +10,16 @@ import { ConsultaVisita, Pqrs, RdoVisita, Visitas } from '../modelos/ruido.inter
 export class ConsultaService {
 
   // consultaVisita: ConsultaVisita
-// {fechaInicial:new Date, fechaFinal:new Date, radicado:'xx'}
+  // {fechaInicial:new Date, fechaFinal:new Date, radicado:'xx'}
 
- /* 
-consultaVisita : ConsultaVisita = {fechaInicial:new Date,
-  fechaFinal:new Date, 
-  radicado:'xx',
-  vistaSistema:'',
-  direccion:'',}*/
+  /* 
+ consultaVisita : ConsultaVisita = {fechaInicial:new Date,
+   fechaFinal:new Date, 
+   radicado:'xx',
+   vistaSistema:'',
+   direccion:'',}*/
 
-  consultaVisita : ConsultaVisita = new ConsultaVisita();
+  consultaVisita: ConsultaVisita = new ConsultaVisita();
 
   /*
 private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( {
@@ -30,12 +30,12 @@ private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( 
     direccion:'',
     });    */
 
-    private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( 
-      new ConsultaVisita()
-    );  
+  private consultaBehSub: BehaviorSubject<ConsultaVisita> = new BehaviorSubject(
+    new ConsultaVisita()
+  );
 
 
-  public  consultaObserv : Observable<ConsultaVisita> = this.consultaBehSub.asObservable();
+  public consultaObserv: Observable<ConsultaVisita> = this.consultaBehSub.asObservable();
 
   constructor() { }
 
@@ -43,32 +43,35 @@ private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( 
     this.consultaVisita.fechaFinal = consultaVisita.fechaFinal;
     this.consultaVisita.fechaInicial = consultaVisita.fechaInicial;
     this.consultaVisita.vistaSistema = consultaVisita.vistaSistema;
+    this.consultaVisita.isCbCPxSinVe = consultaVisita.isCbCPxSinVe;
+    this.consultaVisita.isCbCPxVenci = consultaVisita.isCbCPxVenci;
+    this.consultaVisita.isCbCVencido = consultaVisita.isCbCVencido;
     this.consultaBehSub.next(this.consultaVisita);
   }
 
-  updateDireccion(direccion : string) {
-    console.log('la consulta::: ' , this.consultaVisita);
+  updateDireccion(direccion: string) {
+    console.log('la consulta::: ', this.consultaVisita);
     this.consultaVisita.direccion = direccion;
   }
-  
-  setVistaSistema(vistaSistema : string) {
+
+  setVistaSistema(vistaSistema: string) {
     this.consultaVisita.vistaSistema = vistaSistema;
   }
 
-  updateLocalidad(localidad : string) {
+  updateLocalidad(localidad: string) {
     this.consultaVisita.localidad = localidad;
   }
 
-  updateEstadoTramite(estadoTramite : string) {
+  updateEstadoTramite(estadoTramite: string) {
     this.consultaVisita.estadoTramite = estadoTramite;
   }
 
-  updateTipoPredio(tipoPredio : string) {
+  updateTipoPredio(tipoPredio: string) {
     this.consultaVisita.tipoPredio = tipoPredio;
-   // ****************
+    // ****************
   }
 
-  setTipoGrafica(tipoGrafica : string) {
+  setTipoGrafica(tipoGrafica: string) {
     this.consultaVisita.tipoChart = tipoGrafica;
   }
 

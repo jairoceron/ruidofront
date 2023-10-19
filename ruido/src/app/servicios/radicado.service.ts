@@ -26,15 +26,34 @@ export class RadicadoService {
 
   }
 
+  updateRadicado(pqrs : Pqrs) : Observable<Pqrs>{
+    let direccion = this.url + "updateRadicado";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();       
+    customHeaders =customHeaders.append('content-type','application/json');
+    customHeaders =customHeaders.append('Authorization', lineax);
+
+    return this.http.post<Pqrs>(direccion, pqrs, {
+      'headers':customHeaders ,
+     });
+
+  }
+
   
 
-  consultaRadicado(strRadicado : string) {
+  consultaRadicado(strRadicado : string) : Observable<Pqrs> {
     let direccion = this.url + "consultaRadicado";
     let lineax = "Bearer " + localStorage.getItem("token");
     let customHeaders = new HttpHeaders();       
     customHeaders =customHeaders.append('content-type','application/json');
     customHeaders =customHeaders.append('Authorization', lineax);
-    let pqrs : Pqrs = {radicado:strRadicado} 
+    let pqrs : Pqrs = {
+      objectid : -1,
+      radicado:strRadicado, asunto_radicacion:'' , sector_reportado:'', localidad : '' ,
+     estado_tramite : 1,
+     observaciones_estado_tramite : '',
+     fecha_radicado : new Date() ,
+    } 
 
 // 9999999999999999999999999
 

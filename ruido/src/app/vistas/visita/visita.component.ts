@@ -19,7 +19,14 @@ export class VisitaComponent implements OnInit {
   varSesionI: VariableSesionI = { username: '', modulo: [], menu: [] };
   dummyComponent: any;
   // pqrs : Pqrs[] = []; 
-  pqrsActual : Pqrs = {radicado:''}
+  pqrsActual: Pqrs = {
+    objectid: -1,
+    radicado: '', asunto_radicacion: '', sector_reportado: '',
+    localidad: '', estado_tramite: 1,
+    observaciones_estado_tramite: '',
+    fecha_radicado: new Date(),
+
+  }
   visita: Visitas[] = [];
   dataSource: MatTableDataSource<Visitas> = new MatTableDataSource(this.visita);
   displayedColumns = ['Fecha', 'Profesional', 'Dirección', 'Observación', 'estado_de_la_visita'];
@@ -40,40 +47,40 @@ export class VisitaComponent implements OnInit {
   constructor(
     private visitaRuidoService: VisitaruidoService,
     private router: Router,
-   // private viRuidoService: VisitaruidoService
-   ) { }
+    // private viRuidoService: VisitaruidoService
+  ) { }
 
   ngOnInit(): void {
     // this.consultaVisitas();
-    
-     let consultaVisitaV = this.visitaRuidoService.getConsultaVisitaV();
-     /*
-     this.visitaRuidoService.consultaVisita(consultaVisitaV).subscribe(
-      x => {x;
-        this.dataSource = new MatTableDataSource(x);
-        this.dataSource.paginator = this.paginator;
-      }
-     );
-*/
-     console.log('visitacomponent.ts .... xxxx');   
-     this.visitaRuidoService.pqrObserv.subscribe( x => {
-       x;
-       this.pqrsActual = x;
-       console.log('Va al componente actual ..... visitaCCC ' , x);
-     })
 
-     this.visitaRuidoService.visitaObser.subscribe(x => {
+    let consultaVisitaV = this.visitaRuidoService.getConsultaVisitaV();
+    /*
+    this.visitaRuidoService.consultaVisita(consultaVisitaV).subscribe(
+     x => {x;
+       this.dataSource = new MatTableDataSource(x);
+       this.dataSource.paginator = this.paginator;
+     }
+    );
+*/
+    console.log('visitacomponent.ts .... xxxx');
+    this.visitaRuidoService.pqrObserv.subscribe(x => {
+      x;
+      this.pqrsActual = x;
+      console.log('Va al componente actual ..... visitaCCC ', x);
+    })
+
+    this.visitaRuidoService.visitaObser.subscribe(x => {
       x;
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.paginator = this.paginator;
     })
 
-    }
-    /*
-    
+  }
+  /*
+  
 
-   
-  } */
+ 
+} */
 
   /*
   666666666666666666
@@ -87,7 +94,7 @@ export class VisitaComponent implements OnInit {
   }
 */
   nuevaVisita(): void {
-   console.log('salto a nueva Visita :: paso 1x ');
+    console.log('salto a nueva Visita :: paso 1x ');
     this.router.navigate(['nueVisita']);
   }
 

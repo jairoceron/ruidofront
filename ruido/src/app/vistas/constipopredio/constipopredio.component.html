@@ -5,8 +5,8 @@
   <mat-label>Tipo de Predio</mat-label>
   
   <mat-select placeholder="Tipo de Predio ..." [(ngModel)]="tipoPrediox" (ngModelChange)="onTipoPredioSelection()">
-    <mat-option *ngFor="let tpredio of listTPredio" [value]="tpredio.nombre">
-      {{tpredio.nombre}}
+    <mat-option *ngFor="let tpredio of listTPredio" [value]="tpredio.sector_reportado">
+      {{tpredio.sector_reportado}}
     </mat-option>
   </mat-select>
 </mat-form-field>

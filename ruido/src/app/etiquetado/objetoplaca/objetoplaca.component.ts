@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Informacionvehiculo, Placa, Propietariovehiculo } from 'src/app/modelos/login.interface';
+import { INFO_VEHICULO } from 'src/app/modelos/ruido.interface';
 import { EtiquetadoService } from 'src/app/servicios/etiquetado.service';
 
 @Component({
@@ -19,47 +20,13 @@ export class ObjetoplacaComponent implements OnInit {
   ) {
     this.objPlaca  = {
       placa : 'xxxx',
-      informacionvehiculo :  {  idevapropvehi : 0,
-        placa : this.placa,
-        tipologiaVehicular:  '',
-        tipoServicio: '',
-        tipoCombustible:  '',
-        cilindraje:  '',
-        marca:  '',
-        linea:  '',
-        modelo:  '',
-        fechaImportacion:  new Date(),
-        capacidadCarga:  '',
-        claseVehiculo: '',
-        numeroMotor:  '',
-        vin:  '',
-        ciudadMatricula:  '',
-        vigenciaRTM:  '',
-        tecnRedEmision: '',
-        estEmisiVehic:  '',
-        subContEmision:  '', },
+      informacionvehiculo :  INFO_VEHICULO ,
       propietariovehiculo : {}
     };
 
-    this.informacionvehiculo =  {  idevapropvehi : 0,
-      placa : this.placa,
-      tipologiaVehicular:  '',
-      tipoServicio: '',
-      tipoCombustible:  '',
-      cilindraje:  '',
-      marca:  '',
-      linea:  '',
-      modelo:  '',
-      fechaImportacion:  new Date(),
-      capacidadCarga:  '',
-      claseVehiculo: '',
-      numeroMotor:  '',
-      vin:  '',
-      ciudadMatricula:  '',
-      vigenciaRTM:  '',
-      tecnRedEmision: '',
-      estEmisiVehic:  '',
-      subContEmision:  '', };
+    this.informacionvehiculo = INFO_VEHICULO ;
+    
+   
     this.propiedadvehiculo = {};
    }
 

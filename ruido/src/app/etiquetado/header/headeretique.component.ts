@@ -4,6 +4,10 @@ import { CategoriaI, CilindradaI, ClaseVehiculoI, EstadoEmisionI, Informacionveh
 import { EtiquetadoService } from 'src/app/servicios/etiquetado.service';
 import { DialogVisorPdfComponent } from '../dialog-visor-pdf/dialog-visor-pdf.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DatabaseService } from 'src/app/servicios/database.service';
+import { FormGroup } from '@angular/forms';
+import { InfovehiculoComponent } from '../infovehiculo/infovehiculo.component';
+import { INFO_VEHICULO } from 'src/app/modelos/ruido.interface';
 
 @Component({
   selector: 'app-headeretique',
@@ -12,37 +16,23 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HeaderetiqueComponent implements OnInit {
   placa: string = 'DDD000';
-  informacionvehiculo: Informacionvehiculo = {
-    idevapropvehi: 0,
-    placa: this.placa,
-    tipologiaVehicular: '',
-    tipoServicio: '',
-    tipoCombustible: '',
-    cilindraje: '',
-    marca: '',
-    linea: '',
-    modelo: '',
-    fechaImportacion: new Date(),
-    capacidadCarga: '',
-    claseVehiculo: '',
-    numeroMotor: '',
-    vin: '',
-    ciudadMatricula: '',
-    vigenciaRTM: '',
-    tecnRedEmision: '',
-    estEmisiVehic: '',
-    subContEmision: '',
-  }
+  informacionvehiculo: Informacionvehiculo = INFO_VEHICULO ;
 
 
   constructor(
     private etService: EtiquetadoService,
     private router: Router,
     public dialog: MatDialog,
+    private databaseService : DatabaseService,
 
   ) { }
 
+  username : string = '';
+
+  checkOutForm  : FormGroup = new FormGroup({  });
+
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") || this.username;
     this.etService.placaObserv.subscribe(x => { this.placa = x; });
 
   }
@@ -88,9 +78,25 @@ export class HeaderetiqueComponent implements OnInit {
   }
 
   datosVehiculo() {
+    let infoVehiculo : Informacionvehiculo = INFO_VEHICULO;
+    infoVehiculo.placa = this.placa;
+    this.openDialog(infoVehiculo);
+   // ki kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+   // this.router.navigate(['/infoVehic']);
     
-    this.router.navigate(['/infoVehic']);
-    
+  }
+
+  openDialog(infoVehiculo: Informacionvehiculo): void {
+    console.log('Informacion del vehículo ... ' + infoVehiculo.placa);
+    const dialogRef = this.dialog.open(InfovehiculoComponent, {
+      data: { dataVehiculo: infoVehiculo, },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.router.navigate(['/etiquetado']);
+
+    });
   }
 
   ayuda() {
@@ -102,21 +108,31 @@ export class HeaderetiqueComponent implements OnInit {
 
   imprimirEtiqHolograma() {
 
+    console.log('impresion del holograma : placa inicia la impresion de la etiqueta :::: this.placa >>> ' , this.placa);
+    this.etService.imprimirEtiqHolograma(this.placa).subscribe(
+      x => {
+        x;
+        console.log('impresion del holograma : placa' , this.placa , ' ---- > ' , x);
 
-    const dialogRef = this.dialog.open(DialogVisorPdfComponent, {
-      width: '500px',
-      // 
-      // ./assets/pdf/morfologia_muestra-2227501_usuario-2177.pdf
-      // ./assets/pdf/etiquetadoAAA000.pdf
-      data: { rutaPdfHolograma: './assets/pdf/etiquetadoAAA000.pdf', rutaPdfInfoEtiqueta: './assets/pdf/etiquetadoAAA000.pdf' }
-    });
+        const dialogRef = this.dialog.open(DialogVisorPdfComponent, {
+          width: '500px',
+          // 
+          // ./assets/pdf/morfologia_muestra-2227501_usuario-2177.pdf
+          // ./assets/pdf/etiquetadoAAA000.pdf
+          data: { rutaPdfHolograma: x.pathAssets, rutaPdfInfoEtiqueta: x.pathAssets }
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.placa = result;
+        });
+    
+    
+      }
+    )
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.placa = result;
-    });
 
-
+    
 
     // *******************
   }
@@ -125,5 +141,22 @@ export class HeaderetiqueComponent implements OnInit {
     x;
     console.log(x);
   }); */
+
+  entityPersistenciaVnk() {
+    // 6666666666666666666666666666666666
+    let tableName = 'pqrs';
+    console.log('TableName  ' , tableName);
+    this.databaseService.generarEntityTableName(tableName).subscribe(
+      x => { 
+        x; 
+        console.log(x);
+      } 
+    )
+  }
+
+  checOutFun(checkOutForm  : FormGroup ) {    
+    localStorage.removeItem("token");
+    this.router.navigate(['login']);
+  } 
 
 }

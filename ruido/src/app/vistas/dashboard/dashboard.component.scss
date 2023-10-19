@@ -289,10 +289,7 @@ html {
     width:60%;
   }
 
-  .mat-table {
-    width: 100%;
-    overflow: auto;
-  }
+
   
 
   mat-header-cell {
@@ -387,6 +384,96 @@ html {
     font-size: 13px;
   }
 
+  mat-form-field.fit-content {
+    min-width: 380px;
+  }
+
+
   
-  
+  .make-gold {
+      background-color: gold
+  }
+
+
+  .color-rojo {
+      background-color: rgb(255, 0, 0)
+  }
+
+  .color-amarillo {
+    background-color: rgb(255, 255, 0)
+}
+
+.mat-table {
+  width: 100%;
+  overflow: auto;
+}
+
+.mat-column-actualizar {
+  flex: none;
+  width: 4% ;
+  }
+
+  .mat-column-radicado {
+    flex: none;
+    width: 9%;
+}
+
+
+.mat-column-asunto_de_radicacion { 
+  flex: none;
+  width: 10%;
+}
+
+.mat-column-razon_social_del_establecimient  { 
+  flex: none;
+  width: 10%;
+}
+
+
+.mat-column-estadoTramite  { 
+  flex: none;
+  width: 3%;
+}
+
+.mat-column-numDiasVencimiento  { 
+  flex: none;
+  width: 3%;
+}
+
+.mat-column-banderaVencimiento  { 
+  flex: none;
+  width: 0%;
+}
+
+.mat-column-fechaVisita  { 
+  flex: none;
+  width: 6%;
+}
+
+.mat-column-fecha_del_radicado  { 
+  flex: none;
+  width: 6%;
+}
+
+.mat-column-estadoTramiteStr { 
+  flex: none;
+  width: 8%;
+}
+
+.mat-column-cantidad_de_reprogramaciones{ 
+  flex: none;
+  width: 8%;
+}
+
+
+.mat-column-horario{ 
+  flex: none;
+  width: 8%;
+}
+
+mat-form-field.masAncho {
+  min-width: 420px;
+}
+
+
   

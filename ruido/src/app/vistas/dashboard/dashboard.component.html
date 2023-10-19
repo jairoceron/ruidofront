@@ -1,5 +1,3 @@
-
-
 <app-header></app-header>
 
 <!-- div>Archivo de visitas : <input type="file" (change)="readExcel($event)">  </div -->
@@ -41,20 +39,23 @@
     </mat-form-field>
 -->
     &nbsp;&nbsp;
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="fit-content">
       <mat-label>Módulo de Consulta</mat-label>
-      <mat-select [(ngModel)]="vistaSistema">
+      <mat-select [(ngModel)]="vistaSistema"   (ngModelChange)="moduloConsultaCambiado()" >
 
         <mat-option value={{consDireccionLabel}}>{{consDireccionLabel}}</mat-option>
         <mat-option value={{pqrsLocalidaLabel}}>{{pqrsLocalidaLabel}}</mat-option>
         <mat-option value={{estadoTramiteLabel}}>{{estadoTramiteLabel}}</mat-option>
-
         <mat-option value={{tipoDePredioLabel}}>{{tipoDePredioLabel}}</mat-option>
         <mat-option value={{noEsCompetencia_et}}>{{noEsCompetencia_et}}</mat-option>
         <mat-option value={{conProvisionEsTra}}>{{conProvisionEsTra}}</mat-option>
         <mat-option value={{predio2D_normativi}}>{{predio2D_normativi}}</mat-option>
         <mat-option value={{organismo_control_}}>{{organismo_control_}}</mat-option>
-        <mat-option value={{modulo_alertas_}}>{{modulo_alertas_}}</mat-option>
+        <mat-option value={{VISITA_NO_EF_REP}}>{{VISITA_NO_EF_REP}}</mat-option>
+        <mat-option value={{PQR_REP_PETICION}}>{{PQR_REP_PETICION}}</mat-option>
+        <mat-option value={{PQR_REP_ANTECEDE}}>{{PQR_REP_ANTECEDE}}</mat-option>
+        <mat-option value={{PQR_ULTIMOS_50_R}}>{{PQR_ULTIMOS_50_R}}</mat-option>
+        <!-- mat-option value={{modulo_alertas_}}>{{modulo_alertas_}}</mat-option -->
         <!--mat-option value="Polígono Consulta">Polígono Consulta</mat-option -->
       </mat-select>
     </mat-form-field>
@@ -70,7 +71,7 @@
       Consulta DA
     </button>
     -->
-    <input type="submit" class="btn btn-default" value="Consulta !" (click)="consultaVisitas()">
+    <input type="submit" class="btn btn-default" value="Consulta !" (click)="brokerConsultas()">
 
 
     <input type="submit" class="btn btn-default" value="Descarga" (click)="descargaExcel()">
@@ -81,6 +82,100 @@
 
 
   <div class="p-2 bd-highlight">
+
+    <div *ngIf="vistaSistema === conProvisionEsTra">
+      ENTIDAD DE CONTROL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-checkbox [(ngModel)]="isCbCVencido" (change)="checked()" [required]="true">
+      </mat-checkbox>
+      Vencido &nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-checkbox [(ngModel)]="isCbCPxVenci" (change)="checked()" [required]="true">
+      </mat-checkbox>
+      Próximo a vencer &nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-checkbox [(ngModel)]="isCbCPxSinVe" (change)="checked()" [required]="true">
+      </mat-checkbox>
+      Sin Vencer
+
+
+    </div>
+
+    <div>&nbsp;</div>
+
+    <div *ngIf="vistaSistema === PQR_REP_ANTECEDE  ">
+
+      <!-- (ngModelChange)="onEstTramiteSelection()" -->
+      <!-- mat-form-field appearance="fill">
+        <mat-label>Estado trámite</mat-label>
+
+        <mat-select placeholder="Estado trámite ..." [(ngModel)]="estadoTramitex"  >   
+          <mat-option *ngFor="let estadoTramitex of listEstadoTramitex" [value]="estadoTramitex.nombre">
+            {{estadoTramitex.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field -->
+
+      <mat-form-field appearance="fill">
+        <mat-label>Estado del Trámite</mat-label>
+        <mat-select [(ngModel)]="estadoTramiteSelected.id" name="estadoSelected" (ngModelChange)="onEstadoSelection1()"
+          placeholder="estado">
+          <mat-option *ngFor="let estadoX of listRdoEstado" [value]="estadoX.id">
+            {{estadoX.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;
+
+      <mat-form-field appearance="fill" class="masAncho">
+        <mat-label>Observación Estado del Trámite</mat-label>
+        <mat-select [(ngModel)]="estObserSelected.observacion" name="observEstado" placeholder="Observacion">
+          <mat-option *ngFor="let estadoX of listObsEstadoTramite" [value]="estadoX.observacion">
+            {{estadoX.observacion}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+    </div>
+
+
+    <div *ngIf="vistaSistema === PQR_REP_PETICION  ">
+
+      {{peticionario}}
+      &nbsp;&nbsp;
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput placeholder="Peticionario" [(ngModel)]="peticionario">
+        </mat-form-field>
+      </div>
+      &nbsp;&nbsp;
+
+    </div>
+
+    <div *ngIf="vistaSistema === CONS_NO_ES_COMPETE ">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Localidad :: </mat-label>
+        <mat-select [(ngModel)]="localidadSelected.value" name="localidad" (ngModelChane)="localidadSelected"
+          placeholder="localidad">
+          <mat-option *ngFor="let localidadX of listRuiLocalidad" [value]="localidadX.value">
+            {{localidadX.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <mat-form-field appearance="fill" class="masAncho">
+        <mat-label>Observación Estado del Trámite</mat-label>
+        <mat-select [(ngModel)]="estObserSelected.observacion" name="observEstado" placeholder="Observacion">
+          <mat-option *ngFor="let estadoX of listObsEstadoTramite" [value]="estadoX.observacion">
+            {{estadoX.observacion}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+
+    </div>
+
 
     <div
       *ngIf="vistaSistema === pqrsLocalidaLabel  || vistaSistema === estadoTramiteLabel || vistaSistema === noEsCompetencia_et  || vistaSistema === conProvisionEsTra">
@@ -121,7 +216,7 @@
     <app-chartpie
       *ngIf="vistaSistema === conProvisionEsTra && consultaVisitaGen.tipoChart === graficaPie "></app-chartpie>
 
-      <app-cumpnorma *ngIf="vistaSistema === predio2D_normativi"></app-cumpnorma>
+    <app-cumpnorma *ngIf="vistaSistema === predio2D_normativi"></app-cumpnorma>
 
     <!-- app-poligonruido *ngIf="vistaSistema === 'Polígono Consulta' "></app-poligonruido -->
   </div>
@@ -138,6 +233,18 @@
     <div class="example-container mat-elevation-z8">
 
       <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+        <ng-container matColumnDef="actualizar">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> _ </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-default" aria-label="Left Align"
+              (click)="actualizaRadicado(element.radicado)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+
+          </mat-cell>
+        </ng-container>
 
         <!-- ID Column -->
         <ng-container matColumnDef="radicado">
@@ -156,7 +263,7 @@
 
 
           <div class="example-element-detail">
-            <mat-cell *matCellDef="let row"> {{row.asunto_de_radicacion}}
+            <mat-cell *matCellDef="let row"> {{row.asunto_radicacion}}
             </mat-cell>
 
           </div>
@@ -244,62 +351,116 @@
 
 
 
-        <!-- Name Column -->
-        <!--
-        <ng-container matColumnDef="año">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> año </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.ano}} </mat-cell>
-        </ng-container>
--->
-        <!-- Color Column -->
-        <!--
-        <ng-container matColumnDef="mes">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> mes </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.mes}} </mat-cell>
-        </ng-container>
--->
 
         <ng-container matColumnDef="razon_social_del_establecimient">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Razón Social </mat-header-cell>
-          <mat-cell *matCellDef="let element" [style.color]="element.razon_social_del_establecimient">
-            {{element.razon_social_del_establecimient}} </mat-cell>
+          <mat-cell *matCellDef="let element" [style.color]="element.razon_social_establecimiento">
+            {{element.razon_social_establecimiento}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="localidad">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Localidad </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.localidad}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="direcciones">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Direcciones </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.direcciones}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.direccion}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="estadoTramite">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Estado Trámite </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.estado_del_tramite}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Trámite </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.estado_tramite}} </mat-cell>
         </ng-container>
-        
+
+        <!--
         <ng-container matColumnDef="visita">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Visitas </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <!--
+       
             <button mat-mini-fab aria-label="Example icon button with a home icon"
               (click)="actualizaElDetalle(element.radicado)">
               <mat-icon>center_focus_weak</mat-icon>
             </button>
-            -->
+            
           </mat-cell>
         </ng-container>
-        
+        -->
+
+
+
+
+        <ng-container matColumnDef="estadoTramiteStr">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Estado Trámite </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.estadoTramiteStr}}
+          </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="fecha_del_radicado">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha del Radicado </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.fecha_del_radicado}} </mat-cell>
+          <mat-cell *matCellDef="let element">
+            {{pipe.transform(element.fecha_radicado, 'mediumDate')}}
+
+          </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="numDiasVencimiento">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> # Dias Vencido </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.diasDeVencido }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="banderaVencimiento">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <!-- {{element.banderaVencimiento }} -->
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaVisita">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Visita </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{pipe.transform(element.fechaVisita, 'mediumDate')}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="estadoVisita">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Est Visita </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.estadoVisita }}
+          </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="cantidad_de_reprogramaciones">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Num Reprog </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.cantidad_de_reprogramaciones }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="horario">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Horario </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.horario }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="peticionario">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> peticionario </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{element.peticionario }}
+          </mat-cell>
+        </ng-container>
+
+
+
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
 
         <mat-row *matRowDef="let element; columns: displayedColumns;"
-          [ngClass]="{'make-gold': element.entidad_control == 'SI'}" class="hover"
-          [class.example-expanded-row]="expandedElement === element"></mat-row>
+          [ngClass]="{'make-gold': element.entidad_control == 'SI',  'color-rojo': 'ROJO' == element.banderaVencimiento, 'color-amarillo': 'AMARILLO' == element.banderaVencimiento}"
+          class="hover" [class.example-expanded-row]="expandedElement === element"></mat-row>
 
         <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
 

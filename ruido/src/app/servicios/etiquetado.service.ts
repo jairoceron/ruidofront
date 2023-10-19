@@ -72,13 +72,15 @@ export class EtiquetadoService {
 
   }
 
-  imprimirEtiqHolograma(placa: string): Observable<string> {
+  imprimirEtiqHolograma(placa: string): Observable<MetadataArchPDF> {
+    console.log('Aqui pasamos con la placa de una vez .....placa ', placa);
     let direccion = this.url + "generarEtiquetadPrinterHolograma";
+    console.log('>>>>> direccion :: ', direccion);
     let lineax = "Bearer " + localStorage.getItem("token");
     let customHeaders = new HttpHeaders();
     customHeaders = customHeaders.append('content-type', 'application/json');
     customHeaders = customHeaders.append('Authorization', lineax);
-    return this.http.post<string>(direccion, placa, {
+    return this.http.post<MetadataArchPDF>(direccion, placa, {
       'headers': customHeaders,
     });
 
@@ -91,6 +93,19 @@ export class EtiquetadoService {
     customHeaders = customHeaders.append('content-type', 'application/json');
     customHeaders = customHeaders.append('Authorization', lineax);
     return this.http.post<Informacionvehiculo>(direccion, placa, {
+      'headers': customHeaders,
+    });
+
+  }
+
+  consultaDataInfoVehic(informacionvehiculo: Informacionvehiculo): Observable<Informacionvehiculo[]> {
+    
+    let direccion = this.url + "consultaDataInfoVehic";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
+    return this.http.post<Informacionvehiculo[]>(direccion, informacionvehiculo, {
       'headers': customHeaders,
     });
 

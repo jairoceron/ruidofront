@@ -1,0 +1,167 @@
+listado de autos vista 360 con los Propietarios, Caracteristicas autos.
+
+<mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+    <ng-container matColumnDef="IDEVAINFOVEHIC">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-default" aria-label="Left Align"   (click)="openDialog(element)" >
+                <mat-icon>edit</mat-icon>
+            </button>
+
+
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="IDPRUE_STATIC">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-default" aria-label="Left Align"   (click)="openDiagol_PruebasEstaticas(element)" >
+                <mat-icon>assessment</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="PLACA">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> PLACA </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.placa}}
+        </mat-cell>
+    </ng-container>
+
+   
+    <!-- ng-container matColumnDef="TIPOLOGIAVEHICULAR">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> TIPOLOGIAVEHICULAR </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.tipologiaVehicular}}
+        </mat-cell>
+    </ng-container -->
+  
+    <ng-container matColumnDef="TIPOSERVICIO">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>SERVICIO </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.tipoServicio}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="TIPOCOMBUSTIBLE">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> COMBUSTIBLE </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.tipoCombustible }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="CILINDRAJE">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> CILINDRAJE </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cilindraje }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="MARCA">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> MARCA </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="LINEA">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> LINEA </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.linea}}
+        </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="MODELO">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> MODELO </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.modelo}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FECHAIMPORTACION">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> FECHAIMPORTACION </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+
+            {{pipe.transform(element.fechaImportacion, 'mediumDate')}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="CAPACIDADCARGA">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> CAPACIDAD </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.capacidadCarga }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="CLASEVEHICULO">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> CLASE </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.claseVehiculo}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="NUMEROMOTOR">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> NUM MOTOR </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.numeroMotor}}        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="VIN">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> VIN </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.vin }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="CIUDADMATRICULA">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> CIUDAD MATRICULA </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.ciudadMatricula}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="VIGENCIARTM">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> VIGENCIA RTM </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.vigenciaRTM}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="TECNREDEMISION">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> TECN RED EMISION </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.tecnRedEmision}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ESTEMISIVEHIC">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> EST EMISI VEHIC </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.estEmisiVehic}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="SUBCONTEMISION">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> SUB CONT EMISION </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.subContEmision}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="color_ETIQUETA">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> COLOR ET </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element.color_ETIQUETA}}
+        </mat-cell>
+    </ng-container>
+
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+
+    <mat-row *matRowDef="let element; columns: displayedColumns;"  [ngClass]="{'make-gold': element.color_ETIQUETA == 'NARANJA', 'make-verde': element.color_ETIQUETA == 'VERDE',  'make-amarillo': element.color_ETIQUETA == 'AMARILLO', 'make-azul': element.color_ETIQUETA == 'AZUL', 'make-gris': element.color_ETIQUETA == 'GRIS' } " ></mat-row>
+
+
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

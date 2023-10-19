@@ -1,8 +1,8 @@
 export interface MetadataArchPDF {
-    path : string;
-    nameFile : string;
-    descripcion : string;
-    pathAssets : string;
+    path: string;
+    nameFile: string;
+    descripcion: string;
+    pathAssets: string;
 }
 
 export interface LoginI {
@@ -69,6 +69,15 @@ export interface Propietariovehiculo {
     tipoidentifica?: number;
 }
 
+export interface DialogDataEtiquetado {
+    dataVehiculo: Informacionvehiculo;
+}
+
+export interface FavEtiquetaColor {
+    id:string;
+    nombre:string;
+}
+
 export interface Informacionvehiculo {
 
     idevapropvehi: number;
@@ -91,59 +100,70 @@ export interface Informacionvehiculo {
     estEmisiVehic: string;
     subContEmision: string;
 
+    determin_FAV: string;
+    asoc_FAV_COLOR: string;
+    densidad_HUMO: number;
+    cum_LIM_D_HUMO: string;
+    con_MAT_PARTIC: number;
+    con_NUM_PARTIC: number;
+    color_ETIQUETA: string;
+    fecha_ETIQUETA: Date;
+    fecha_VIG_FIN_ETIQUETA: Date;
+
+
 }
 
 export interface Placa {
-    placa ?: string;
-    
-    informacionvehiculo : Informacionvehiculo;
-    propietariovehiculo : Propietariovehiculo;
+    placa?: string;
+
+    informacionvehiculo: Informacionvehiculo;
+    propietariovehiculo: Propietariovehiculo;
 }
 
 export interface DialogData {
-    rutaPdfHolograma : string;
-    rutaPdfInfoEtiqueta : string;
+    rutaPdfHolograma: string;
+    rutaPdfInfoEtiqueta: string;
 }
 
 
 export interface AllTabsColumns {
-   
-    TABLE_NAME : string;    
-    COLUMN_NAME : string;	
-    OWNER  :  string;
-    DATA_TYPE  :  string;
-    DATA_TYPE_MOD  :  string;
-    DATA_TYPE_OWNER  :  string;
-    DATA_LENGTH  :  number ;
-    DATA_PRECISION  :  number ;
-    DATA_SCALE  :  number ;
-    NULLABLE  :  string;
-    COLUMN_ID  :  number ;
-    DEFAULT_LENGTH  :  number ;
-    DATA_DEFAULT  :  number ;
-    NUM_DISTINCT  :  number ;
-    LOW_VALUE  :  string;
-    HIGH_VALUE  :  string;
-    DENSITY  :  number ;
-    NUM_NULLS  :  number ;
-    NUM_BUCKETS  :  number ;
-    LAST_ANALYZED  :  Date;
-    SAMPLE_SIZE  :  number ;
-    CHARACTER_SET_NAME  :  string;
-    CHAR_COL_DECL_LENGTH  :  number ;
-    GLOBAL_STATS  :  string;
-    USER_STATS  :  string;
-    AVG_COL_LEN  :  number ;
-    CHAR_LENGTH  :  number ;
-    CHAR_USED  :  string;
-    V80_FMT_IMAGE  :  string;
-    DATA_UPGRADED  :  string;
-    HIDDEN_COLUMN  :  string;
-    VIRTUAL_COLUMN  :  string;
-    SEGMENT_COLUMN_ID  :  number ;
-    INTERNAL_COLUMN_ID  :  number ;
-    HISTOGRAM  :  string;
-    QUALIFIED_COL_NAME  :  string;
+
+    TABLE_NAME: string;
+    COLUMN_NAME: string;
+    OWNER: string;
+    DATA_TYPE: string;
+    DATA_TYPE_MOD: string;
+    DATA_TYPE_OWNER: string;
+    DATA_LENGTH: number;
+    DATA_PRECISION: number;
+    DATA_SCALE: number;
+    NULLABLE: string;
+    COLUMN_ID: number;
+    DEFAULT_LENGTH: number;
+    DATA_DEFAULT: number;
+    NUM_DISTINCT: number;
+    LOW_VALUE: string;
+    HIGH_VALUE: string;
+    DENSITY: number;
+    NUM_NULLS: number;
+    NUM_BUCKETS: number;
+    LAST_ANALYZED: Date;
+    SAMPLE_SIZE: number;
+    CHARACTER_SET_NAME: string;
+    CHAR_COL_DECL_LENGTH: number;
+    GLOBAL_STATS: string;
+    USER_STATS: string;
+    AVG_COL_LEN: number;
+    CHAR_LENGTH: number;
+    CHAR_USED: string;
+    V80_FMT_IMAGE: string;
+    DATA_UPGRADED: string;
+    HIDDEN_COLUMN: string;
+    VIRTUAL_COLUMN: string;
+    SEGMENT_COLUMN_ID: number;
+    INTERNAL_COLUMN_ID: number;
+    HISTOGRAM: string;
+    QUALIFIED_COL_NAME: string;
 
 }
 

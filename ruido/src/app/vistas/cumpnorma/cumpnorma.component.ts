@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConsultaVisita, CONSUL_TIPO_PREDIO, GRAFICA_TIPO_BAR, GRAFICA_TIPO_PIE, PREDIO2D_NORMATIVI, RdoTipopredio, RuiLocalidad } from 'src/app/modelos/ruido.interface';
+import { ConsultaVisita, CONSUL_TIPO_PREDIO, GRAFICA_TIPO_BAR, GRAFICA_TIPO_PIE, PREDIO2D_NORMATIVI, RdoTipopredio, RuiLocalidad, SectorReportadoPqrs, RuidoLocalidad } from 'src/app/modelos/ruido.interface';
 import { AsuntoService } from 'src/app/servicios/asunto.service';
 import { ConsultaService } from 'src/app/servicios/consulta.service';
 import { EstadoService } from 'src/app/servicios/estado.service';
@@ -18,9 +18,10 @@ import { TipopredioService } from 'src/app/servicios/tipopredio.service';
 })
 export class CumpnormaComponent implements OnInit {
 
-  listRuiLocalidad: RuiLocalidad[] = [];
+  listRuiLocalidad: RuidoLocalidad[] = [];
   public localidad: string = '';
-  listTPredio: RdoTipopredio[] = [];
+  // listTPredio: RdoTipopredio[] = [];
+  listTPredio: SectorReportadoPqrs[] = [];
   tipoPrediox: string = '';
   cumplimientoNormativo : string = PREDIO2D_NORMATIVI;
   vistaSistema : string = PREDIO2D_NORMATIVI;
@@ -37,6 +38,11 @@ export class CumpnormaComponent implements OnInit {
     estadoTramite:'',
     tipoPredio:'',
     tipoChart :GRAFICA_TIPO_PIE,
+    isCbCVencido : false,
+    isCbCPxVenci : false,
+    isCbCPxSinVe : false,
+    peticionario : '',
+    observacionEstadoTramite :  '',
 }
 
   constructor(private radicadoService: RadicadoService,
@@ -69,7 +75,7 @@ export class CumpnormaComponent implements OnInit {
 
   listTiposPredio() {
     console.log("Consulta por localidad 1b ");
-    let rdoTipoPredio: RdoTipopredio = { idtipopredio: 1, nombre: '' }
+    let rdoTipoPredio: SectorReportadoPqrs = { Id: 1, sector_reportado: '' }
     console.log("Consulta por localidad 1c ");
     this.tipoPredioService.consultaLocalidad(rdoTipoPredio).subscribe(
       x => {

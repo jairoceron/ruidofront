@@ -1,12 +1,13 @@
-import { Component, OnInit, VERSION } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, OnInit, VERSION } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { CilindradaI, ClaseVehiculoI, Informacionvehiculo, MarcaI, TipoCombustibleI, TipoServicioI } from 'src/app/modelos/login.interface';
+import { CilindradaI, ClaseVehiculoI, DialogDataEtiquetado, Informacionvehiculo, MarcaI, TipoCombustibleI, TipoServicioI } from 'src/app/modelos/login.interface';
 import { EtiquetadoService } from 'src/app/servicios/etiquetado.service';
 import { NotificationService } from 'src/app/servicios/notification.service';
 import { DialogVisorPdfComponent } from '../dialog-visor-pdf/dialog-visor-pdf.component';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { INFO_VEHICULO } from 'src/app/modelos/ruido.interface';
 
 @Component({
   selector: 'app-infovehiculo',
@@ -18,18 +19,18 @@ export class InfovehiculoComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   submitted = false;
 
-  date: string = 'yyyy/mm/dd'; 
+  date: string = 'yyyy/mm/dd';
   mensajeDeError = "";
   name = "Angular " + VERSION.major;
   display: FormControl = new FormControl("", Validators.required);
-  file_store !: FileList ;
+  file_store !: FileList;
   file_list: Array<string> = [];
 
   listMarca: MarcaI[] = [];
-  selectedMarca : MarcaI = {idmarca:0, idclasevehiculo:0, nombre:''}
-  
+  selectedMarca: MarcaI = { idmarca: 0, idclasevehiculo: 0, nombre: '' }
+
   listCilindrada: CilindradaI[] = [];
-  selectedCilindrada : CilindradaI = {idcilindrada:0, idclasevehiculo:0, nombre:''}
+  selectedCilindrada: CilindradaI = { idcilindrada: 0, idclasevehiculo: 0, nombre: '' }
 
   listClaVehi: ClaseVehiculoI[] = [];  //  { idclasevehiculo:0, nombre:''};
   selectedClaseVehiculo: ClaseVehiculoI = { idclasevehiculo: 0, nombre: '' };
@@ -41,31 +42,7 @@ export class InfovehiculoComponent implements OnInit {
   selectedTipoCombustible: TipoCombustibleI = { idtipocombustib: 0, idclasevehiculo: 0, nombre: '' };
 
   placa: string = 'AAA000';
-  informacionvehiculo: Informacionvehiculo = {
-    idevapropvehi: 0,
-    placa: this.placa,
-    tipologiaVehicular: '',
-    tipoServicio: '',
-    tipoCombustible: '',
-    cilindraje: '',
-    marca: '',
-    linea: '',
-    modelo: '',
-    fechaImportacion: new Date(),
-    capacidadCarga: '',
-    claseVehiculo: '',
-    numeroMotor: '',
-    vin: '',
-    ciudadMatricula: '',
-    vigenciaRTM: '',
-    tecnRedEmision: '',
-    estEmisiVehic: '',
-    subContEmision: '',
-  }
-
-  /*
-  
-*/
+  informacionvehiculo: Informacionvehiculo = INFO_VEHICULO;
 
   constructor(
     private etService: EtiquetadoService,
@@ -73,17 +50,26 @@ export class InfovehiculoComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router,
     public dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<InfovehiculoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogDataEtiquetado,
   ) {
 
-    
-   }
+
+  }
 
   ngOnInit(): void {
-    this.cargaDatoPlaca();
+    console.log("data que trae del otro componente :::::  ", this.data);
+    this.cargaListaMarcas() 
+    this.cargaListaCilindrada();
+    this.cargaListaTipoCombustible();
+
+    this.recogeDatosModal();
+    // this.cargaDatoPlaca();
     this.cargaDataBaseDatosInfoVehic(this.placa);
 
-    console.log('asalto de la duda ::: ', this.informacionvehiculo);
+    // console.log('asalto de la duda ::: ', this.informacionvehiculo);
+    // this.data.dataVehiculo.placa
   }
 
   cargaValuesForm() {
@@ -115,10 +101,10 @@ export class InfovehiculoComponent implements OnInit {
       }
     );
   }
-  
+
 
   /*
-  onChangeClaseVehiculo(selectedClaseVehiculo: ClaseVehiculoI ) {
+  onChangeClaseVehiculo(selectedClaseVehiculo: ClaseVehiculoI ) { 
     console.log(".............. onchangeClaseVehiculo");
   }*/
 
@@ -143,72 +129,57 @@ export class InfovehiculoComponent implements OnInit {
       // **************************************************
     });
 
-    this.etService.consultaObjetoPlaca(placa).subscribe(x => {
-      this.informacionvehiculo = x.informacionvehiculo;
-    })
+    //   this.etService.consultaObjetoPlaca(placa).subscribe(x => {
+    //     this.informacionvehiculo = x.informacionvehiculo;
+    //   })
 
     this.listCilindrada = [];
-    console.log("este es el cilindraje ::: " , this.selectedClaseVehiculo.idclasevehiculo );
+    console.log("este es el cilindraje ::: ", this.selectedClaseVehiculo.idclasevehiculo);
     this.etService.listCilindrada(this.selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listCilindrada = x;
     });
 
   }
 
+  /*
   cargaDatoPlaca() {
     this.etService.placaObserv.subscribe(
       x => {
         this.placa = x;
       }
     )
-  }
+  }*/
 
   guardaInfoVehiculo() {
-    /*
-    this.informacionvehiculo = {
-      tipologiaVehicular: this.tipologiaVehicular,
-      tipoServicio: this.tipoServicio,
-      tipoCombustible: this.tipoCombustible,
-      cilindraje: this.cilindraje,
-      marca: this.marca,
-      linea: this.linea,
-      modelo: this.modelo,
-      fechaImportacion: this.fechaImportacion,
-      capacidadCarga: this.capacidadCarga,
-      claseVehiculo: this.claseVehiculo,
-      numeroMotor: this.numeroMotor,
-      vin: this.vin,
-      ciudadMatricula: this.ciudadMatricula,
-      vigenciaRTM: this.vigenciaRTM,
-      tecnRedEmision: this.tecnRedEmision,
-      estEmisiVehic: this.estEmisiVehic,
-      subContEmision: this.subContEmision,
-      placa: this.placa,
-    }
-*/
+
 
 
     let titMensaje: string = 'Desea guardar la información ..';
-    console.log('inform del vehi .. ' , this.informacionvehiculo );
-    this.cargaDatoPlaca();
+    console.log('inform del vehi .. ', this.informacionvehiculo);
+    //  this.cargaDatoPlaca();
     this.informacionvehiculo.placa = this.placa;
     this.informacionvehiculo.claseVehiculo = this.selectedClaseVehiculo.nombre;
     this.informacionvehiculo.tipologiaVehicular = this.selectedTipoServicio.nombre;
+    this.informacionvehiculo.tipoServicio = this.selectedTipoServicio.nombre;
     this.informacionvehiculo.tipoCombustible = this.selectedTipoCombustible.nombre;
-    this.informacionvehiculo.marca =  this.selectedMarca.nombre;
+    this.informacionvehiculo.marca = this.selectedMarca.nombre;
     this.informacionvehiculo.cilindraje = this.selectedCilindrada.nombre;
-    
+
 
     this.notificationService.confirmation(titMensaje, () => {
 
-      
+
       this.etService.guardaInfoVehiculo(this.informacionvehiculo).subscribe(
         x => {
           x;
-          console.log('Informacion del Vehiculo.. ' , x);
+          console.log('Informacion del Vehiculo.. ', x);
           console.log('xxxxx ');
-          this.router.navigate(['/objetoPlaca']);  // esto va después de que guarda
-        } ,
+          this.router.navigate(['/etiquetado']).then(() => {
+            window.location.reload();
+          });
+          // this.router.navigate(['/objetoPlaca']);  // esto va después de que guarda
+          // 999999999lllllllllllllllllllllllllllll
+        },
         err => {
           this.mensajeDeError = 'ocurrio un error';
           console.log("Error caught at Subscriber " + err);
@@ -250,39 +221,38 @@ export class InfovehiculoComponent implements OnInit {
   }
 
 
+  /*
   onChangeClaseVehiculo(selectedClaseVehiculo: ClaseVehiculoI) {
     // let contClaseVehi = this.indiceVehicForm.get("claseVehiculo") ;
     // console.log("valor de clase de vehiculo ::: " , contClaseVehi?.value );
     // console.log("value ... vehiculo ::: " , this.indiceVehicForm.controls['claseVehiculo']);
 
-     console.log("value ... sss ::: fffffffffffffffffffffff ");
-     console.log(selectedClaseVehiculo);
+    console.log("value ... sss ::: fffffffffffffffffffffff ");
+    console.log(selectedClaseVehiculo);
     this.listTipoCom = [];
     this.etService.listTipoCombustible(selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listTipoCom = x;
     });
 
     this.listCilindrada = [];
-    console.log("este es el cilindraje ::: " , selectedClaseVehiculo.idclasevehiculo );
+    console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
     this.etService.listCilindrada(selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listCilindrada = x;
     });
 
     this.listMarca = [];
-    console.log("este es el cilindraje ::: " , selectedClaseVehiculo.idclasevehiculo );
+    console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
     this.etService.listMarca(selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listMarca = x;
     });
+  }
+  */
 
-
+  onChangeCilindrada(selectedCilindrada: CilindradaI) {
 
   }
 
-  onChangeCilindrada(selectedCilindrada : CilindradaI ) {
-
-  }
-
-  onChangeMarca(selectedMarca : MarcaI ) {
+  onChangeMarca(selectedMarca: MarcaI) {
 
   }
 
@@ -307,7 +277,7 @@ export class InfovehiculoComponent implements OnInit {
 
     // do submit ajax
   }
-  
+
 
   setDate(date: string) {
     this.date = date ? date : '';
@@ -332,6 +302,51 @@ export class InfovehiculoComponent implements OnInit {
     this.form.reset();
   }
 
+  recogeDatosModal() {
+    this.informacionvehiculo.vin  = this.data.dataVehiculo.vin;
+    this.informacionvehiculo.numeroMotor = this.data.dataVehiculo.numeroMotor;
+    this.informacionvehiculo.capacidadCarga  = this.data.dataVehiculo.capacidadCarga;
+    this.informacionvehiculo.fechaImportacion = this.data.dataVehiculo.fechaImportacion;
+    this.informacionvehiculo.modelo = this.data.dataVehiculo.modelo;
+    this.informacionvehiculo.linea = this.data.dataVehiculo.linea;
+    this.selectedMarca.nombre = this.data.dataVehiculo.marca;
+    this.selectedClaseVehiculo.nombre = this.data.dataVehiculo.claseVehiculo;
+    this.selectedTipoServicio.nombre = this.data.dataVehiculo.tipoServicio;
+    this.placa = this.data.dataVehiculo.placa;
+    this.selectedTipoCombustible.nombre = this.data.dataVehiculo.tipoCombustible;
+    this.selectedCilindrada.nombre = this.data.dataVehiculo.cilindraje;
+    this.informacionvehiculo.ciudadMatricula = this.data.dataVehiculo.ciudadMatricula;
+    this.informacionvehiculo.vigenciaRTM = this.data.dataVehiculo.vigenciaRTM;
+    this.informacionvehiculo.tecnRedEmision =  this.data.dataVehiculo.tecnRedEmision;
+    this.informacionvehiculo.estEmisiVehic =  this.data.dataVehiculo.estEmisiVehic;
+    this.informacionvehiculo.subContEmision =  this.data.dataVehiculo.subContEmision;
+
+
+    console.log("recoge dtos del modal .... " + this.data.dataVehiculo);
+  }
+
+  cargaListaTipoCombustible() {
+    this.listTipoCom = [];
+    this.etService.listTipoCombustible(-1).subscribe(x => {
+      this.listTipoCom = x;
+    });
+  }
+
+  cargaListaCilindrada() {
+    this.listCilindrada = [];
+    // console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
+    this.etService.listCilindrada(-1).subscribe(x => {
+      this.listCilindrada = x;
+    });
+
+  }
+
+  cargaListaMarcas() {
+    this.listMarca = [];
+    //console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
+    this.etService.listMarca(-4).subscribe(x => {
+      this.listMarca = x;
+    });
+  }
+
 }
-
-

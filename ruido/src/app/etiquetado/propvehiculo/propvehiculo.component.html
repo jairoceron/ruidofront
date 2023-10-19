@@ -10,7 +10,7 @@
                 <mat-label>Primer nombre del propietario</mat-label>
                 <input matInput placeholder="" formControlName="primerNombre">
             </mat-form-field>
-           
+
 
             <mat-form-field appearance="outline">
                 <mat-label>Segundo nombre del propietario</mat-label>
@@ -27,12 +27,12 @@
         </div>
 
         <div class="container">
-            
-                <mat-radio-group formControlName="tpIdentificacion" appearance="outline">
-                    <mat-radio-button value="1">Cédula Ciudadanía&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-radio-button>
-                    <mat-radio-button value="2">Nit</mat-radio-button>
-                </mat-radio-group>
-            
+
+            <mat-radio-group formControlName="tpIdentificacion" appearance="outline">
+                <mat-radio-button value="1">Cédula Ciudadanía&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-radio-button>
+                <mat-radio-button value="2">Nit</mat-radio-button>
+            </mat-radio-group>
+
 
             <mat-form-field appearance="outline">
                 <mat-label>Número del documento:</mat-label>
@@ -50,25 +50,28 @@
                 <mat-label>Correo electrónico</mat-label>
                 <input matInput placeholder="" formControlName="correoElectronico">
             </mat-form-field>
-
-            <div class="form-group form-check">
-                <input
-                  type="checkbox"
-                  
-                  class="form-check-input"
-                  [ngClass]="{ 'is-invalid': submitted  }"
-                />
-                <label for="acceptTerms" class="form-check-label"
-                  > Autorización para el tratamiento de datos personales, en cumplimiento de las disposiciones 
-                  de la Ley 1581 de 2012 y del Decreto reglamentario 1377 de 2013 que desarrollan el
-                  derecho de habeas data.</label
-                >
-                <div *ngIf="submitted " class="invalid-feedback">
-                   
-                </div>
-              </div>
-
         </div>
+
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+
+        <div class="container">
+            <input type="checkbox" class="form-check-input" [ngClass]="{ 'is-invalid': submitted  }" />
+            <label for="acceptTerms" class="form-check-label"> Autorización para el tratamiento de datos personales, en
+                cumplimiento de las disposiciones
+                de la Ley 1581 de 2012 y del Decreto reglamentario 1377 de 2013 que desarrollan el
+                derecho de habeas data.</label>
+            <div *ngIf="submitted " class="invalid-feedback">
+
+            </div>
+        </div>
+
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
         <div class="container">
             <!-- button class="btn btn-success" (click)="guardarPropVehiculo()" cdkFocusInitial>Guardar Propietario
                 Vehiculo</button>
@@ -85,9 +88,9 @@
         </div>
     </div>
 
-  
 
 
 
-    
+
+
 </form>

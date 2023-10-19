@@ -2,9 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConsultaVisita, GRAFICA_TIPO_PIE, Pqrs, RdoProfesional, RdoVisita, Visitas } from 'src/app/modelos/ruido.interface';
 import { ProfesionalService } from 'src/app/servicios/profesional.service';
 import { VisitaruidoService } from 'src/app/servicios/visitaruido.service';
-import {  ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 import { DateFilterFn } from '@angular/material/datepicker';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-nuevisita',
@@ -13,7 +13,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 })
 export class NuevisitaComponent implements OnInit {
   @ViewChild(ToastContainerDirective, { static: true })
- 
+
   toastContainer!: ToastContainerDirective;
   @ViewChild('element') toast: any;
   @ViewChild('element') element: any;
@@ -21,9 +21,9 @@ export class NuevisitaComponent implements OnInit {
 
   rangeFilter(date: Date): boolean {
     let currentDate: Date = new Date();
-    let includeDatesWithinNextTwentyDays: boolean = date.valueOf() < (currentDate.valueOf() + 20*60*60*1000*24);
+    let includeDatesWithinNextTwentyDays: boolean = date.valueOf() < (currentDate.valueOf() + 20 * 60 * 60 * 1000 * 24);
     return includeDatesWithinNextTwentyDays;
-}
+  }
 
 
 
@@ -32,12 +32,19 @@ export class NuevisitaComponent implements OnInit {
   profesional: string = 'xx___';
   listProfesional: RdoProfesional[] = [];
   fechaInicial: Date = new Date();
-  pqrActual: Pqrs = { radicado: '' }
+  pqrActual: Pqrs = {
+    objectid: -1,
+    radicado: '', asunto_radicacion: '', sector_reportado: '',
+    localidad: '', estado_tramite: 1,
+    observaciones_estado_tramite: '',
+    fecha_radicado: new Date(),
+
+  }
   toastr: any;
 
   constructor(private profesionalService: ProfesionalService,
     private visitaRuidoService: VisitaruidoService,
-    private toastrService : ToastrService) {
+    private toastrService: ToastrService) {
 
 
   }
@@ -63,7 +70,7 @@ export class NuevisitaComponent implements OnInit {
     })
   }
 
-  onCreate(dato : any) {
+  onCreate(dato: any) {
     this.element.show();
   }
 
@@ -71,7 +78,7 @@ export class NuevisitaComponent implements OnInit {
     console.log('xxxx :: zzzz Fecha Inicial::: >>>', this.fechaInicial);
 
     let visita: Visitas = {
-      
+
       objectid: 0,
       año: 0,
       mes: '',
@@ -124,50 +131,61 @@ export class NuevisitaComponent implements OnInit {
       barrio: '',
       orig_fid: 0,
       globalid: '',
-    fechavisita:this.fechaInicial};
+      fechavisita: this.fechaInicial
+    };
+
+
 
     let rdoVisita: RdoVisita = {
       profesional: this.profesional,
-      radicado: this.pqrActual.radicado,
+      radicado: '1111',
       fechavisita: this.fechaInicial,
       estadovisita: '',
       numeroexpediente: 0,
       horariovisita: '',
-      direccion: this.pqrActual.direcciones,
+      // direccion: this.pqrActual.direcciones,
       latitud: 0,
       longitud: 0,
     }
 
-    this.visitaRuidoService.guardaVisitaXX(visita).subscribe( x => {
-        x;
-        console.log('guarda:: ', visita);
-        let contenido = "<div class='e-custom'>Take a look at our next generation <b>Javascript</b> <a href='https://ej2.syncfusion.com/home/index.html' target='_blank'>LEARN MORE</a></div>";
-        let options= { closeButton:true, tapToDismiss:false, titleClass:'red' ,  timeOut: 3000, progressBar:true, enableHtml:true};
-        
-        this.toastrService.success('Visita Guardada', visita.radicado, options).onTap.subscribe(() => this.toasterClickedHandler());
-        let consultaVisita : ConsultaVisita = {
-          fechaInicial:new Date(), 
-          fechaFinal:new Date(), 
-          radicado : visita.radicado,
-          vistaSistema:'',
-          direccion:'',
-          localidad:'',
-          estadoTramite:'',
-          tipoPredio:'',
-          tipoChart:GRAFICA_TIPO_PIE,
-        };
-        this.visitaRuidoService.setConsultaVisitaV(consultaVisita);
-        this.visitaRuidoService.actualizaInfoVisiPorRadicado(consultaVisita);
+    this.visitaRuidoService.guardaVisitaXX(visita).subscribe(x => {
+      x;
+      console.log('guarda:: ', visita);
+      let contenido = "<div class='e-custom'>Take a look at our next generation <b>Javascript</b> <a href='https://ej2.syncfusion.com/home/index.html' target='_blank'>LEARN MORE</a></div>";
+      let options = { closeButton: true, tapToDismiss: false, titleClass: 'red', timeOut: 3000, progressBar: true, enableHtml: true };
 
-        // con esto actualiza el behavior subject ...
-          // y debería actualizarse el componente y en la pantalla aparece a este radicado el histórico de visitas.
+      this.toastrService.success('Visita Guardada', visita.radicado, options).onTap.subscribe(() => this.toasterClickedHandler());
+      let consultaVisita: ConsultaVisita = {
+        fechaInicial: new Date(),
+        fechaFinal: new Date(),
+        radicado: '',
 
-        //.subscribe(x => {
-          //x;
-          //console.log('actualizacion del objeto:: ',x);          
-        // });
-     
-       // ******
+        vistaSistema: '',
+        direccion: '',
+        localidad: '',
+        estadoTramite: '',
+        tipoPredio: '',
+        tipoChart: GRAFICA_TIPO_PIE,
+        isCbCVencido: false,
+        isCbCPxVenci: false,
+        isCbCPxSinVe: false,
+        peticionario : '',
+        observacionEstadoTramite :  '',
+           
+
+      };
+      this.visitaRuidoService.setConsultaVisitaV(consultaVisita);
+      this.visitaRuidoService.actualizaInfoVisiPorRadicado(consultaVisita);
+
+      // con esto actualiza el behavior subject ...
+      // y debería actualizarse el componente y en la pantalla aparece a este radicado el histórico de visitas.
+
+      //.subscribe(x => {
+      //x;
+      //console.log('actualizacion del objeto:: ',x);          
+      // });
+
+      // ******
 
     });
 
@@ -184,15 +202,15 @@ export class NuevisitaComponent implements OnInit {
   }
 
   myFilter(d: Date): boolean {
-		const day = d.getDay();
+    const day = d.getDay();
     const month = d.getMonth();
-		const todays_date = d.getDate();
-		const todaysDateObject = new Date();
-		const today = todaysDateObject.getDate();
+    const todays_date = d.getDate();
+    const todaysDateObject = new Date();
+    const today = todaysDateObject.getDate();
     const actualMonth = todaysDateObject.getMonth();
     console.log(todays_date)
 
-    	/** Prevent actual system date from being selected.*/
+    /** Prevent actual system date from being selected.*/
     if (month === actualMonth && todays_date === today) {
       return false;
     } else if (day !== 0 && day !== 6) {
@@ -202,14 +220,14 @@ export class NuevisitaComponent implements OnInit {
     }
 
 
-  
-}
+
+  }
 
 
-myFilterx = (d: Date  |null ): boolean => {
-  const day = (d || new Date()).getDay();
-  // Prevent Saturday and Sunday from being selected.
-  return day !== 0 && day !== 6;
-};
+  myFilterx = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
 
 }

@@ -1,22 +1,21 @@
-<app-headeretique></app-headeretique>
-
+<!--app-headeretique></app-headeretique-->
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>Información General del Vehículo {{data.dataVehiculo.placa}}</h1>
 {{mensajeDeError}}
 <mat-card>
-    <div>
-        <span class="example-input-label">--Información General del Vehículo {{placa}}</span>
-    </div>
+    
     <div class="example-container">
 
         <!--
             <mat-label>Tipologia Vehicular</mat-label>
             <input matInput placeholder="" [(ngModel)]="informacionvehiculo.tipologiaVehicular">
+
+            (ngModelChange)="onChangeClaseVehiculo(selectedClaseVehiculo)"
 -->
 
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="claseVehiculo" class="form-label">Clase de Vehículo</mat-label>
-            <mat-select [(ngModel)]="selectedClaseVehiculo" id="claseVehiculo"
-                (ngModelChange)="onChangeClaseVehiculo(selectedClaseVehiculo)">
-                <mat-option *ngFor="let lClVeh of listClaVehi" [value]="lClVeh">
+            <mat-select [(ngModel)]="selectedClaseVehiculo.nombre" id="claseVehiculo" >
+                <mat-option *ngFor="let lClVeh of listClaVehi" [value]="lClVeh.nombre">
                     {{lClVeh.nombre}}
                 </mat-option>
 
@@ -29,9 +28,9 @@
         </mat-form-field -->
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="tipoServicio" class="form-label">Tipo de Servicio</mat-label>
-            <mat-select [(ngModel)]="selectedTipoServicio" id="tipoServicio"
+            <mat-select [(ngModel)]="selectedTipoServicio.nombre" id="tipoServicio"
                 (change)="onChangeTipoServicio(selectedTipoServicio)">
-                <mat-option *ngFor="let lClVeh of listTipoServicio" [value]="lClVeh">
+                <mat-option *ngFor="let lClVeh of listTipoServicio" [value]="lClVeh.nombre">
                     {{lClVeh.nombre}}
                 </mat-option>
 
@@ -41,10 +40,10 @@
 
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="tipoCombustible" class="form-label">Tipo de Combustible</mat-label>
-            <!-- input matInput placeholder="" [(ngModel)]="informacionvehiculo.tipoCombustible" -->
-            <mat-select [(ngModel)]="selectedTipoCombustible" id="tipoServicio"
+          
+            <mat-select [(ngModel)]="selectedTipoCombustible.nombre" id="tipoServicio"
                 (ngModelChange)="onChangeTipoServicio(selectedTipoServicio)">
-                <mat-option *ngFor="let lClVeh of listTipoCom" [value]="lClVeh">
+                <mat-option *ngFor="let lClVeh of listTipoCom" [value]="lClVeh.nombre">
                     {{lClVeh.nombre}}
                 </mat-option>
 
@@ -56,9 +55,9 @@
 
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="cilindraje" class="form-label">Cilindraje</mat-label>
-            <mat-select [(ngModel)]="selectedCilindrada" id="cilindraje"
+            <mat-select [(ngModel)]="selectedCilindrada.nombre" id="cilindraje"
                 (ngModelChange)="onChangeCilindrada(selectedCilindrada)">
-                <mat-option *ngFor="let lClVeh of listCilindrada" [value]="lClVeh">
+                <mat-option *ngFor="let lClVeh of listCilindrada" [value]="lClVeh.nombre">
                     {{lClVeh.nombre}}
                 </mat-option>
             </mat-select>
@@ -67,8 +66,8 @@
 
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="marca" class="form-label">Marca</mat-label>
-            <mat-select [(ngModel)]="selectedMarca" id="marca" (ngModelChange)="onChangeMarca(selectedMarca)">
-                <mat-option *ngFor="let lClVeh of listMarca" [value]="lClVeh">
+            <mat-select [(ngModel)]="selectedMarca.nombre" id="marca" (ngModelChange)="onChangeMarca(selectedMarca)">
+                <mat-option *ngFor="let lClVeh of listMarca" [value]="lClVeh.nombre">
                     {{lClVeh.nombre}}
                 </mat-option>
             </mat-select>
@@ -91,21 +90,22 @@
             <input matInput placeholder="" [(ngModel)]="informacionvehiculo.linea">
         </mat-form-field>
         &nbsp;
+
+
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Año / Modelo</mat-label>
             <input matInput placeholder="" [(ngModel)]="informacionvehiculo.modelo">
         </mat-form-field>
         &nbsp;
-        <mat-form-field appearance="outline" >
+        
+        <mat-form-field appearance="outline">
             <mat-label>Fecha Importación</mat-label>
-            <input matInput
-              [matDatepicker]="picker"
-              placeholder="Fecha Importación"
-              (dateChange)="setDate($event.value)" [(ngModel)]="informacionvehiculo.fechaImportacion">
+            <input matInput [matDatepicker]="picker" placeholder="Fecha Importación"
+                (dateChange)="setDate($event.value)" [(ngModel)]="informacionvehiculo.fechaImportacion">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          
+        </mat-form-field>
+
 
         &nbsp;
         <mat-form-field appearance="outline" class="example-full-width">
@@ -149,6 +149,16 @@
             <mat-label>Subsistema Control de Emisiones</mat-label>
             <input matInput placeholder="" [(ngModel)]="informacionvehiculo.subContEmision">
         </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <textarea matInput placeholder="Tecnología de reducción de emisiones"></textarea>
+        </mat-form-field>
+        &nbsp;
+        <button class="btn btn-success" (click)="guardaInfoVehiculo()" cdkFocusInitial>Guardar Información
+            Vehículo</button>
+        &nbsp;
+        <button class="btn btn-success" (click)="generarEtiquetaEVA()" cdkFocusInitial>Generar Etiqueta
+            EVA</button>
 
         <div>
             <mat-label>
@@ -188,7 +198,7 @@
 
         <div>
             <mat-label>
-                PDF Registro fotográfico de la Tarjeta de Propiedad  (ambas caras)
+                PDF Registro fotográfico de la Tarjeta de Propiedad (ambas caras)
             </mat-label>
             <button mat-icon-button matPrefix (click)="pdfTecMecan.click()">
                 <mat-icon>attach_file</mat-icon>
@@ -211,41 +221,28 @@
 
         <div class="example-container">
             <mat-label>
-                
+
             </mat-label>
         </div>
         <div>&nbsp;</div>
-        <mat-form-field>
-            <textarea matInput placeholder="Tecnología de reducción de emisiones"></textarea>
-        </mat-form-field>
+       
 
         <div>&nbsp;</div>
         <div class="form-group form-check">
-            <input
-              type="checkbox"
-              
-              class="form-check-input"
-              [ngClass]="{ 'is-invalid': submitted  }"
-            />
-            <label for="acceptTerms" class="form-check-label"
-              >Autorización para el tratamiento de datos personales, en cumplimiento de las disposiciones 
-              de la Ley 1581 de 2012 y del Decreto reglamentario 1377 de 2013 que desarrollan el
-              derecho de habeas data.</label
-            >
+            <input type="checkbox" class="form-check-input" [ngClass]="{ 'is-invalid': submitted  }" />
+            <label for="acceptTerms" class="form-check-label">Autorización para el tratamiento de datos personales, en
+                cumplimiento de las disposiciones
+                de la Ley 1581 de 2012 y del Decreto reglamentario 1377 de 2013 que desarrollan el
+                derecho de habeas data.</label>
             <div *ngIf="submitted " class="invalid-feedback">
-                
+
             </div>
-          </div>
+        </div>
 
 
         <div>&nbsp;</div>
 
-        &nbsp;
-        <button class="btn btn-success" (click)="guardaInfoVehiculo()" cdkFocusInitial>Guardar Información
-            Vehículo</button>
-        &nbsp;
-        <button class="btn btn-success" (click)="generarEtiquetaEVA()" cdkFocusInitial>Generar Etiqueta
-            EVA</button>
+
 
     </div>
 </mat-card>

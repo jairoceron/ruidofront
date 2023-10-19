@@ -4,7 +4,7 @@ import { ResponseI, VariableSesionI } from '../modelos/response.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
-import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, CS_ORGANIS_CONTROL, Pqrs, PQRS_POR_LOCALIDAD } from '../modelos/ruido.interface';
+import { ConsultaVisita, CONSUL_TIPO_PREDIO, CONS_POR_DIRECCION, CONS_POR_ESTADOTRA, CS_ORGANIS_CONTROL, Pqrs, PQRS_POR_LOCALIDAD, PqrsDTO, VISITA_NO_EF_REP, PQR_REP_PETICION, PQR_REP_ANTECEDE, CONS_NO_ES_COMPETE } from '../modelos/ruido.interface';
 
 
 
@@ -45,9 +45,46 @@ export class VarSesionService {
 
   }
 
-  consultaVisita(consultaVisita: ConsultaVisita): Observable<Pqrs[]> {
+  consultaVisitaFase2(consultaVisita: ConsultaVisita): Observable<PqrsDTO[]> {
+    let direccion = this.url + "consultaVisita";
+    if (consultaVisita.vistaSistema === VISITA_NO_EF_REP) {
+      
+      direccion = this.url + "visitaNoEfectivaReprograma";      
+    }
 
-    // 999999999999999999999999999
+    if (consultaVisita.vistaSistema === PQR_REP_PETICION) {
+      
+      direccion = this.url + "visitaPorPeticionario";      
+    }
+
+    if (consultaVisita.vistaSistema === PQR_REP_ANTECEDE) {
+      
+      direccion = this.url + "visitaPorReporteAntecedente";      
+    }
+
+    if (consultaVisita.vistaSistema === CONS_NO_ES_COMPETE ) {
+      
+      direccion = this.url + "visitaConsultaNoEsCompetencia";      
+    }
+
+
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
+
+
+    return this.http.post<PqrsDTO[]>(direccion, consultaVisita, {
+      'headers': customHeaders,
+    });
+
+  }
+
+  consultaVisita(consultaVisita: ConsultaVisita): Observable<PqrsDTO[]> {
+
+   
+   // console.log('Miremos que visita es :::!!!!!!  ' , this.consultaVisita);
+
     let direccion = this.url + "consultaVisita";
 
     if (consultaVisita.vistaSistema === CONS_POR_DIRECCION) {
@@ -58,6 +95,7 @@ export class VarSesionService {
     if (consultaVisita.vistaSistema === PQRS_POR_LOCALIDAD) {
       // direccion = this.url + "consultaDirecVisita";
       direccion = this.url + "consultaPorLocalidad";
+      
      
     } 
 
@@ -78,17 +116,16 @@ export class VarSesionService {
     if (consultaVisita.vistaSistema === CS_ORGANIS_CONTROL) {      
       direccion = this.url + "consultaOrganismoDeControl";           
     } 
-    console.log( ' --- Vista Sistema:: ' + consultaVisita.vistaSistema  );
-    console.log( ' --- direccion :: ' + direccion );
+
     
 
     let lineax = "Bearer " + localStorage.getItem("token");
     let customHeaders = new HttpHeaders();
     customHeaders = customHeaders.append('content-type', 'application/json');
     customHeaders = customHeaders.append('Authorization', lineax);
-    console.log('Con esto me voy :::::>> ' + consultaVisita.fechaFinal + ' --- direccion :: ' + consultaVisita.direccion);
 
-    return this.http.post<Pqrs[]>(direccion, consultaVisita, {
+
+    return this.http.post<PqrsDTO[]>(direccion, consultaVisita, {
       'headers': customHeaders,
     });
 

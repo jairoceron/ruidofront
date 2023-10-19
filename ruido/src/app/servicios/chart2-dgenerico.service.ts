@@ -18,7 +18,7 @@ export class Chart2DgenericoService {
     if (consultaVisita.vistaSistema === PREDIO2D_NORMATIVI) {
       direccion = this.url + "chart2dTipoPredioCumpliNorma";
     }
-
+    
 
     let lineax = "Bearer " + localStorage.getItem("token");
     let customHeaders = new HttpHeaders();
