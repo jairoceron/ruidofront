@@ -17,10 +17,12 @@ import { ObjetoplacaComponent } from './etiquetado/objetoplaca/objetoplaca.compo
 import { VariableComponent } from './datalake/variable/variable.component';
 import { DatabaseComponent } from './util/database/database.component';
 import { AyudaComponent } from './etiquetado/ayuda/ayuda.component';
+import { CiudadanoComponent } from './etiquetado/ciudadano/ciudadano.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'login', pathMatch:'full'},
   { path:'login', component:LoginComponent},
+  { path:'eva/ciudadano', component:CiudadanoComponent},
   { path:'dashboard', component:DashboardComponent},
   { path:'etiquetado', component:EtiquetadoComponent},
   { path:'ruido', component:RuidoComponent},

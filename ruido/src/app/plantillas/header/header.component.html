@@ -1,12 +1,15 @@
 <nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-text">
-      
-      
-      <form novalidate [formGroup]="checkOutForm" (ngSubmit)="checOutFun(checkOutForm.value)" >
-        <img src="assets\cabezote-verde.png" id="icon" alt="User Icon" />&nbsp;&nbsp;&nbsp;&nbsp;CIMAB &nbsp;&nbsp;&nbsp; {{username}}
-        <input type="submit" class="fadeIn fourth" value="Salir">
-      </form>
-    </span>
-  </nav> 
-  
+  <span class="navbar-text">
+
+
+    <form novalidate [formGroup]="checkOutForm" (ngSubmit)="checOutFun(checkOutForm.value)">
+      <img src="assets\cabezote-verde.png" id="icon" alt="User Icon" />&nbsp;&nbsp;&nbsp;&nbsp;CIMAB &nbsp;&nbsp;&nbsp;
+      {{username}}
+      <input type="submit" class="fadeIn fourth" value="Salir">
+    </form>
+  </span>
+</nav>
+
+<div *ngIf="username != 'CIUDADANO' ">
   <app-menu></app-menu>
+</div>

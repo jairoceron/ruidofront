@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoriaI, CilindradaI, ClaseVehiculoI, EstadoEmisionI, Informacionvehiculo, MetadataArchPDF, PesoVehiculoI, TipoCombustibleI } from 'src/app/modelos/login.interface';
+import { CategoriaI, CilindradaI, ClaseVehiculoI, EstadoEmisionI, Informacionvehiculo, MetadataArchPDF, PesoVehiculoI, Propietariovehiculo, TipoCombustibleI } from 'src/app/modelos/login.interface';
 import { EtiquetadoService } from 'src/app/servicios/etiquetado.service';
 import { DialogVisorPdfComponent } from '../dialog-visor-pdf/dialog-visor-pdf.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { DatabaseService } from 'src/app/servicios/database.service';
 import { FormGroup } from '@angular/forms';
 import { InfovehiculoComponent } from '../infovehiculo/infovehiculo.component';
 import { INFO_VEHICULO } from 'src/app/modelos/ruido.interface';
+import { ExcelService } from 'src/app/servicios/excel.service';
 
 @Component({
   selector: 'app-headeretique',
@@ -16,20 +17,23 @@ import { INFO_VEHICULO } from 'src/app/modelos/ruido.interface';
 })
 export class HeaderetiqueComponent implements OnInit {
   placa: string = 'DDD000';
-  informacionvehiculo: Informacionvehiculo = INFO_VEHICULO ;
+  informacionvehiculo: Informacionvehiculo = INFO_VEHICULO;
+  dataInformacionVehiculo : Informacionvehiculo[] = [];
+  dataPropietariovehiculo : Propietariovehiculo[] = [];
 
 
   constructor(
     private etService: EtiquetadoService,
     private router: Router,
     public dialog: MatDialog,
-    private databaseService : DatabaseService,
-
+    private databaseService: DatabaseService,
+    private excelService: ExcelService,
+  
   ) { }
 
-  username : string = '';
+  username: string = '';
 
-  checkOutForm  : FormGroup = new FormGroup({  });
+  checkOutForm: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") || this.username;
@@ -39,14 +43,14 @@ export class HeaderetiqueComponent implements OnInit {
   generarPDFetiquetado() {
     this.etService.generarPDFetiquetado(this.placa).subscribe(x => {
       x;
-      console.log('GDMPTLB ...... ' , x);
+      console.log('GDMPTLB ...... ', x);
       this.pantallaModalViewPdf(x);
-      
+
     });
 
   }
 
-  pantallaModalViewPdf(metadataArchPDF : MetadataArchPDF ) {
+  pantallaModalViewPdf(metadataArchPDF: MetadataArchPDF) {
 
     const dialogRef = this.dialog.open(DialogVisorPdfComponent, {
       width: '1000px',
@@ -78,12 +82,12 @@ export class HeaderetiqueComponent implements OnInit {
   }
 
   datosVehiculo() {
-    let infoVehiculo : Informacionvehiculo = INFO_VEHICULO;
+    let infoVehiculo: Informacionvehiculo = INFO_VEHICULO;
     infoVehiculo.placa = this.placa;
     this.openDialog(infoVehiculo);
-   // ki kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-   // this.router.navigate(['/infoVehic']);
-    
+    // ki kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+    // this.router.navigate(['/infoVehic']);
+
   }
 
   openDialog(infoVehiculo: Informacionvehiculo): void {
@@ -100,19 +104,19 @@ export class HeaderetiqueComponent implements OnInit {
   }
 
   ayuda() {
-    
+
     this.router.navigate(['/ayuda']);
-    
+
   }
   //*********************************
 
   imprimirEtiqHolograma() {
 
-    console.log('impresion del holograma : placa inicia la impresion de la etiqueta :::: this.placa >>> ' , this.placa);
+    console.log('impresion del holograma : placa inicia la impresion de la etiqueta :::: this.placa >>> ', this.placa);
     this.etService.imprimirEtiqHolograma(this.placa).subscribe(
       x => {
         x;
-        console.log('impresion del holograma : placa' , this.placa , ' ---- > ' , x);
+        console.log('impresion del holograma : placa', this.placa, ' ---- > ', x);
 
         const dialogRef = this.dialog.open(DialogVisorPdfComponent, {
           width: '500px',
@@ -121,18 +125,18 @@ export class HeaderetiqueComponent implements OnInit {
           // ./assets/pdf/etiquetadoAAA000.pdf
           data: { rutaPdfHolograma: x.pathAssets, rutaPdfInfoEtiqueta: x.pathAssets }
         });
-    
+
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
           this.placa = result;
         });
-    
-    
+
+
       }
     )
 
 
-    
+
 
     // *******************
   }
@@ -145,18 +149,44 @@ export class HeaderetiqueComponent implements OnInit {
   entityPersistenciaVnk() {
     // 6666666666666666666666666666666666
     let tableName = 'pqrs';
-    console.log('TableName  ' , tableName);
+    console.log('TableName  ', tableName);
     this.databaseService.generarEntityTableName(tableName).subscribe(
-      x => { 
-        x; 
+      x => {
+        x;
         console.log(x);
-      } 
+      }
     )
   }
 
-  checOutFun(checkOutForm  : FormGroup ) {    
+  checOutFun(checkOutForm: FormGroup) {
     localStorage.removeItem("token");
     this.router.navigate(['login']);
-  } 
+  }
+
+  descargaExcel() {
+    // descarga -- Propietarios de vehículo
+    //          -- Información del vehículo
+    console.log('Descarga a Excel ..... ');
+    this.etService.consultaDataInfoVehic(INFO_VEHICULO).subscribe(
+      x => {
+        this.dataInformacionVehiculo = x;
+        this.excelService.exportAsExcelFile(this.dataInformacionVehiculo, 'etiquetado.xls')
+      //  pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+
+      }
+    );
+
+    console.log('Descarga a Excel lo del propietario del vehiculo ::: ..... ');
+    this.etService.listPropietarioVehiculo('GDMPTLB').subscribe(
+      x => {
+        console.log('hace la subscripcion ::: ');
+        this.dataPropietariovehiculo = x;
+        this.excelService.exportAsExcelFile(this.dataPropietariovehiculo, 'propietario.xls')
+      //  pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+
+      }
+    );
+
+  }
 
 }

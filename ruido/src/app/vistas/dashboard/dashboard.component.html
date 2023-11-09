@@ -1,5 +1,5 @@
 <app-header></app-header>
-
+<!--app-menu></app-menu-->
 <!-- div>Archivo de visitas : <input type="file" (change)="readExcel($event)">  </div -->
 
 <!-- div>Archivo de PQRS : <input type="file" (change)="readExcelPQRS($event)"> </div -->
@@ -54,7 +54,7 @@
         <mat-option value={{VISITA_NO_EF_REP}}>{{VISITA_NO_EF_REP}}</mat-option>
         <mat-option value={{PQR_REP_PETICION}}>{{PQR_REP_PETICION}}</mat-option>
         <mat-option value={{PQR_REP_ANTECEDE}}>{{PQR_REP_ANTECEDE}}</mat-option>
-        <mat-option value={{PQR_ULTIMOS_50_R}}>{{PQR_ULTIMOS_50_R}}</mat-option>
+        <!-- mat-option value={{PQR_ULTIMOS_50_R}}>{{PQR_ULTIMOS_50_R}}</mat-option -->
         <!-- mat-option value={{modulo_alertas_}}>{{modulo_alertas_}}</mat-option -->
         <!--mat-option value="Polígono Consulta">Polígono Consulta</mat-option -->
       </mat-select>
@@ -74,7 +74,7 @@
     <input type="submit" class="btn btn-default" value="Consulta !" (click)="brokerConsultas()">
 
 
-    <input type="submit" class="btn btn-default" value="Descarga" (click)="descargaExcel()">
+    <input type="submit" class="btn btn-default" value="Descarga" (click)="descargaExcel()"> 
 
   </div>
 
@@ -125,7 +125,7 @@
       &nbsp;&nbsp;
 
       <mat-form-field appearance="fill" class="masAncho">
-        <mat-label>Observación Estado del Trámite</mat-label>
+        <mat-label>2. Observación Estado del Trámite</mat-label>
         <mat-select [(ngModel)]="estObserSelected.observacion" name="observEstado" placeholder="Observacion">
           <mat-option *ngFor="let estadoX of listObsEstadoTramite" [value]="estadoX.observacion">
             {{estadoX.observacion}}
@@ -164,7 +164,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;
 
       <mat-form-field appearance="fill" class="masAncho">
-        <mat-label>Observación Estado del Trámite</mat-label>
+        <mat-label>3. Observación Estado del Trámite</mat-label>
         <mat-select [(ngModel)]="estObserSelected.observacion" name="observEstado" placeholder="Observacion">
           <mat-option *ngFor="let estadoX of listObsEstadoTramite" [value]="estadoX.observacion">
             {{estadoX.observacion}}

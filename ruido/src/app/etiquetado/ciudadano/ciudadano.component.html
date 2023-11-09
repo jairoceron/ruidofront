@@ -1,0 +1,48 @@
+<app-header></app-header>
+
+<!-- div>Archivo de visitas : <input type="file" (change)="readExcel($event)">  </div -->
+
+<!--div>Archivo de PQRS : <input type="file" (change)="readExcelPQRS($event)"> </div-->
+
+<h1>Señor Ciudadano: Bienvenido a la Plataforma de Etiquetado Vehicular Ambiental EVA</h1>
+
+
+
+<div class="d-flex flex-column bd-highlight mb-6">
+    <div class="p-2 bd-highlight">
+        Ingrese la información de los datos de:
+    </div>
+    <div class="p-2 bd-highlight">
+
+    </div>
+</div>
+<mat-form-field class="example-form-field">
+    <mat-label>Placa Vehiculo</mat-label>
+    <input matInput type="text" [(ngModel)]="placa"  (blur)="habilitarBotones($event)" >
+
+</mat-form-field>
+<table>
+    <tr>
+        <td>
+
+
+
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="openDiagol_propietVehiculo()"  [disabled]="disabled">
+                <mat-icon>account_box</mat-icon>
+            </button>
+        </td>
+        <td>
+            <h3>Propietario del Vehículo</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="abreFormCaracVehiculo()"  [disabled]="disabled">
+                <mat-icon> directions_bus</mat-icon>
+            </button>
+        </td>
+        <td>
+            <h3>Características del Vehículo</h3>
+        </td>
+    </tr>
+</table>

@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Propietariovehiculo } from 'src/app/modelos/login.interface';
+import { DialogDataEtiquetado, Propietariovehiculo } from 'src/app/modelos/login.interface';
 import { EtiquetadoService } from 'src/app/servicios/etiquetado.service';
 import { NotificationService } from 'src/app/servicios/notification.service';
+import { InfovehiculoComponent } from '../infovehiculo/infovehiculo.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CIUDADANO, PROPIETARIOVEHICULO } from 'src/app/modelos/ruido.interface';
 
 @Component({
   selector: 'app-propvehiculo',
@@ -23,9 +26,9 @@ export class PropvehiculoComponent implements OnInit {
     correoElectronico: ['', [Validators.required, Validators.email]],
     telefono: ['', [Validators.required, Validators.maxLength(40)]],
   });
-  ;
-  submitted = false;
 
+  submitted = false;
+  mensajeDeError: string = '';
   primerNombre: string = '';
   segundoNombre: string = '';
   primerApellido: string = '';
@@ -33,7 +36,7 @@ export class PropvehiculoComponent implements OnInit {
   numeroIdentificacion: string = '';
   telefono: string = '';
   correoElectronico: string = '';
-  placa: string = 'AAA001';
+  // placa: string = 'AAA001';
   propvehiculo: Propietariovehiculo = {};
   tpIdentificacion: number = 1;
 
@@ -42,19 +45,38 @@ export class PropvehiculoComponent implements OnInit {
     private etService: EtiquetadoService,
     public notificationService: NotificationService,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    public dialogRef: MatDialogRef<InfovehiculoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogDataEtiquetado,
   ) { }
 
   ngOnInit(): void {
     this.cargadataPlaca();
   }
 
+
   cargadataPlaca() {
-    this.etService.placaObserv.subscribe(x => {
-      this.placa = x
+    // this.etService.placaObserv.subscribe(x => {
+    // this.placa = x
+    //  })
+    PROPIETARIOVEHICULO.placa = this.data.dataVehiculo.placa;
+    this.etService.propietarioVehiculoPlaca(PROPIETARIOVEHICULO).subscribe(x => {
+
+      console.log("Propietario del vehiculo ", x);
+      if (x == null) {
+        // aaaaaaaaaaaaaaaaaaaaaaa
+        this.propvehiculo = PROPIETARIOVEHICULO;
+        // this.propvehiculo.placa = 
+      } else {
+        this.propvehiculo = x;
+      }
+
+      console.log(x);
     })
-    // 999999999999999
+
+    //   fffffffffffffffffffffffff 999999999999999
   }
+
 
   guardarPropVehiculo() {
 
@@ -90,30 +112,52 @@ export class PropvehiculoComponent implements OnInit {
     }
 
 
-    console.log('Mateo 21');
     console.log(JSON.stringify(this.form.value, null, 2));
 
     console.log(this.form.value.primerNombre);
     this.form.get('name of you control')
 
-    this.propvehiculo = {
-      idevapropvehi: 1,
-      nombre1: this.form.value.primerNombre,
-      nombre2: this.form.value.segundoNombre,
-      apellido1: this.form.value.primerApellido,
-      apellido2: this.form.value.segundoApellido,
-      placa: this.placa,      
-      identificacion: this.form.value.numeroIdentificacion,
-      tipoidentifica: this.form.value.tpIdentificacion,
-    }
 
-    console.log('esta muy interesante GDMPTLB :: ', this.form.controls)
+
+    console.log('esta muy interesante GDMPTLB :: ', this.form.controls);
+    console.log('esta muy interesante _____  ', this.propvehiculo);
+
+   
+    this.propvehiculo.idevapropvehi = this.form.value.idevapropvehi;  
+    this.propvehiculo.nombre1 = this.form.value.primerNombre;   
+    this.propvehiculo.nombre2 = this.form.value.segundoNombre;   
+    this.propvehiculo.apellido1 = this.form.value.primerNombre;  
+    this.propvehiculo.apellido2 = this.form.value.segundoApellido;  
+    this.form.value.placa = this.data.dataVehiculo.placa;
+    this.propvehiculo.placa = this.form.value.placa;        
+    this.propvehiculo.identificacion = this.form.value.numeroIdentificacion;  
+    this.propvehiculo.tipoidentifica  = this.form.value.tpIdentificacion; 
+    this.propvehiculo.email    = this.form.value.correoElectronico;        
+    this.propvehiculo.telefono  = this.form.value.telefono;    
+    // aaaaaaaaaaaaaaaaaa999999999999999999999999999999
+
+
     this.notificationService.confirmation("Desea actualizar los datos del propietario del Vehículo", () => {
       this.notificationService.success("Confirmación Ok");
       this.etService.guardaPropietarioVehiculo(this.propvehiculo).subscribe(x => {
         x;
-        console.log(x);
-        this.router.navigate(['/listPlaca']);
+        // console.log(x);
+        // this.router.navigate(['/listPlaca']);
+        // aaaaaaaaaa 999999999999999
+
+        if (localStorage.getItem("username") == CIUDADANO) {
+          this.router.navigate(['eva/ciudadano']).then(() => {
+            window.location.reload();
+          });
+
+        } else {
+
+        this.router.navigate(['/etiquetado']).then(() => {
+          window.location.reload();
+        });
+
+      }
+
       })
     },
       'Está usted seguro?',

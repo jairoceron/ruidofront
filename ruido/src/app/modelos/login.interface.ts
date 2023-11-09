@@ -14,7 +14,33 @@ export interface LoginI {
 export interface ClaseVehiculoI {
     idclasevehiculo: number;
     nombre: string;
+}
 
+export interface TipologiaVehicular {
+    idtipologiavehicular: number;
+    nombre: string;
+}
+
+export interface EvaEtiquetado{
+     clasepapa : string ;  //  VARCHAR(160),  
+     clase : string ;  //  VARCHAR(160),
+     combustible : string ;  // 	 VARCHAR(160),
+     modelo : string ;  // 	 VARCHAR(160),
+     estandaremision : string ;  // 	 VARCHAR(160),
+     cilindrada : string ;  // 	 VARCHAR(160),
+     indiceetiquetado : number ;  //  NUMBER(6),
+     fe_co : number ;  //  NUMBER(10,4),
+     fe_thc : number ;  // 	NUMBER(10,4),
+     fe_nox : number ;  //  NUMBER(10,4),
+     fe_pm : number ;  //  NUMBER(10,4),
+     fe_co2 : number ;  //  NUMBER(10,4),
+     fe_ch4 : number ;  //  NUMBER(10,4),
+     fe_co2eq : number ;  //  NUMBER(10,4),
+     pn : number ;  //  NUMBER(10,4),
+     pm_llsp : number ;  //  NUMBER(10,4),
+     opa : number ;  //  NUMBER(10,4),
+     fav : number ;  //  NUMBER(10,4),
+     etiquetado : string ;  // VARCHAR(160)
 }
 
 export interface TipoCombustibleI {
@@ -67,6 +93,10 @@ export interface Propietariovehiculo {
     placa?: string;
     identificacion?: string;
     tipoidentifica?: number;
+    email?: string;
+    telefono?: string;
+
+
 }
 
 export interface DialogDataEtiquetado {
@@ -76,6 +106,28 @@ export interface DialogDataEtiquetado {
 export interface FavEtiquetaColor {
     id:string;
     nombre:string;
+}
+
+export interface EvaEtiquetado {
+    clasepapa : string ; 
+    clase : string ;  
+    combustible : string ;  
+    modelo : string ;  
+    estandaremision : string ; 
+    cilindrada : string ;  
+    indiceetiquetado : number ;  
+    fe_co : number ;  
+    fe_thc : number ;  
+    fe_nox : number ;  
+    fe_pm : number ;  
+    fe_co2 : number ;  
+    fe_ch4 : number ;  
+    fe_co2eq : number ;  
+    pn : number ;  
+    pm_llsp : number ;  
+    opa : number ;  
+    fav : number ;  
+    etiquetado : string ;  
 }
 
 export interface Informacionvehiculo {
@@ -91,6 +143,7 @@ export interface Informacionvehiculo {
     modelo: string;
     fechaImportacion: Date;
     capacidadCarga: string;
+    capacidadPasajeros: string;
     claseVehiculo: string;
     numeroMotor: string;
     vin: string;

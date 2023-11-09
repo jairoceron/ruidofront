@@ -1,5 +1,5 @@
 import { timestamp } from "rxjs";
-import { FavEtiquetaColor, Informacionvehiculo } from "./login.interface";
+import { EvaEtiquetado, FavEtiquetaColor, Informacionvehiculo, Propietariovehiculo } from "./login.interface";
 
 /*
 export interface ConsultaVisita {
@@ -153,14 +153,15 @@ export interface Pqrs {
 }
 
 export interface  PqrsDTO {
-  objectid : number;
+ 
   radicado : string;   
-   fecha_radicado?: Date;   
-   asunto_radicacion : string; 
+  direccion?: string;  
+   
    razon_social_establecimiento?: string; 
    sector_reportado : string; 
    localidad: string; 
    entidad_de_control?: string;  
+   asunto_radicacion : string; 
    peticionario?: string; 
    estado_tramite: number; 
    observaciones_estado_tramite : string; 
@@ -172,7 +173,7 @@ export interface  PqrsDTO {
    profesional_diligencia?: string; 
    x?: number; 
    y?: number; 
-   direccion?: string; 
+  
    complemento_direccion?: string ; 
    diasDeVencido?: number ; 
    banderaVencimiento?: string ; 
@@ -181,6 +182,8 @@ export interface  PqrsDTO {
    estadoVisita  ?: string ; 
    cantidad_de_reprogramaciones  ?: string ; 
    horario  ?: string ; 
+   fecha_radicado?: Date;  
+   objectid : number;
 
   // shape?: string; 
 
@@ -248,23 +251,23 @@ export interface Visitas {
 
 
 export const PQRS_POR_LOCALIDAD: string = 'PQRS por Localidad :: PQR';
-export const CONS_POR_DIRECCION: string = 'H6 Consulta por Dirección :: PQR';
+export const CONS_POR_DIRECCION: string = 'Consulta por Dirección :: PQR';
 export const CONS_POR_ESTADOTRA: string = 'Estado Del Trámite ::  PQR'; 
 export const CONSUL_TIPO_PREDIO: string = 'Tipo de Predio :: Visita';
-export const CONS_NO_ES_COMPETE: string = 'H9 Estado Del Trámite NO es competencia ::  PQR';  
+export const CONS_NO_ES_COMPETE: string = 'Estado Del Trámite NO es competencia ::  PQR';  
 export const CON_PROVISIONAL_ET: string = 'Estado Del Trámite Provisional ::  PQR'; 
 export const PREDIO2D_NORMATIVI: string = 'Cumplimiento Normativo - Predio Generador ::  Visita'; 
 export const CS_ORGANIS_CONTROL: string = 'Organismo de Control ::  PQR'; 
 export const CS_MODULO_ALERTAS: string = 'Módulo de Alertas :: '; 
 export const GRAFICA_TIPO_PIE: string = 'Torta'; 
 export const GRAFICA_TIPO_BAR: string = 'Barra'; 
-export const VISITA_NO_EF_REP: string = 'H10 VISITA :: No Efectiva - Reprogramar'; 
-export const PQR_REP_PETICION: string = 'H7 PQR :: Reporte Por Peticionario'; 
-export const PQR_REP_ANTECEDE: string = 'H8 PQR :: Reporte de Antecedentes'; 
-export const PQR_ULTIMOS_50_R: string = 'H5 Ultimos 50 Radicados'; 
+export const VISITA_NO_EF_REP: string = 'VISITA :: No Efectiva - Reprogramar'; 
+export const PQR_REP_PETICION: string = 'PQR :: Reporte Por Peticionario'; 
+export const PQR_REP_ANTECEDE: string = 'PQR :: Reporte de Antecedentes'; 
+export const PQR_ULTIMOS_50_R: string = 'Ultimos 50 Radicados'; 
 
 
-export const ESTADO_TRAMITE_NO_ES_COMPETENCIA : number = 5;
+export const ESTADO_TRAMITE_NO_ES_COMPETENCIA : number = 9;
 export const NO_ES_COMPETENCIA = "NO ES COMPETENCIA";
 
 
@@ -279,7 +282,47 @@ export const FAV_ETIQUETA_COLOR: FavEtiquetaColor[] = [
 export const FAV_ETIQUETA_COL: FavEtiquetaColor = 
   {id:'NARANJA' , nombre:'NARANJA'};
   
+//9999999999999999999999999999999999999999rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 
+export const PROPIETARIOVEHICULO : Propietariovehiculo = {
+  idevapropvehi: 1,
+  nombre1: '',
+  nombre2: '',
+  apellido1: '',
+  apellido2: '',
+  placa: '',
+  identificacion: '',
+  tipoidentifica: -1,
+  email : '@',
+}
+
+export const CIUDADANO : string = 'CIUDADANO' ;
+export const PASSWDCIUDADANO : string = 'PASSWDCIUDADANO' ;
+
+export const VEHICULO_PESADO_CARGA : string ='Vehículo pesado de carga';
+export const VEHICULO_TRANS_PUBL_PASAJER_URBANO : string ='Vehículos de transporte público de pasajeros urbano';
+
+export const EVA_ETIQUETADO : EvaEtiquetado = {
+  clasepapa : '' , 
+  clase : '' ,  
+  combustible : '' ,
+  modelo : '' , 
+  estandaremision : '' ,
+  cilindrada : '' , 
+  indiceetiquetado : -1,
+  fe_co : -1,
+  fe_thc : -1,
+  fe_nox : -1,
+  fe_pm : -1,
+  fe_co2 : -1,
+  fe_ch4 : -1,
+  fe_co2eq : -1,
+  pn : -1, 
+  pm_llsp : -1,
+  opa : -1,  
+  fav : -1,
+  etiquetado : ''   
+}
 
 export const INFO_VEHICULO : Informacionvehiculo = {idevapropvehi: -1,
   placa: '',
@@ -292,6 +335,7 @@ export const INFO_VEHICULO : Informacionvehiculo = {idevapropvehi: -1,
   modelo: '',
   fechaImportacion: new Date,
   capacidadCarga: '',
+  capacidadPasajeros : '',
   claseVehiculo: '',
   numeroMotor: '',
   vin: '',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CategoriaI, CilindradaI, ClaseVehiculoI, EstadoEmisionI, Informacionvehiculo, LoginI, MarcaI, MetadataArchPDF, PesoVehiculoI, Placa, Propietariovehiculo, TipoCombustibleI, TipoServicioI } from '../modelos/login.interface'
+import { CategoriaI, CilindradaI, ClaseVehiculoI, EstadoEmisionI, EvaEtiquetado, Informacionvehiculo, LoginI, MarcaI, MetadataArchPDF, PesoVehiculoI, Placa, Propietariovehiculo, TipoCombustibleI, TipoServicioI, TipologiaVehicular } from '../modelos/login.interface'
 import { ResponseI } from '../modelos/response.interface';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
@@ -138,6 +138,34 @@ export class EtiquetadoService {
 
   }
 
+  listTipologiaVehicular(idTipologiaVehicular: number): Observable<TipologiaVehicular[]> {
+    let direccion = this.url + "listTipologiaVehicular";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
+
+    return this.http.post<TipologiaVehicular[]>(direccion, idTipologiaVehicular, {
+      'headers': customHeaders,
+    });
+
+  }
+
+ // ddddddddddddddddddddddddddddd9999999999999999999999999999999999999999
+  calculoFactosAmbiVehicular(informacionvehiculo: Informacionvehiculo): Observable<EvaEtiquetado> {
+    let direccion = this.url + "calculoFactosAmbiVehicular";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
+
+    return this.http.post<EvaEtiquetado>(direccion, informacionvehiculo, {
+      'headers': customHeaders,
+    });
+
+  }
+
+
   listCilindrada(idclasevehiculo: number): Observable<CilindradaI[]> {
     let direccion = this.url + "listCilindrada";
     let lineax = "Bearer " + localStorage.getItem("token");
@@ -178,6 +206,9 @@ export class EtiquetadoService {
   }
 
   guardaPropietarioVehiculo(propietarioVehiculo: Propietariovehiculo): Observable<Propietariovehiculo> {
+
+    console.log("metodo :: guardaPropietarioVehiculo propietarioVehiculo>> :: " + propietarioVehiculo );
+
     let direccion = this.url + "guardaPropietarioVehiculo";
     let lineax = "Bearer " + localStorage.getItem("token");
     let customHeaders = new HttpHeaders();
@@ -189,6 +220,30 @@ export class EtiquetadoService {
     });
 
   }
+
+  propietarioVehiculoPlaca(propietarioVehiculo: Propietariovehiculo): Observable<Propietariovehiculo> {
+    let direccion = this.url + "propietarioVehiculoPlaca";
+    console.log('TOKEN DE LA PLACA :::: ' , localStorage.getItem("token"));
+
+    if (localStorage.getItem("token") != null) { }
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
+
+    return this.http.post<Propietariovehiculo>(direccion, propietarioVehiculo, {
+      'headers': customHeaders,
+    });
+  
+
+  }
+
+  /*   loginByEmail(form:LoginI):Observable<ResponseI> {
+    let direccion = this.url + "authenticate";
+    return this.http.post<ResponseI>(direccion,form);
+    */   
+//}
+// aaaaaaaaaaaaaaaaaaaaaaaaffff 
 
   guardaInfoVehiculo(informacionVehiculo: Informacionvehiculo): Observable<Informacionvehiculo> {
     let direccion = this.url + "guardaInformacionVehiculo";
@@ -220,6 +275,7 @@ export class EtiquetadoService {
 
 
   listPropietarioVehiculo(placa: String): Observable<Propietariovehiculo[]> {
+    console.log('servicio ::: listPropietarioVehiculo');
     let direccion = this.url + "listaPropietarioVehiculo";
     let lineax = "Bearer " + localStorage.getItem("token");
     let customHeaders = new HttpHeaders();

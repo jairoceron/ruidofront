@@ -3,9 +3,9 @@ listado de autos vista 360 con los Propietarios, Caracteristicas autos.
 <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
     <ng-container matColumnDef="IDEVAINFOVEHIC">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
         <mat-cell *matCellDef="let element">
-            <button type="button" class="btn btn-default" aria-label="Left Align"   (click)="openDialog(element)" >
+            <button type="button" class="btn btn-default" aria-label="Left Align" (click)="openDialog(element)">
                 <mat-icon>edit</mat-icon>
             </button>
 
@@ -13,13 +13,44 @@ listado de autos vista 360 con los Propietarios, Caracteristicas autos.
         </mat-cell>
     </ng-container>
     <ng-container matColumnDef="IDPRUE_STATIC">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
         <mat-cell *matCellDef="let element">
-            <button type="button" class="btn btn-default" aria-label="Left Align"   (click)="openDiagol_PruebasEstaticas(element)" >
+            <button type="button" class="btn btn-default" aria-label="Left Align"
+                (click)="openDiagol_PruebasEstaticas(element)">
                 <mat-icon>assessment</mat-icon>
             </button>
         </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="propietVehiculo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-default" aria-label="Left Align"
+                (click)="openDiagol_propietVehiculo(element)">
+                <mat-icon>person</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="hologramaPrint">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-default" aria-label="Left Align"
+                (click)="imprimirEtiqHolograma(element)">
+                <mat-icon>qr_code_scanner</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="pdfReporte">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-default" aria-label="Left Align"
+                (click)="imprimirPdfReporte(element)">
+                <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
 
     <ng-container matColumnDef="PLACA">
         <mat-header-cell *matHeaderCellDef mat-sort-header> PLACA </mat-header-cell>
@@ -28,14 +59,14 @@ listado de autos vista 360 con los Propietarios, Caracteristicas autos.
         </mat-cell>
     </ng-container>
 
-   
+
     <!-- ng-container matColumnDef="TIPOLOGIAVEHICULAR">
         <mat-header-cell *matHeaderCellDef mat-sort-header> TIPOLOGIAVEHICULAR </mat-header-cell>
         <mat-cell *matCellDef="let element">
             {{element.tipologiaVehicular}}
         </mat-cell>
     </ng-container -->
-  
+
     <ng-container matColumnDef="TIPOSERVICIO">
         <mat-header-cell *matHeaderCellDef mat-sort-header>SERVICIO </mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -55,18 +86,18 @@ listado de autos vista 360 con los Propietarios, Caracteristicas autos.
     </ng-container>
 
 
-    <ng-container matColumnDef="MARCA">
+    <!-- ng-container matColumnDef="MARCA">
         <mat-header-cell *matHeaderCellDef mat-sort-header> MARCA </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
-    </ng-container>
+    </ng-container -->
 
 
-    <ng-container matColumnDef="LINEA">
+    <!-- ng-container matColumnDef="LINEA">
         <mat-header-cell *matHeaderCellDef mat-sort-header> LINEA </mat-header-cell>
         <mat-cell *matCellDef="let element">
             {{element.linea}}
         </mat-cell>
-    </ng-container>
+    </ng-container -->
 
 
     <ng-container matColumnDef="MODELO">
@@ -77,7 +108,7 @@ listado de autos vista 360 con los Propietarios, Caracteristicas autos.
     </ng-container>
 
     <ng-container matColumnDef="FECHAIMPORTACION">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> FECHAIMPORTACION </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> FECHA IMPORTACION </mat-header-cell>
         <mat-cell *matCellDef="let element">
 
             {{pipe.transform(element.fechaImportacion, 'mediumDate')}}
@@ -101,7 +132,7 @@ listado de autos vista 360 con los Propietarios, Caracteristicas autos.
     <ng-container matColumnDef="NUMEROMOTOR">
         <mat-header-cell *matHeaderCellDef mat-sort-header> NUM MOTOR </mat-header-cell>
         <mat-cell *matCellDef="let element">
-            {{element.numeroMotor}}        </mat-cell>
+            {{element.numeroMotor}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="VIN">
@@ -159,7 +190,8 @@ listado de autos vista 360 con los Propietarios, Caracteristicas autos.
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
 
-    <mat-row *matRowDef="let element; columns: displayedColumns;"  [ngClass]="{'make-gold': element.color_ETIQUETA == 'NARANJA', 'make-verde': element.color_ETIQUETA == 'VERDE',  'make-amarillo': element.color_ETIQUETA == 'AMARILLO', 'make-azul': element.color_ETIQUETA == 'AZUL', 'make-gris': element.color_ETIQUETA == 'GRIS' } " ></mat-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;"
+        [ngClass]="{'make-gold': element.color_ETIQUETA == 'NARANJA', 'make-verde': element.color_ETIQUETA == 'VERDE',  'make-amarillo': element.color_ETIQUETA == 'AMARILLO', 'make-azul': element.color_ETIQUETA == 'AZUL', 'make-gris': element.color_ETIQUETA == 'GRIS' } "></mat-row>
 
 
 </mat-table>

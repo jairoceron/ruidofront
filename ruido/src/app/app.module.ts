@@ -84,6 +84,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { AyudaComponent } from './etiquetado/ayuda/ayuda.component';
 import { DatagenComponent } from './etiquetado/datagen/datagen.component';
 import { EstaticComponent } from './etiquetado/estatic/estatic.component';
+import { CiudadanoComponent } from './etiquetado/ciudadano/ciudadano.component';
 
 
 
@@ -126,7 +127,7 @@ import { EstaticComponent } from './etiquetado/estatic/estatic.component';
     HeaderComponent, ObjetoplacaComponent,
      DialogVisorPdfComponent, ExamplePdfViewerComponent, 
      VariableComponent, DatabaseComponent,
-    DialogVisorPdfComponent, HeaderetiqueComponent, AyudaComponent, DatagenComponent, EstaticComponent
+    DialogVisorPdfComponent, HeaderetiqueComponent, AyudaComponent, DatagenComponent, EstaticComponent, CiudadanoComponent
   ],
   imports: [
     DragDropModule,

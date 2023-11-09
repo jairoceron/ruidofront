@@ -196,6 +196,7 @@ export class DashboardComponent implements OnInit {
     this.consultaVariables();
     this.listEstadoTramite();
     this.consultaListaLocalidades();
+    console.log("No es compentencia ", ESTADO_TRAMITE_NO_ES_COMPETENCIA);
     this.consultaListaObsEstadTramite(ESTADO_TRAMITE_NO_ES_COMPETENCIA);
   }
 
@@ -399,7 +400,7 @@ export class DashboardComponent implements OnInit {
 
 
         console.log('dashboard ...... ', x);
-
+        //ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff  
         this.pqrs = x;
         console.log('paso 0');
         this.dataSource = new MatTableDataSource(this.pqrs);
@@ -601,7 +602,7 @@ export class DashboardComponent implements OnInit {
     this.estadoService.consultaObsEstadoTram(estado).subscribe(x => {
 
       x;
-      console.log('observaciones de los estados ::', x);
+      console.log('!!!!!!!! observaciones de los estados ::', x);
       this.listObsEstadoTramite = x;
     })
   }

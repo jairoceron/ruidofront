@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import * as XLSX from 'xlsx';
+import { EvaEtiquetado } from '../modelos/login.interface';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:charset=UTF-8';
 
 const EXCEL_EXTENSION = '.xlsx';
@@ -13,10 +14,10 @@ const EXCEL_EXTENSION = '.xlsx';
   providedIn: 'root'
 })
 export class ExcelService {
-  
+
   private url = environment.ruidoURL;
-  excelData:any;
-  constructor(private http:HttpClient) { }
+  excelData: any;
+  constructor(private http: HttpClient) { }
 
   public exportAsExcelFile(json: any[], excelFileName: string): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
@@ -32,29 +33,57 @@ export class ExcelService {
 
   }
 
- cargaDataExcel(visita : any[]):Observable<String> {
-  let direccion = this.url + "cargaDataExcel";
-  let lineax = "Bearer " + localStorage.getItem("token");
-  let customHeaders = new HttpHeaders();
-  customHeaders =customHeaders.append('content-type','application/json');
-  customHeaders =customHeaders.append('Authorization', lineax);
+  cargaDataExcel(visita: any[]): Observable<String> {
+    let direccion = this.url + "cargaDataExcel";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
 
-  return this.http.post<String>(direccion, visita,  {
-      'headers':customHeaders ,});
-     
-}
+    return this.http.post<String>(direccion, visita, {
+      'headers': customHeaders,
+    });
 
-cargaDataExcelPQRS(visita : any[]):Observable<String> {
-  let direccion = this.url + "cargaDataExcelPQRS";
-  let lineax = "Bearer " + localStorage.getItem("token");
-  let customHeaders = new HttpHeaders();
-  customHeaders =customHeaders.append('content-type','application/json');
-  customHeaders =customHeaders.append('Authorization', lineax);
+  }
 
-  return this.http.post<String>(direccion, visita,  {
-      'headers':customHeaders ,});
-     
-}
+  cargaDatafffExcelPQRS(visita: any[]): Observable<String> {
+    let direccion = this.url + "cargaDataExcelPQRS";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
+
+    return this.http.post<String>(direccion, visita, {
+      'headers': customHeaders,
+    });
+
+  }
+
+  cargaDataEtiquetado(listEtiquetado: EvaEtiquetado[]): Observable<String> {
+    let direccion = this.url + "cargaDataExcelEtiquetado";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
+
+    return this.http.post<String>(direccion, listEtiquetado, {
+      'headers': customHeaders,
+    });
+
+  }
+
+  cargaDataExcelPQRS(visita: any[]): Observable<String> {
+    let direccion = this.url + "cargaDataExcelPQRS";
+    let lineax = "Bearer " + localStorage.getItem("token");
+    let customHeaders = new HttpHeaders();
+    customHeaders = customHeaders.append('content-type', 'application/json');
+    customHeaders = customHeaders.append('Authorization', lineax);
+
+    return this.http.post<String>(direccion, visita, {
+      'headers': customHeaders,
+    });
+
+  }
 
 
 }

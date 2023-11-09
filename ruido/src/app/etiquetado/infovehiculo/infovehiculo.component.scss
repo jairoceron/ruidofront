@@ -21,3 +21,29 @@ body {
   color: #fff;
   cursor: move;
 }
+
+table tr td {
+  width: 100%;
+  font-family: Roboto, Arial, sans-serif;
+  border: 1px solid #ccc;
+}
+
+.make-gold {
+    background-color: orange
+}
+
+.make-amarillo  {
+  background-color: yellow
+}
+
+.make-verde  {
+  background-color: rgb(135, 245, 135)
+}
+
+.make-azul  {
+  background-color: rgb(124, 185, 241)
+}
+
+.make-gris  {
+  background-color: gray
+}

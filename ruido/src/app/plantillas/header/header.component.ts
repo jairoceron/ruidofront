@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
 
   checOutFun(checkOutForm  : FormGroup ) {    
       localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      this.username = '';
       this.router.navigate(['login']);
     } 
     

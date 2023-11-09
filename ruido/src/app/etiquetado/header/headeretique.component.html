@@ -11,10 +11,10 @@
 
 
 
-        <a href="#" mat-button>Código QR</a>
-       
-        <a mat-button (click)="propietarioVehiculo()">Datos Propietario del Vehículo</a>
-        <a mat-button (click)="imprimirEtiqHolograma()"><mat-icon>qr_code_scanner</mat-icon></a>
+        <!-- a href="#" mat-button>Código QR</a -->
+
+        <!-- a mat-button (click)="propietarioVehiculo()">Datos Propietario del Vehículo</a -->
+        <!-- a mat-button (click)="imprimirEtiqHolograma()"><mat-icon>qr_code_scanner</mat-icon></a -->
         <a mat-button (click)="ayuda()"><mat-icon>help</mat-icon></a>
         <a mat-button (click)="entityPersistenciaVnk()"><mat-icon>graphic_eq</mat-icon></a>
         <!-- a href="#" mat-button>Menu Item 3</a>
@@ -29,18 +29,28 @@
         <input matInput type="text" [(ngModel)]="placa" (keyup)="actualizaObservador($event )">
         <button *ngIf="placa" matSuffix mat-icon-button aria-label="Clear" (click)="generarPDFetiquetado()">
           <mat-icon>picture_as_pdf</mat-icon>
+
         </button>
+
+        <button *ngIf="placa" matSuffix mat-icon-button aria-label="Clear" (click)="generarPDFetiquetado()">
+          <mat-icon>search</mat-icon>
+        </button>
+
+
+
       </mat-form-field>
 
-      
-      
-     
-        <button *ngIf="placa" matSuffix mat-icon-button aria-label="Clear" (click)="datosVehiculo()">
-          <mat-icon>note_add</mat-icon>
-        </button>
-        
 
 
+
+      <button *ngIf="placa" matSuffix mat-icon-button aria-label="Clear" (click)="datosVehiculo()">
+        <mat-icon>note_add</mat-icon>
+      </button>
+
+
+      <button *ngIf="placa" matSuffix mat-icon-button aria-label="Clear" (click)="descargaExcel()">
+        <mat-icon>cloud_download</mat-icon>
+      </button>
 
 
       <form novalidate [formGroup]="checkOutForm" (ngSubmit)="checOutFun(checkOutForm.value)">

@@ -2,12 +2,12 @@ import { Component, Inject, OnInit, VERSION } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { CilindradaI, ClaseVehiculoI, DialogDataEtiquetado, Informacionvehiculo, MarcaI, TipoCombustibleI, TipoServicioI } from 'src/app/modelos/login.interface';
+import { CilindradaI, ClaseVehiculoI, DialogDataEtiquetado, EvaEtiquetado, Informacionvehiculo, MarcaI, TipoCombustibleI, TipoServicioI, TipologiaVehicular } from 'src/app/modelos/login.interface';
 import { EtiquetadoService } from 'src/app/servicios/etiquetado.service';
 import { NotificationService } from 'src/app/servicios/notification.service';
 import { DialogVisorPdfComponent } from '../dialog-visor-pdf/dialog-visor-pdf.component';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { INFO_VEHICULO } from 'src/app/modelos/ruido.interface';
+import { CIUDADANO, EVA_ETIQUETADO, INFO_VEHICULO, VEHICULO_PESADO_CARGA, VEHICULO_TRANS_PUBL_PASAJER_URBANO } from 'src/app/modelos/ruido.interface';
 
 @Component({
   selector: 'app-infovehiculo',
@@ -16,6 +16,7 @@ import { INFO_VEHICULO } from 'src/app/modelos/ruido.interface';
 })
 export class InfovehiculoComponent implements OnInit {
 
+  evaEtiquetado: EvaEtiquetado = EVA_ETIQUETADO;
   form: FormGroup = new FormGroup({});
   submitted = false;
 
@@ -35,6 +36,9 @@ export class InfovehiculoComponent implements OnInit {
   listClaVehi: ClaseVehiculoI[] = [];  //  { idclasevehiculo:0, nombre:''};
   selectedClaseVehiculo: ClaseVehiculoI = { idclasevehiculo: 0, nombre: '' };
 
+  listTipologiaVehicular: TipologiaVehicular[] = [];  //  { idclasevehiculo:0, nombre:''};
+  selectedTipologiaVehicular: TipologiaVehicular = { idtipologiavehicular: 0, nombre: '' };
+
   listTipoServicio: TipoServicioI[] = [];  //  { };
   selectedTipoServicio: TipoServicioI = { idtiposerv: 0, nombre: '' };
 
@@ -43,6 +47,11 @@ export class InfovehiculoComponent implements OnInit {
 
   placa: string = 'AAA000';
   informacionvehiculo: Informacionvehiculo = INFO_VEHICULO;
+  vehiculoPesadoCarga: string = VEHICULO_PESADO_CARGA;
+  vehiculoTrPubPasaUr: string = VEHICULO_TRANS_PUBL_PASAJER_URBANO
+
+  // aaaaaaaaaaaaaaaaaa 9999999999999999999999999
+
 
   constructor(
     private etService: EtiquetadoService,
@@ -60,7 +69,8 @@ export class InfovehiculoComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("data que trae del otro componente :::::  ", this.data);
-    this.cargaListaMarcas() 
+    this.cargaListaTipologiaVehicular();
+    this.cargaListaMarcas()
     this.cargaListaCilindrada();
     this.cargaListaTipoCombustible();
 
@@ -159,12 +169,14 @@ export class InfovehiculoComponent implements OnInit {
     //  this.cargaDatoPlaca();
     this.informacionvehiculo.placa = this.placa;
     this.informacionvehiculo.claseVehiculo = this.selectedClaseVehiculo.nombre;
-    this.informacionvehiculo.tipologiaVehicular = this.selectedTipoServicio.nombre;
+    this.informacionvehiculo.tipologiaVehicular = this.selectedTipologiaVehicular.nombre;
     this.informacionvehiculo.tipoServicio = this.selectedTipoServicio.nombre;
     this.informacionvehiculo.tipoCombustible = this.selectedTipoCombustible.nombre;
     this.informacionvehiculo.marca = this.selectedMarca.nombre;
     this.informacionvehiculo.cilindraje = this.selectedCilindrada.nombre;
 
+    this.informacionvehiculo.capacidadPasajeros = this.informacionvehiculo.capacidadPasajeros;
+    this.informacionvehiculo.capacidadCarga = this.informacionvehiculo.capacidadCarga;
 
     this.notificationService.confirmation(titMensaje, () => {
 
@@ -172,11 +184,18 @@ export class InfovehiculoComponent implements OnInit {
       this.etService.guardaInfoVehiculo(this.informacionvehiculo).subscribe(
         x => {
           x;
-          console.log('Informacion del Vehiculo.. ', x);
-          console.log('xxxxx ');
-          this.router.navigate(['/etiquetado']).then(() => {
-            window.location.reload();
-          });
+
+          if (localStorage.getItem("username") == CIUDADANO) {
+            this.router.navigate(['eva/ciudadano']).then(() => {
+              window.location.reload();
+            });
+          } else {
+            // console.log('Informacion del Vehiculo.. ', x);
+            // console.log('xxxxx ');
+            this.router.navigate(['/etiquetado']).then(() => {
+              window.location.reload();
+            });
+          }
           // this.router.navigate(['/objetoPlaca']);  // esto va después de que guarda
           // 999999999lllllllllllllllllllllllllllll
         },
@@ -303,23 +322,26 @@ export class InfovehiculoComponent implements OnInit {
   }
 
   recogeDatosModal() {
-    this.informacionvehiculo.vin  = this.data.dataVehiculo.vin;
+    this.informacionvehiculo.vin = this.data.dataVehiculo.vin;
     this.informacionvehiculo.numeroMotor = this.data.dataVehiculo.numeroMotor;
-    this.informacionvehiculo.capacidadCarga  = this.data.dataVehiculo.capacidadCarga;
+    this.informacionvehiculo.capacidadCarga = this.data.dataVehiculo.capacidadCarga;
+    this.informacionvehiculo.capacidadPasajeros = this.data.dataVehiculo.capacidadPasajeros;
+
     this.informacionvehiculo.fechaImportacion = this.data.dataVehiculo.fechaImportacion;
     this.informacionvehiculo.modelo = this.data.dataVehiculo.modelo;
     this.informacionvehiculo.linea = this.data.dataVehiculo.linea;
     this.selectedMarca.nombre = this.data.dataVehiculo.marca;
     this.selectedClaseVehiculo.nombre = this.data.dataVehiculo.claseVehiculo;
+    this.selectedTipologiaVehicular.nombre = this.data.dataVehiculo.tipologiaVehicular;
     this.selectedTipoServicio.nombre = this.data.dataVehiculo.tipoServicio;
     this.placa = this.data.dataVehiculo.placa;
     this.selectedTipoCombustible.nombre = this.data.dataVehiculo.tipoCombustible;
     this.selectedCilindrada.nombre = this.data.dataVehiculo.cilindraje;
     this.informacionvehiculo.ciudadMatricula = this.data.dataVehiculo.ciudadMatricula;
     this.informacionvehiculo.vigenciaRTM = this.data.dataVehiculo.vigenciaRTM;
-    this.informacionvehiculo.tecnRedEmision =  this.data.dataVehiculo.tecnRedEmision;
-    this.informacionvehiculo.estEmisiVehic =  this.data.dataVehiculo.estEmisiVehic;
-    this.informacionvehiculo.subContEmision =  this.data.dataVehiculo.subContEmision;
+    this.informacionvehiculo.tecnRedEmision = this.data.dataVehiculo.tecnRedEmision;
+    this.informacionvehiculo.estEmisiVehic = this.data.dataVehiculo.estEmisiVehic;
+    this.informacionvehiculo.subContEmision = this.data.dataVehiculo.subContEmision;
 
 
     console.log("recoge dtos del modal .... " + this.data.dataVehiculo);
@@ -341,6 +363,14 @@ export class InfovehiculoComponent implements OnInit {
 
   }
 
+  cargaListaTipologiaVehicular() {
+    this.listTipologiaVehicular = [];
+    this.etService.listTipologiaVehicular(-1).subscribe(x => {
+      this.listTipologiaVehicular = x;
+    });
+
+  }
+
   cargaListaMarcas() {
     this.listMarca = [];
     //console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
@@ -349,4 +379,30 @@ export class InfovehiculoComponent implements OnInit {
     });
   }
 
+  calculoFactorVehiAmbiental(event: any) {
+    console.log('este es el evento del cliente :: ', event);
+    let informVehiFAV: Informacionvehiculo = INFO_VEHICULO;
+    informVehiFAV.placa = this.placa;
+    informVehiFAV.claseVehiculo = this.selectedClaseVehiculo.nombre;
+    informVehiFAV.tipologiaVehicular = this.selectedTipologiaVehicular.nombre;
+    informVehiFAV.tipoServicio = this.selectedTipoServicio.nombre;
+    informVehiFAV.tipoCombustible = this.selectedTipoCombustible.nombre;
+    informVehiFAV.marca = this.selectedMarca.nombre;
+    informVehiFAV.cilindraje = this.selectedCilindrada.nombre;
+
+    informVehiFAV.capacidadPasajeros = this.informacionvehiculo.capacidadPasajeros;
+    informVehiFAV.capacidadCarga = this.informacionvehiculo.capacidadCarga;
+
+   
+    this.etService.calculoFactosAmbiVehicular(informVehiFAV).subscribe(x => {
+      
+      if (x == null) {
+        this.evaEtiquetado = EVA_ETIQUETADO;
+      } else {
+        this.evaEtiquetado = x;
+      }
+    });
+
+
+  }
 }
