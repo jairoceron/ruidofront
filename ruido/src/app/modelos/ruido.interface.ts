@@ -296,6 +296,8 @@ export const PROPIETARIOVEHICULO : Propietariovehiculo = {
   email : '@',
 }
 
+export const CONSULTA_VISITA : ConsultaVisita = new ConsultaVisita();
+
 export const CIUDADANO : string = 'CIUDADANO' ;
 export const PASSWDCIUDADANO : string = 'PASSWDCIUDADANO' ;
 

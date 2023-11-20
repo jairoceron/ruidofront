@@ -85,6 +85,8 @@ import { AyudaComponent } from './etiquetado/ayuda/ayuda.component';
 import { DatagenComponent } from './etiquetado/datagen/datagen.component';
 import { EstaticComponent } from './etiquetado/estatic/estatic.component';
 import { CiudadanoComponent } from './etiquetado/ciudadano/ciudadano.component';
+import { CalidaddataComponent } from './microsensor/calidaddata/calidaddata.component';
+import { PublicevaComponent } from './etiquetado/publiceva/publiceva.component';
 
 
 
@@ -127,7 +129,7 @@ import { CiudadanoComponent } from './etiquetado/ciudadano/ciudadano.component';
     HeaderComponent, ObjetoplacaComponent,
      DialogVisorPdfComponent, ExamplePdfViewerComponent, 
      VariableComponent, DatabaseComponent,
-    DialogVisorPdfComponent, HeaderetiqueComponent, AyudaComponent, DatagenComponent, EstaticComponent, CiudadanoComponent
+    DialogVisorPdfComponent, HeaderetiqueComponent, AyudaComponent, DatagenComponent, EstaticComponent, CiudadanoComponent, CalidaddataComponent, PublicevaComponent
   ],
   imports: [
     DragDropModule,
@@ -182,7 +184,8 @@ import { CiudadanoComponent } from './etiquetado/ciudadano/ciudadano.component';
     EtiquetadoComponent,
     PropvehiculoComponent,
     VacioComponent,
-    DialogVisorPdfComponent, HeaderetiqueComponent],
+    DialogVisorPdfComponent, HeaderetiqueComponent,
+    CiudadanoComponent, CalidaddataComponent, PublicevaComponent],
   providers: [MatSnackBarModule],
   //  declarations: [DialogVisorPdfComponent],
 

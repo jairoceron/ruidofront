@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Sbccalidad } from 'src/app/modelos/ruido.interface';
 import { SbccalidadService } from 'src/app/servicios/sbccalidad.service';
 
@@ -14,7 +15,7 @@ import { SbccalidadService } from 'src/app/servicios/sbccalidad.service';
 })
 export class AiresbcComponent implements OnInit {
 
-  @ViewChild(MatPaginator, { static: false })
+  @ViewChild(MatPaginator, { static: false }) 
   paginator!: MatPaginator;
 
 
@@ -38,7 +39,8 @@ export class AiresbcComponent implements OnInit {
   
   constructor(
     private sbccalidadService : SbccalidadService ,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private router: Router,) {
 
    }
 
@@ -61,6 +63,11 @@ export class AiresbcComponent implements OnInit {
   public correrProceso(variable:string) {
     console.log("variable ::  ", variable);
     
+  }
+
+  calidadDeDatos() {
+    console.log('Proceso de calidad de datos')
+    this.router.navigate(['microsensor/dataQuality']);
   }
 
 }

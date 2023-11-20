@@ -236,7 +236,7 @@ export class DashboardComponent implements OnInit {
 
 
   assignComponent(component: string) {
-    console.log('Este es el componente !!!! ... ', component);
+   
     if (component === "consultavisita") this.dummyComponent = RuidoComponent;
     else if (component === "generarindice") this.dummyComponent = EtiquetadoComponent;
     else if (component === "airesbc") this.dummyComponent = AiresbcComponent;
@@ -392,26 +392,26 @@ export class DashboardComponent implements OnInit {
     this.consultaService.consultaObserv.subscribe(x1 => {
 
 
-      console.log('!!!! Esto hace un SUBSCRIBE ANIDADO  !!!!!! ', x1);
+     
       x1;
 
 
       this.variaSesionService.consultaVisita(x1).subscribe(x => {
 
 
-        console.log('dashboard ...... ', x);
+        
         //ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff  
         this.pqrs = x;
-        console.log('paso 0');
+      
         this.dataSource = new MatTableDataSource(this.pqrs);
-        console.log('paso 1');
+      
         this.dataSource.paginator = this.paginator;
         console.log('paso 2');
 
       });
     });
 
-    console.log('b5');
+  
 
   }
 

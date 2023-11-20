@@ -68,4 +68,9 @@ export class LoginComponent implements OnInit {
 
   }
 
+  ingresoCiudadano() {
+    console.log('ingreso a eva ciudadano');
+    this.router.navigate(['eva/ciudadano']);
+  }
+
 }

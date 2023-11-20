@@ -18,15 +18,19 @@ import { VariableComponent } from './datalake/variable/variable.component';
 import { DatabaseComponent } from './util/database/database.component';
 import { AyudaComponent } from './etiquetado/ayuda/ayuda.component';
 import { CiudadanoComponent } from './etiquetado/ciudadano/ciudadano.component';
+import { CalidaddataComponent } from './microsensor/calidaddata/calidaddata.component';
+import { PublicevaComponent } from './etiquetado/publiceva/publiceva.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'login', pathMatch:'full'},
   { path:'login', component:LoginComponent},
   { path:'eva/ciudadano', component:CiudadanoComponent},
+  { path:'eva/publico', component:PublicevaComponent},
   { path:'dashboard', component:DashboardComponent},
   { path:'etiquetado', component:EtiquetadoComponent},
   { path:'ruido', component:RuidoComponent},
   { path:'airesbc', component:AiresbcComponent},
+  { path:'microsensor/dataQuality', component:CalidaddataComponent},
   { path:'visita', component:VisitaComponent},
   { path:'radicado', component:RadicadoComponent},
   { path:'nueVisita', component:NuevisitaComponent}, 
