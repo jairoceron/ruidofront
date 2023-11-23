@@ -163,8 +163,7 @@ export class InfovehiculoComponent implements OnInit {
 
 
     let titMensaje: string = 'Desea guardar la información ..';
-    console.log('inform del vehi .. ', this.informacionvehiculo);
-    //  this.cargaDatoPlaca();
+   
     this.informacionvehiculo.placa = this.placa;
     this.informacionvehiculo.claseVehiculo = this.selectedClaseVehiculo.nombre;
     this.informacionvehiculo.tipologiaVehicular = this.selectedTipologiaVehicular.nombre;
@@ -307,7 +306,7 @@ export class InfovehiculoComponent implements OnInit {
       return;
     }
 
-    console.log(JSON.stringify(this.form.value, null, 2));
+  
   }
 
   onReset(): void {
@@ -392,11 +391,7 @@ export class InfovehiculoComponent implements OnInit {
     let informVehiFAV: Informacionvehiculo = INFO_VEHICULO;
     informVehiFAV.tipologiaVehicular = this.selectedTipologiaVehicular.nombre;
     informVehiFAV.tipoCombustible = this.selectedTipoCombustible.nombre
-    console.log('Aqui es donde se sabe debe cambiar en el select ::: ' , informVehiFAV.tipologiaVehicular  );
-
-    // informVehiFAV.tipologiaVehicular = this.selectedTipologia;
-    console.log('TIPOLOGIA VEHICULAR ..... ', informVehiFAV.tipologiaVehicular);
-
+   
         
     this.etService.actualizarInformaVehiculoBehavior(informVehiFAV);
 /*
@@ -404,7 +399,7 @@ export class InfovehiculoComponent implements OnInit {
   }
 
   calculoFactorVehiAmbiental(event: any) {
-    console.log('este es el evento del cliente :: ', event);
+   
     let informVehiFAV: Informacionvehiculo = INFO_VEHICULO;
     informVehiFAV.placa = this.placa;
     informVehiFAV.claseVehiculo = this.selectedClaseVehiculo.nombre;
@@ -416,7 +411,7 @@ export class InfovehiculoComponent implements OnInit {
 
     informVehiFAV.capacidadPasajeros = this.informacionvehiculo.capacidadPasajeros;
     informVehiFAV.capacidadCarga = this.informacionvehiculo.capacidadCarga;
-    console.log("  !!!!!!  calculoFactorVehiAmbiental  ......  " ,  informVehiFAV  );
+    
    
     this.etService.calculoFactosAmbiVehicular(informVehiFAV).subscribe(x => {
       
