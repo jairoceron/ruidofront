@@ -104,40 +104,16 @@ export class PoligonruidoComponent implements OnInit, AfterViewInit {
     let waypoints: any[] = [];
     waypoints[0] = this.createLatLng(4.2, 71.3);
     waypoints[1] = this.createLatLng(4.3, 71.23);
-    console.log("gdmptlb");
-
-
-
-
-
+    
     this.map.on('click', function(event:any) {
 
-      // New marker on coordinate, add it to the map
-      // new L.Marker(event.latlng).addTo(this.map);
-  
-      // Add coordinate to the polyline
-      // polyline.addLatLng(event.latlng);
-      console.log('ccccc' , event);
+
       var latlng = L.latLng(50.5, 30.5);
-      console.log("esto debe funcionar :: " , event.latlng);
+
       new L.Marker(event.latlng);
   
   });
-    /*
-    this.path=LL.Routing.control({
-      waypoints:waypoints,
-      show:false,
-      createMarker: (i:number,wp:Puntox, n:number)=>this.customMarker(i,wp,n) })
-    .addTo(this.mymap)
    
-    .on('routesfound', (e:Event)=> 
-    {
-    // this.distance = e.routes[0].summary.totalDistance;
-    // this.updateInfopanel(this.distance)
-    console.log('routing distance: ' + this.distance)
-    }
-    )
-*/
   let px : Puntox = {name:'Radicado', latLng:'22'};
 this.customMarker(0, px , 88) ;
   }
@@ -187,9 +163,7 @@ this.customMarker(0, px , 88) ;
   }
 
   onClickGdmptlb(data:any){
-    //let e = JSON.stringify(data)
-    console.log("data clcik",data);
-   // alert("clecked")
+   
  
    }
 

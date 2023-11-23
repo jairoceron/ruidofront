@@ -1,0 +1,16 @@
+<!-- {{ informacionVehx | json }}   -->
+<mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+  <ng-container matColumnDef={{displayedColumn.columna}} class="make-gold"
+    *ngFor="let displayedColumn of displayedColumns">
+    <th mat-header-cell *matHeaderCellDef>{{displayedColumn.label}} </th>
+    <td mat-cell *matCellDef="let element"> {{element[displayedColumn.columna] }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColuXXX"></tr>
+  <tr mat-row [ngClass]="{'make-gold': element.etiquetado == 'NARANJA', 'make-verde': element.etiquetado == 'VERDE', 
+   'make-amarillo': element.etiquetado == 'AMARILLO',
+  'make-azul': element.etiquetado == 'AZUL', 'make-gris': element.etiquetado == 'GRIS' } " *matRowDef="let element; columns: displayedColuXXX;">
+  </tr>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+

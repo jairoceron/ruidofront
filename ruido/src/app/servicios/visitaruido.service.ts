@@ -74,7 +74,7 @@ export class VisitaruidoService {
     this.consultaVisita(consultaVisita).subscribe(x => {
         x;
         this.visitaBehSub.next(x);
-        console.log('Hace la actualizacion de las consultas ... ', x);
+       
     
     });
 
@@ -120,7 +120,7 @@ export class VisitaruidoService {
     customHeaders =customHeaders.append('content-type','application/json');
     customHeaders =customHeaders.append('Authorization', lineax);
     let username = localStorage.getItem("username") ;
-    console.log('Parece que consulta el servicio ::: ');
+   
     return this.http.post<RdoVisita[]>(direccion, username, {
       'headers':customHeaders ,
      });
@@ -134,7 +134,7 @@ export class VisitaruidoService {
     customHeaders =customHeaders.append('content-type','application/json');
     customHeaders =customHeaders.append('Authorization', lineax);
     let username = localStorage.getItem("username") ;
-    console.log('Parece que consulta el servicio ::: ');
+    
     return this.http.post<Visitas[]>(direccion, username, {
       'headers':customHeaders ,
      });

@@ -51,7 +51,7 @@ export class PlacaComponent implements OnInit {
   cargarDatasource() {
     this.etService.listPropietarioVehiculo('AGA258').subscribe(x => {
       x;
-      console.log(x);
+     
       this.dataSource = new MatTableDataSource<Propietariovehiculo>(x);
     })
   }

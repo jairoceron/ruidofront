@@ -166,7 +166,7 @@ export class RadicadoComponent implements OnInit {
 
     this.radicadoService.guardarRadicado(radicado).subscribe(x => {
       x;
-      console.log('Valor de retorno luego del registro :: ', x);
+     
       this.toastr.success('Registro Exitoso', radicado.radicado);
       this.route.navigate(['dashboard']);
       //   this.router.navigate(['etiquetado']);
@@ -179,7 +179,7 @@ export class RadicadoComponent implements OnInit {
     this.sectorService.consultaSector(sector).subscribe(x => {
 
       x;
-      console.log(x);
+     
       this.listRuiSector = x;
       // ************************************
     })
@@ -190,7 +190,7 @@ export class RadicadoComponent implements OnInit {
     this.localidadService.consultaLocalidad(localidad).subscribe(x => {
 
       x;
-      //  console.log(x);
+     
       this.listRuiLocalidad = x;
     })
   }
@@ -200,7 +200,7 @@ export class RadicadoComponent implements OnInit {
     this.asuntoService.consultaAsunto(asunto).subscribe(x => {
 
       x;
-      console.log('aSUNTOS.... ', x);
+     
       this.listRdoAsunto = x;
 
       //this.asuntoSelected = [6, 'EXPEDIENTE'];
@@ -216,7 +216,7 @@ export class RadicadoComponent implements OnInit {
     this.estadoService.consultaEstado(estado).subscribe(x => {
 
       x;
-      console.log(x);
+     
       this.listRdoEstado = x;
     })
   }
@@ -224,11 +224,11 @@ export class RadicadoComponent implements OnInit {
   consultaListaObsEstadTramite(idEstadoTramite: number) {
     let estado: RdoEstadoTramite = { id: idEstadoTramite, nombre: 'xxx' };
 
-    // 9999999999999999999
+    
     this.estadoService.consultaObsEstadoTram(estado).subscribe(x => {
 
       x;
-      console.log('observaciones de los estados ::', x);
+    
       this.listObsEstadoTramite = x;
     })
   }
@@ -238,15 +238,13 @@ export class RadicadoComponent implements OnInit {
     this.profesionalService.consultaProfesionales(profesional).subscribe(x => {
 
       x;
-      console.log(x);
+    
       this.listProfesional = x;
     })
   }
 
   actualizaRadicado() {
-    console.log('Este es el radicado que trajo de la otra pagina :: ', this.data.radicado)
-    //  99999999999999999999
-
+    
 
 
     this.pqrsXX = {
@@ -265,12 +263,12 @@ export class RadicadoComponent implements OnInit {
     //  fecha_radicado: this.fechaRadicado,
     //  asunto_radicacion: this.asuntoSelected[1],
 
-    console.log('actualizacion de datos ::: ', this.pqrsXX);
+   
 
 
     this.radicadoService.updateRadicado(this.pqrsXX).subscribe(x => {
       x;
-      console.log('Valor de retorno luego del registro :: ', x);
+   
       this.toastr.success('Registro Exitoso', this.pqrsXX.radicado);
       this.route.navigate(['dashboard']);
       //   this.router.navigate(['etiquetado']);
@@ -282,13 +280,13 @@ export class RadicadoComponent implements OnInit {
 
   consultaDelRadicadoDB() {
     this.asuntoN = { value: '6', viewValue: 'EXPEDIENTE' };
-    console.log("Consulta del radicado ...");
+   
     this.radicadoService.consultaRadicado(this.data.radicado).subscribe(x => {
       x;
-      console.log(' Consulta radicado ', x);
+   
       let ll: string = '';
       this.asuntoN = { value: '6', viewValue: x.asunto_radicacion };
-      console.log(' Consulta radicado  asunto :: ', this.asuntoN);
+   
       //   this.asuntoSelected = [x.asunto_radicacion, x.asunto_radicacion];
       this.asuntoSelected = { value: x.asunto_radicacion, viewValue: x.asunto_radicacion };
       // this.sectorSelected = [x.sector_reportado, x.sector_reportado];
@@ -305,17 +303,17 @@ export class RadicadoComponent implements OnInit {
         this.radicado = x.radicado,
         this.fechaRadicacion = x.fecha_radicado
 
-      // this.patientCategory
+     
 
     });
 
-    //**************
+    
 
   }
 
 
   onEstadoSelection1() {
-    console.log('Cambia el estado del trámite :::: ', this.estadoTramiteSelected.id);
+   
     this.consultaListaObsEstadTramite(this.estadoTramiteSelected.id);
   }
 

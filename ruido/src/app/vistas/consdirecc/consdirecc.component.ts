@@ -25,7 +25,7 @@ actualizarDireccionServicio() {
 }
 
 onBlur(): void {
-  console.log('Focus Is Lost for this Element ' + this.consultaVisita.direccion);
+ 
   this.actualizarDireccionServicio();
 }
 

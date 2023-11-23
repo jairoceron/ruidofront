@@ -43,7 +43,7 @@ export class HeaderetiqueComponent implements OnInit {
   generarPDFetiquetado() {
     this.etService.generarPDFetiquetado(this.placa).subscribe(x => {
       x;
-      console.log('GDMPTLB ...... ', x);
+     
       this.pantallaModalViewPdf(x);
 
     });
@@ -61,7 +61,7 @@ export class HeaderetiqueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+     
       this.placa = result;
     });
 
@@ -91,13 +91,13 @@ export class HeaderetiqueComponent implements OnInit {
   }
 
   openDialog(infoVehiculo: Informacionvehiculo): void {
-    console.log('Informacion del vehículo ... ' + infoVehiculo.placa);
+    
     const dialogRef = this.dialog.open(InfovehiculoComponent, {
       data: { dataVehiculo: infoVehiculo, },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+     
       this.router.navigate(['/etiquetado']);
 
     });
@@ -112,11 +112,11 @@ export class HeaderetiqueComponent implements OnInit {
 
   imprimirEtiqHolograma() {
 
-    console.log('impresion del holograma : placa inicia la impresion de la etiqueta :::: this.placa >>> ', this.placa);
+   
     this.etService.imprimirEtiqHolograma(this.placa).subscribe(
       x => {
         x;
-        console.log('impresion del holograma : placa', this.placa, ' ---- > ', x);
+       
 
         const dialogRef = this.dialog.open(DialogVisorPdfComponent, {
           width: '500px',
@@ -127,7 +127,7 @@ export class HeaderetiqueComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
+       
           this.placa = result;
         });
 
@@ -143,17 +143,17 @@ export class HeaderetiqueComponent implements OnInit {
   /*
   this.etService.imprimirEtiqHolograma(this.placa).subscribe(x => {
     x;
-    console.log(x);
+   
   }); */
 
   entityPersistenciaVnk() {
     // 6666666666666666666666666666666666
     let tableName = 'pqrs';
-    console.log('TableName  ', tableName);
+  
     this.databaseService.generarEntityTableName(tableName).subscribe(
       x => {
         x;
-        console.log(x);
+       
       }
     )
   }
@@ -166,23 +166,23 @@ export class HeaderetiqueComponent implements OnInit {
   descargaExcel() {
     // descarga -- Propietarios de vehículo
     //          -- Información del vehículo
-    console.log('Descarga a Excel ..... ');
+   
     this.etService.consultaDataInfoVehic(INFO_VEHICULO).subscribe(
       x => {
         this.dataInformacionVehiculo = x;
         this.excelService.exportAsExcelFile(this.dataInformacionVehiculo, 'etiquetado.xls')
-      //  pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+     
 
       }
     );
 
-    console.log('Descarga a Excel lo del propietario del vehiculo ::: ..... ');
+   
     this.etService.listPropietarioVehiculo('GDMPTLB').subscribe(
       x => {
-        console.log('hace la subscripcion ::: ');
+     
         this.dataPropietariovehiculo = x;
         this.excelService.exportAsExcelFile(this.dataPropietariovehiculo, 'propietario.xls')
-      //  pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+     
 
       }
     );

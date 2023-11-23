@@ -20,7 +20,7 @@ export class CalidaddataComponent implements OnInit {
   procesoCalidadMicrosensores() {
     this.calidadMicrosensor.calidadMicrosensor().subscribe(
       x => {x;
-      console.log('ejecucion proceso calidad :: ');
+     
       }
     )
   }

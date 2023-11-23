@@ -18,11 +18,11 @@ export class DatabaseComponent implements OnInit {
   }
 
   generarEntityTablename() {
-    console.log('TableName  ' , this.tableName);
+   
     this.databaseService.generarEntityTableName(this.tableName).subscribe(
       x => { 
         x; 
-        console.log(x);
+      
       } 
     )
   }

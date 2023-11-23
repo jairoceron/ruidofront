@@ -187,7 +187,7 @@ export class DashboardComponent implements OnInit {
     private consultaService: ConsultaService) { }
 
   actualizaVisita() {
-    console.log('actualizacion de la visita :: ');
+    
 
   }
 
@@ -196,7 +196,7 @@ export class DashboardComponent implements OnInit {
     this.consultaVariables();
     this.listEstadoTramite();
     this.consultaListaLocalidades();
-    console.log("No es compentencia ", ESTADO_TRAMITE_NO_ES_COMPETENCIA);
+  
     this.consultaListaObsEstadTramite(ESTADO_TRAMITE_NO_ES_COMPETENCIA);
   }
 
@@ -208,30 +208,13 @@ export class DashboardComponent implements OnInit {
 
     let username: string = localStorage.getItem("username") || '';
     this.variaSesionService.encuentraModulo(username).subscribe(x => {
-      console.log('Este xx es el objeto de sesion 00..... ');
+  
       this.varSesionI = x;
-      // this.varSesionI.modulo
-      console.log(x);
-
-      /*
-      for (var menX of this.varSesionI.menu) {
-                console.log("este es el modulo ::: " , modul);
-               if (menX == 'etiquedado') {
-                this.router.navigate(['etiquetado']);
-                console.log('ingresa a etiquetado ...');
-               }
-               if (menX == 'ruido') {
-                this.router.navigate(['ruido']);
-                console.log('ingresa a ruido ...');
-               }
-      }
-      */
-
+     
     }
     )
 
-    console.log('Esto funciona bien  fechaInicial ', this.fechaInicial);
-    console.log('Esto funciona bien  fechaFinal   ', this.fechaFinal);
+    
   }
 
 
@@ -247,7 +230,7 @@ export class DashboardComponent implements OnInit {
   // fechaInicialX : Date, fechaFinalX : Date
   actualizaElDetalle(radicadoX: string) {
 
-    console.log('EstadoTrámite ', this.vistaSistema);
+   
 
     let consultaVisita: ConsultaVisita = {
       fechaInicial: this.fechaInicial,
@@ -266,14 +249,14 @@ export class DashboardComponent implements OnInit {
       observacionEstadoTramite: '',
     };
 
-    console.log('Actualiza el detalle ..consultaVisita . xxx ', consultaVisita);
+   
 
     this.consultaService.setConsultaActual(consultaVisita);
 
     this.radicadoService.consultaRadicado(radicadoX).subscribe(x => {
       x;
       this.pqrsActual = x;
-      console.log('PQRS actal .. ', this.pqrsActual);
+   
       this.visitaService.pqrsActual(this.pqrsActual);
       let consultaVisita: ConsultaVisita = {
         fechaInicial: new Date(),
@@ -315,7 +298,7 @@ export class DashboardComponent implements OnInit {
     consultaVisita.localidad = this.localidadSelected.value;
     consultaVisita.observacionEstadoTramite = this.estObserSelected.observacion;
 
-    console.log(" CONSULTA VISITA >>>> ", consultaVisita);
+    
 
 
 
@@ -352,42 +335,24 @@ export class DashboardComponent implements OnInit {
   }
 
   consultaVisita(consultaVisita: ConsultaVisita) {
-    console.log('Consulta visita :::');
+    
     // this.consultaService.consultaObserv.subscribe()
 
     this.variaSesionService.consultaVisitaFase2(consultaVisita).subscribe(x => {
-      console.log('Visitas Dto ::: ', x);
+    
       this.pqrs = x;
 
       this.dataSource = new MatTableDataSource(this.pqrs);
-      console.log('paso 1 :: Visitas');
+    
       this.dataSource.paginator = this.paginator;
-      console.log('paso 2 :: Visistas ');
+    
     });
 
 
-    //333333333333333333333333333333;
-    // fsdfds = fff
   }
 
 
   consultaPqrs() {
-    console.log('b1 Estado trámite :. ', this.vistaSistema);
-    // let consultaVisita: ConsultaVisita = { 
-    //  fechaInicial: this.fechaInicial, 
-    //  fechaFinal: this.fechaFinal, 
-    //  radicado: '2021ER82639', 
-    //  vistaSistema:this.vistaSistema,      
-    //  direccion:'',
-    //};
-
-
-
-
-
-    // console.log('b2');
-    //***********
-
 
     this.consultaService.consultaObserv.subscribe(x1 => {
 
@@ -398,15 +363,12 @@ export class DashboardComponent implements OnInit {
 
       this.variaSesionService.consultaVisita(x1).subscribe(x => {
 
-
-        
-        //ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff  
         this.pqrs = x;
       
         this.dataSource = new MatTableDataSource(this.pqrs);
       
         this.dataSource.paginator = this.paginator;
-        console.log('paso 2');
+       
 
       });
     });
@@ -432,7 +394,7 @@ export class DashboardComponent implements OnInit {
   }
 
   descargaExcel() {
-    console.log('Descarga Excel');
+   
     let data: any = [{
       eid: 'e101',
       ename: 'ravi',
@@ -452,21 +414,21 @@ export class DashboardComponent implements OnInit {
   }
 
   readExcel(event: any) {
-    console.log('a1');
+   
     let file = event.target.files[0];
-    console.log('a2');
+   
     let fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
-    console.log('a3');
+   
     fileReader.onload = (e) => {
-      console.log('a4');
+   
       var workBook = XLSX.read(fileReader.result, { type: 'binary' });
-      console.log('a5');
+   
       var sheetNames = workBook.SheetNames;
-      console.log('a6');
+   
       this.excelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])
-      console.log('a7');
-      console.log(this.excelData);
+   
+   
       this.excelService.cargaDataExcel(this.excelData).subscribe(x => { x; }
       );
 
@@ -474,21 +436,21 @@ export class DashboardComponent implements OnInit {
   }
 
   readExcelPQRS(event: any) {
-    console.log('a1');
+   
     let file = event.target.files[0];
-    console.log('a2');
+   
     let fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
-    console.log('a3');
+   
     fileReader.onload = (e) => {
-      console.log('a4');
+   
       var workBook = XLSX.read(fileReader.result, { type: 'binary' });
-      console.log('a5');
+   
       var sheetNames = workBook.SheetNames;
-      console.log('a6');
+   
       this.excelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])
-      console.log('a7');
-      console.log(this.excelData);
+   
+   
       this.excelService.cargaDataExcelPQRS(this.excelData).subscribe(x => { x; }
       );
 
@@ -506,19 +468,19 @@ export class DashboardComponent implements OnInit {
   }
 
   actualizaRadicado(radicadoX: string) {
-    console.log('Actualiza radicado XXXX >> ', radicadoX);
+   
     const dialogRef = this.dialog.open(RadicadoComponent, {
       data: { radicado: radicadoX, estado_tramite: -1 },
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+   
       this.radicado = result;
     });
   }
 
 
   checked() {
-    console.log('Se ha hecho el checked .... ')
+   
   }
 
 
@@ -573,9 +535,9 @@ export class DashboardComponent implements OnInit {
 
 
   listEstadoTramite() {
-    console.log("Consulta por localidad 1b ");
+    
     let rdoEstado: RdoEstadoTramite = { id: 1, nombre: '' }
-    console.log("Consulta por localidad 1c ");
+    
 
     // consultaEstado(estado: RdoEstado): Observable<RdoEstado[]> {
 
@@ -583,15 +545,15 @@ export class DashboardComponent implements OnInit {
       x => {
         x;
         this.listEstadoTramitex = x;
-        console.log('los estados del tramite :: ', x);
+       
 
       });
-    console.log("Consulta por estado tramite ");
+   
   }
 
 
   onEstadoSelection1() {
-    console.log('Cambia el estado del trámite :::: ', this.estadoTramiteSelected.id);
+   
     this.consultaListaObsEstadTramite(this.estadoTramiteSelected.id);
   }
 
@@ -602,7 +564,7 @@ export class DashboardComponent implements OnInit {
     this.estadoService.consultaObsEstadoTram(estado).subscribe(x => {
 
       x;
-      console.log('!!!!!!!! observaciones de los estados ::', x);
+     
       this.listObsEstadoTramite = x;
     })
   }
@@ -612,7 +574,7 @@ export class DashboardComponent implements OnInit {
     this.estadoService.consultaEstado(estado).subscribe(x => {
 
       x;
-      console.log(x);
+    
       this.listRdoEstado = x;
     })
   }
@@ -622,7 +584,7 @@ export class DashboardComponent implements OnInit {
     this.localidadService.consultaLocalidad(localidad).subscribe(x => {
 
       x;
-      //  console.log(x);
+    
       this.listRuiLocalidad = x;
     })
   }

@@ -77,7 +77,7 @@ export class EstaticComponent implements OnInit {
     infoVehiculo.fecha_VIG_FIN_ETIQUETA = this.addYears(new Date(), 2);
 
 
-    console.log(' consciencia ::::.  ', infoVehiculo);
+   
 
     let titMensaje: string = 'Desea guardar la información ..';
 
@@ -89,13 +89,11 @@ export class EstaticComponent implements OnInit {
       this.etService.guardaInfoVehiculo(infoVehiculo).subscribe(
         x => {
           x;
-          console.log('Informacion del Vehiculo.. ', x);
-          console.log('xxxxx ');
+   
           this.router.navigate(['/etiquetado']).then(() => {
              window.location.reload();
           });
-          // this.router.navigate(['/objetoPlaca']);  // esto va después de que guarda
-          // 999999999lllllllllllllllllllllllllllll
+      
         },
         err => {
           this.mensajeDeError = 'ocurrio un error';
@@ -105,7 +103,7 @@ export class EstaticComponent implements OnInit {
 
 
       this.notificationService.success("confirm oked");
-      console.log('Confirmado ........ ');
+    
     },
       'Está seguro de la operación?',
       () => {

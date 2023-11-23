@@ -71,15 +71,13 @@ export class DatagenComponent implements OnInit {
   }
 
   cargaDataInfoVehic(infoVehiculo: Informacionvehiculo) {
-    console.log('Consulta visita :::');
-    // this.consultaService.consultaObserv.subscribe()
+    
 
     this.etService.consultaDataInfoVehic(infoVehiculo).subscribe(
       x => {
-        //    x;
-        console.log(x);
+    
         this.dataSource = new MatTableDataSource(x);
-        console.log('paso 1 :: listado de visitas');
+    
         this.dataSource.paginator = this.paginator;
       }
     )
@@ -89,49 +87,49 @@ export class DatagenComponent implements OnInit {
 
 
   openDialog(infoVehiculo: Informacionvehiculo): void {
-    console.log('Informacion del vehículo ... ' + infoVehiculo.placa);
+   
     const dialogRef = this.dialog.open(InfovehiculoComponent, {
       data: { dataVehiculo: infoVehiculo, },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+   
 
     });
   }
 
   
   openDiagol_PruebasEstaticas(infoVehiculo: Informacionvehiculo): void {
-    console.log('Informacion del vehículo ... ' + infoVehiculo.placa);
+   
     const dialogRef = this.dialog.open(EstaticComponent, {
       data: { dataVehiculo: infoVehiculo, },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+   
 
     });
   }
 
   openDiagol_propietVehiculo(infoVehiculo: Informacionvehiculo): void {
-    console.log('Propietario Informacion del vehículo ... ' + infoVehiculo.placa);
+  
     const dialogRef = this.dialog.open(PropvehiculoComponent, {
       data: { dataVehiculo: infoVehiculo, },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    
 
     });
   }
 
   imprimirEtiqHolograma(infoVehiculo: Informacionvehiculo): void {
 
-    console.log('impresion del holograma : placa inicia la impresion de la etiqueta :::: this.placa >>> ', infoVehiculo.placa);
+   
     this.etService.imprimirEtiqHolograma(infoVehiculo.placa).subscribe(
       x => {
         x;
-        console.log('impresion del holograma : placa', infoVehiculo.placa, ' ---- > ', x);
+      
 
         const dialogRef = this.dialog.open(DialogVisorPdfComponent, {
           width: '500px',
@@ -142,7 +140,7 @@ export class DatagenComponent implements OnInit {
         });
 
      //   dialogRef.afterClosed().subscribe(result => {
-     //     console.log('The dialog was closed');
+    
      //     infoVehiculo.placa = result;
      //   });
 
@@ -157,7 +155,7 @@ export class DatagenComponent implements OnInit {
   imprimirPdfReporte(infoVehiculo: Informacionvehiculo): void {
     this.etService.generarPDFetiquetado(infoVehiculo.placa).subscribe(x => {
       x;
-      console.log('GDMPTLB ...... ', x);
+     
       this.pantallaModalViewPdf(x);
 
     });
@@ -179,7 +177,7 @@ export class DatagenComponent implements OnInit {
     });
 
   //  dialogRef.afterClosed().subscribe(result => {
-  //    console.log('The dialog was closed');
+ 
  //     this.placa = result;
  //   });
 

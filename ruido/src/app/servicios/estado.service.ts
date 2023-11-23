@@ -31,7 +31,7 @@ export class EstadoService {
   }
 
   consultaObsEstadoTram(estado:  RdoEstadoTramite): Observable<ObserEstTramite[]> {
-    console.log('estado :::: ' , estado);
+    
      let direccion = this.url + "observacionTramite";
      let lineax = "Bearer " + localStorage.getItem("token");
      let customHeaders = new HttpHeaders();

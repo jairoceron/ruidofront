@@ -47,55 +47,12 @@ export class EsriComponent  implements OnInit {
     }
 
    inxxxx()  {
-    console.log(`************ I will init eagerly`);
-    /*
-    const map = new Map({
-      basemap: 'dark-gray'
-    });
-*/
-   // center: [-116.3031, 43.6088],
-   // zoom: 12
-   /* 
-    const view = new MapView({
-      container: 'viewDiv',
-      map: map,
-      center: [-116.3031, 43.6088], // lon, lat
-      // scale: 577790.554289
-      zoom: 12
-    });
-*/
-    /*
-    const mapImageLayer2 = new MapImageLayer({
-      url:
-        'https://geocimab.ambientebogota.gov.co/wserver/rest/services/SIIGAR_GESTION/FeatureServer/0'
-    });
-  */
-
-    // esri-support
-    // 27!$dJskeB
   
-  //  map.add(mapImageLayer2);
+
+
 
    }
-  
-/*
-  map : Map = new Map({
-     // basemap: 'satellite'
-     // basemap: 'dark-gray'
-     // basemap: "streets" 
-     basemap: 'dark-gray',
-    });
-*/
 
-    
-    /*
-     view = new MapView({
-      container: 'viewDiv',
-      map: this.map,
-      zoom: 4,
-      center: [-74.0531292, 4.759873],
-    });
- */
 
    options  = {
     url:
@@ -113,29 +70,6 @@ export class EsriComponent  implements OnInit {
   arranca(): void {
 
 
-
-   
- console.log('loladrones')
- /* 
- queryFeatures(this.options)
-  .then(response => {
-    console.log('lola');
-    console.log(response); // 500
-  }); 
-*/
-  // const attachments = new Attachments({});
-  // this.map.add(this.featureLayer);
-  // this.view.ui.add(attachments, 'top-right');
-
- /* 
-  this.featureLayer.when(async () => {
-    const result = await this.featureLayer.queryFeatures({
-      objectIds: [9],
-    });
-    console.log('generacion grafica :::  ', result);
-    attachments.graphic = result.features[0];
-  });
-*/
   }
 
 

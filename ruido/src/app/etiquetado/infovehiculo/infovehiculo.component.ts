@@ -38,6 +38,9 @@ export class InfovehiculoComponent implements OnInit {
 
   listTipologiaVehicular: TipologiaVehicular[] = [];  //  { idclasevehiculo:0, nombre:''};
   selectedTipologiaVehicular: TipologiaVehicular = { idtipologiavehicular: 0, nombre: '' };
+  selectedTipologia = '';
+
+
 
   listTipoServicio: TipoServicioI[] = [];  //  { };
   selectedTipoServicio: TipoServicioI = { idtiposerv: 0, nombre: '' };
@@ -68,18 +71,17 @@ export class InfovehiculoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("data que trae del otro componente :::::  ", this.data);
+    
     this.cargaListaTipologiaVehicular();
     this.cargaListaMarcas()
     this.cargaListaCilindrada();
     this.cargaListaTipoCombustible();
 
     this.recogeDatosModal();
-    // this.cargaDatoPlaca();
+    
     this.cargaDataBaseDatosInfoVehic(this.placa);
 
-    // console.log('asalto de la duda ::: ', this.informacionvehiculo);
-    // this.data.dataVehiculo.placa
+    
   }
 
   cargaValuesForm() {
@@ -113,30 +115,26 @@ export class InfovehiculoComponent implements OnInit {
   }
 
 
-  /*
-  onChangeClaseVehiculo(selectedClaseVehiculo: ClaseVehiculoI ) { 
-    console.log(".............. onchangeClaseVehiculo");
-  }*/
-
+ 
   onChangeTipoServicio(selectedTiposervicio: TipoServicioI) {
-    console.log(".............. onchangeClaseVehiculo");
+    
   }
 
   cargaDataBaseDatosInfoVehic(placa: string) {
 
     this.etService.listClaseVehiculo().subscribe(x => {
       x;
-      console.log('Tipología Vehicular ', x);
+    
       this.listClaVehi = x;
-      // **************************************************
+ 
     });
 
-    console.log('Pasa a tipo de servicio ::: ');
+    
     this.etService.listTipoServicio().subscribe(x => {
       x;
-      console.log('xxxx ::: Tipo Servicio ', x);
+ 
       this.listTipoServicio = x;
-      // **************************************************
+ 
     });
 
     //   this.etService.consultaObjetoPlaca(placa).subscribe(x => {
@@ -144,7 +142,7 @@ export class InfovehiculoComponent implements OnInit {
     //   })
 
     this.listCilindrada = [];
-    console.log("este es el cilindraje ::: ", this.selectedClaseVehiculo.idclasevehiculo);
+    
     this.etService.listCilindrada(this.selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listCilindrada = x;
     });
@@ -190,24 +188,22 @@ export class InfovehiculoComponent implements OnInit {
               window.location.reload();
             });
           } else {
-            // console.log('Informacion del Vehiculo.. ', x);
-            // console.log('xxxxx ');
+            
             this.router.navigate(['/etiquetado']).then(() => {
               window.location.reload();
             });
           }
-          // this.router.navigate(['/objetoPlaca']);  // esto va después de que guarda
-          // 999999999lllllllllllllllllllllllllllll
+          
         },
         err => {
           this.mensajeDeError = 'ocurrio un error';
-          console.log("Error caught at Subscriber " + err);
+     
         }
       )
 
 
       this.notificationService.success("confirm oked");
-      console.log('Confirmado ........ ');
+     
     },
       'Está seguro de la operación?',
       () => {
@@ -234,7 +230,7 @@ export class InfovehiculoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+     
       this.placa = result;
     });
   }
@@ -243,24 +239,22 @@ export class InfovehiculoComponent implements OnInit {
   /*
   onChangeClaseVehiculo(selectedClaseVehiculo: ClaseVehiculoI) {
     // let contClaseVehi = this.indiceVehicForm.get("claseVehiculo") ;
-    // console.log("valor de clase de vehiculo ::: " , contClaseVehi?.value );
-    // console.log("value ... vehiculo ::: " , this.indiceVehicForm.controls['claseVehiculo']);
+   
 
-    console.log("value ... sss ::: fffffffffffffffffffffff ");
-    console.log(selectedClaseVehiculo);
+   
     this.listTipoCom = [];
     this.etService.listTipoCombustible(selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listTipoCom = x;
     });
 
     this.listCilindrada = [];
-    console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
+   
     this.etService.listCilindrada(selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listCilindrada = x;
     });
 
     this.listMarca = [];
-    console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
+   
     this.etService.listMarca(selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listMarca = x;
     });
@@ -344,7 +338,7 @@ export class InfovehiculoComponent implements OnInit {
     this.informacionvehiculo.subContEmision = this.data.dataVehiculo.subContEmision;
 
 
-    console.log("recoge dtos del modal .... " + this.data.dataVehiculo);
+    
   }
 
   cargaListaTipoCombustible() {
@@ -356,7 +350,7 @@ export class InfovehiculoComponent implements OnInit {
 
   cargaListaCilindrada() {
     this.listCilindrada = [];
-    // console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
+    
     this.etService.listCilindrada(-1).subscribe(x => {
       this.listCilindrada = x;
     });
@@ -373,10 +367,40 @@ export class InfovehiculoComponent implements OnInit {
 
   cargaListaMarcas() {
     this.listMarca = [];
-    //console.log("este es el cilindraje ::: ", selectedClaseVehiculo.idclasevehiculo);
+   
     this.etService.listMarca(-4).subscribe(x => {
       this.listMarca = x;
     });
+  }
+
+ 
+  calculoFactorVehiAmbientalTipoVehicular(event: any) {
+    let informVehiFAV: Informacionvehiculo = INFO_VEHICULO;
+    informVehiFAV.tipologiaVehicular = this.selectedTipologiaVehicular.nombre;
+   
+
+    // informVehiFAV.tipologiaVehicular = this.selectedTipologia;
+   
+
+        
+    this.etService.actualizarInformaVehiculoBehavior(informVehiFAV);
+/*
+ */
+  }
+
+  calculoFactorVehiAmbTipoVehicularCombustible(event: any) {
+    let informVehiFAV: Informacionvehiculo = INFO_VEHICULO;
+    informVehiFAV.tipologiaVehicular = this.selectedTipologiaVehicular.nombre;
+    informVehiFAV.tipoCombustible = this.selectedTipoCombustible.nombre
+    console.log('Aqui es donde se sabe debe cambiar en el select ::: ' , informVehiFAV.tipologiaVehicular  );
+
+    // informVehiFAV.tipologiaVehicular = this.selectedTipologia;
+    console.log('TIPOLOGIA VEHICULAR ..... ', informVehiFAV.tipologiaVehicular);
+
+        
+    this.etService.actualizarInformaVehiculoBehavior(informVehiFAV);
+/*
+ */
   }
 
   calculoFactorVehiAmbiental(event: any) {
@@ -392,7 +416,7 @@ export class InfovehiculoComponent implements OnInit {
 
     informVehiFAV.capacidadPasajeros = this.informacionvehiculo.capacidadPasajeros;
     informVehiFAV.capacidadCarga = this.informacionvehiculo.capacidadCarga;
-
+    console.log("  !!!!!!  calculoFactorVehiAmbiental  ......  " ,  informVehiFAV  );
    
     this.etService.calculoFactosAmbiVehicular(informVehiFAV).subscribe(x => {
       

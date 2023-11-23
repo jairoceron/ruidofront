@@ -62,7 +62,7 @@ export class PropvehiculoComponent implements OnInit {
     PROPIETARIOVEHICULO.placa = this.data.dataVehiculo.placa;
     this.etService.propietarioVehiculoPlaca(PROPIETARIOVEHICULO).subscribe(x => {
 
-      console.log("Propietario del vehiculo ", x);
+     
       if (x == null) {
         // aaaaaaaaaaaaaaaaaaaaaaa
         this.propvehiculo = PROPIETARIOVEHICULO;
@@ -71,7 +71,7 @@ export class PropvehiculoComponent implements OnInit {
         this.propvehiculo = x;
       }
 
-      console.log(x);
+     
     })
 
     //   fffffffffffffffffffffffff 999999999999999
@@ -112,16 +112,12 @@ export class PropvehiculoComponent implements OnInit {
     }
 
 
-    console.log(JSON.stringify(this.form.value, null, 2));
-
-    console.log(this.form.value.primerNombre);
+    
     this.form.get('name of you control')
 
 
 
-    console.log('esta muy interesante GDMPTLB :: ', this.form.controls);
-    console.log('esta muy interesante _____  ', this.propvehiculo);
-
+    
    
     this.propvehiculo.idevapropvehi = this.form.value.idevapropvehi;  
     this.propvehiculo.nombre1 = this.form.value.primerNombre;   
@@ -141,9 +137,7 @@ export class PropvehiculoComponent implements OnInit {
       this.notificationService.success("Confirmación Ok");
       this.etService.guardaPropietarioVehiculo(this.propvehiculo).subscribe(x => {
         x;
-        // console.log(x);
-        // this.router.navigate(['/listPlaca']);
-        // aaaaaaaaaa 999999999999999
+       
 
         if (localStorage.getItem("username") == CIUDADANO) {
           this.router.navigate(['eva/ciudadano']).then(() => {
@@ -171,7 +165,7 @@ export class PropvehiculoComponent implements OnInit {
   }
 
   get f(): { [key: string]: AbstractControl } {
-    // console.log('esta muy interesante GDMPTLB :: ', this.form.controls)
+    
     return this.form.controls;
   }
 

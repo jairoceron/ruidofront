@@ -67,27 +67,26 @@ export class CumpnormaComponent implements OnInit {
     let localidad: RuiLocalidad = { idLocalidad: 1, nombre: 'xxx' };
     this.localidadService.consultaLocalidad(localidad).subscribe(x => {
 
-     // x;
-     // console.log(x);
+     
       this.listRuiLocalidad = x;
     })
   }
 
   listTiposPredio() {
-    console.log("Consulta por localidad 1b ");
+    
     let rdoTipoPredio: SectorReportadoPqrs = { Id: 1, sector_reportado: '' }
-    console.log("Consulta por localidad 1c ");
+    
     this.tipoPredioService.consultaLocalidad(rdoTipoPredio).subscribe(
       x => {
-       // x;
+    
         this.listTPredio = x;
-       // console.log('las localidades :: ', x);
+    
 
       });
-   // console.log("Consulta por localidad 1d ");
+   
   }
   onTipoPredioSelection() {
-    console.log("localidad seleccionada .... ", this.tipoPrediox);
+   
     this.consultaService.updateTipoPredio(this.tipoPrediox); // ***********
     this.consultaService.setVistaSistema(PREDIO2D_NORMATIVI); 
     this.consultaService.updateLocalidad(this.localidad);

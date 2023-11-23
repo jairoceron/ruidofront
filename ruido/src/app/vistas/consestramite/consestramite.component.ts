@@ -20,14 +20,14 @@ export class ConsestramiteComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("Consulta por localidad 1a ");
+   
     this.listLocalidad();
   }
 
   listLocalidad() {
-    console.log("Consulta por localidad 1b ");
+   
     let rdoEstado: RdoEstadoTramite = {id : 1, nombre : ''}
-    console.log("Consulta por localidad 1c ");
+   
 
     // consultaEstado(estado: RdoEstado): Observable<RdoEstado[]> {
 
@@ -35,16 +35,16 @@ export class ConsestramiteComponent implements OnInit {
       x => {
         x; 
         this.listEstadoTramitex = x;
-        console.log('los estados del tramite :: ' , x);
+       
 
     });
-    console.log("Consulta por estado tramite ");
+    
   }
  
   onEstTramiteSelection() {
-    console.log("localidad seleccionada .... " , this.estadoTramitex);
-    this.consultaService.updateEstadoTramite(this.estadoTramitex); // ********
-    this.consultaService.setVistaSistema(CONS_POR_ESTADOTRA);   // ***************
+    
+    this.consultaService.updateEstadoTramite(this.estadoTramitex); 
+    this.consultaService.setVistaSistema(CONS_POR_ESTADOTRA);   
 
 }
 

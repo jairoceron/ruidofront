@@ -46,7 +46,7 @@ export class VisitaprofesionalComponent implements OnInit {
    
     this.visitaruidoService.consultaVisitasProfesionalXX().subscribe(x => {
       x;
-      console.log(x);
+     
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.paginator = this.paginator;
     })
@@ -69,7 +69,7 @@ export class VisitaprofesionalComponent implements OnInit {
   }
 
   actualizaVisita(visitas:Visitas) {
-         console.log(visitas);
+    
   }
 
 }

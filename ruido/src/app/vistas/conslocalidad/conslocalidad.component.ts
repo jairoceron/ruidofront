@@ -21,26 +21,26 @@ export class ConslocalidadComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("Consulta por localidad 1a ");
+   
     this.listLocalidad();
   }
 
   listLocalidad() {
-    console.log("Consulta por localidad 1b ");
+   
     let ruilocalidad: RuiLocalidad = { idLocalidad: 1, nombre: '' }
-    console.log("Consulta por localidad 1c ");
+   
     this.localidadService.consultaLocalidad(ruilocalidad).subscribe(
       x => {
         x;
         this.listRuiLocalidad = x;
-        console.log('las localidades :: ', x);
+   
 
       });
-    console.log("Consulta por localidad 1d ");
+   
   }
 
   onLocalidadSelection() {
-    console.log("localidad seleccionada .... ", this.localidadx);
+   
     this.consultaService.updateLocalidad(this.localidadx);
     this.consultaService.setVistaSistema(PQRS_POR_LOCALIDAD);
 

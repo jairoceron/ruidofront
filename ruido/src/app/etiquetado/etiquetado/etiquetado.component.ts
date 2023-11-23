@@ -55,7 +55,7 @@ export class EtiquetadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.etService.listClaseVehiculo().subscribe( x => { 
-      console.log('clases de vehiculoc ... ' , x);
+   
       this.listClaVehi = x;
     })
   }
@@ -66,16 +66,12 @@ export class EtiquetadoComponent implements OnInit {
   generarPDFetiquetado() {
     this.etService.generarPDFetiquetado(this.placa).subscribe( x => {
        x;
-       console.log(x);
+    
       });
   }
 
   onChangeClaseVehiculo(selectedClaseVehiculo: ClaseVehiculoI ) {
-    // let contClaseVehi = this.indiceVehicForm.get("claseVehiculo") ;
-    // console.log("valor de clase de vehiculo ::: " , contClaseVehi?.value );
-    // console.log("value ... vehiculo ::: " , this.indiceVehicForm.controls['claseVehiculo']);
     
-    console.log("value ... sss ::: " , selectedClaseVehiculo);
     this.listTipoCom = [];
     this.etService.listTipoCombustible(selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
       this.listTipoCom = x;
@@ -104,16 +100,10 @@ export class EtiquetadoComponent implements OnInit {
   }
 
   onChangeTipoCombustible(selectedTipoCombustible : TipoCombustibleI )  {
-   // let contClaseVehi = this.indiceVehicForm.get("claseVehiculo") ;
-   // console.log("valor de clase de vehiculo ::: " , contClaseVehi?.value );
-   // console.log("value ... vehiculo ::: " , this.indiceVehicForm.controls['claseVehiculo']);
+  
     
-    console.log("value ... sss ::: " , selectedTipoCombustible);
-    /*
-    this.etService.listTipoCombustible(selectedClaseVehiculo.idclasevehiculo).subscribe(x => {
-      this.listTipoCom = x;
-    });
-*/
+    
+  
 
   }
 
@@ -137,9 +127,9 @@ export class EtiquetadoComponent implements OnInit {
   }
 
   datosVehiculo() {
-    console.log('El siguiente paso es mas duro que este ..... (1)');
+   
     this.router.navigate(['/infoVehic']);
-    console.log('El siguiente paso es mas duro que este ..... (2)');
+   
   }
 //*********************************
 }

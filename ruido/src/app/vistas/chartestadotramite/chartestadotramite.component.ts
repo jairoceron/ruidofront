@@ -64,29 +64,27 @@ export class ChartestadotramiteComponent implements OnInit {
   }
   //onResize(event:any) { this.view = [1900, 1080 ]; }
   onSelect(data:any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    
   }
 
   onActivate(data:any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    
   }
 
   onDeactivate(data:any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    
   }
 
   loadData() {
- //   console.log('a1');
- //   let consultaVisita :ConsultaVisita = { fechaFinal:new Date(), fechaInicial:new Date(), radicado:'000' }
- //   console.log('a2');
+ 
+ 
     this.consultaService.consultaObserv.subscribe(x => {
-    //  console.log('a3');
-    //  console.log(x);
+ 
       x;
       this.estadoService.chartEstadoTramite(x ).subscribe(x => {
-      //  console.log('a4');
+ 
         this.single = x;
-        console.log('chartEstadoTramite <<<<<<<<<< ');
+ 
      });
  
     });

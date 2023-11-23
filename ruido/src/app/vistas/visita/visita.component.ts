@@ -54,19 +54,11 @@ export class VisitaComponent implements OnInit {
     // this.consultaVisitas();
 
     let consultaVisitaV = this.visitaRuidoService.getConsultaVisitaV();
-    /*
-    this.visitaRuidoService.consultaVisita(consultaVisitaV).subscribe(
-     x => {x;
-       this.dataSource = new MatTableDataSource(x);
-       this.dataSource.paginator = this.paginator;
-     }
-    );
-*/
-    console.log('visitacomponent.ts .... xxxx');
+    
     this.visitaRuidoService.pqrObserv.subscribe(x => {
       x;
       this.pqrsActual = x;
-      console.log('Va al componente actual ..... visitaCCC ', x);
+    
     })
 
     this.visitaRuidoService.visitaObser.subscribe(x => {
@@ -76,25 +68,9 @@ export class VisitaComponent implements OnInit {
     })
 
   }
-  /*
   
-
- 
-} */
-
-  /*
-  666666666666666666
-  consultaVisitas() {
-    let consultaVisita: ConsultaVisita = { fechaInicial: this.fechaInicial, fechaFinal: this.fechaInicial, radicado: this.radicado };
-    this.visitaRuido.consultaVisita(consultaVisita).subscribe(x => {
-      this.visita = x;
-      this.dataSource = new MatTableDataSource(this.visita);
-      this.dataSource.paginator = this.paginator;
-    });
-  }
-*/
   nuevaVisita(): void {
-    console.log('salto a nueva Visita :: paso 1x ');
+  
     this.router.navigate(['nueVisita']);
   }
 

@@ -53,14 +53,14 @@ export class CiudadanoComponent implements OnInit {
 
   abreFormCaracVehiculo(): void {
     this.infoVehiculo.placa = this.placa;
-    console.log('Informacion del vehículo ... ' + this.infoVehiculo.placa);
+   
     const dialogRef = this.dialog.open(InfovehiculoComponent, {
       data: { dataVehiculo: this.infoVehiculo, },
     });
 
     /*
      dialogRef.afterClosed().subscribe(result => {
-       console.log('The dialog was closed');
+      
        this.router.navigate(['/etiquetado']);
  
      });
@@ -68,26 +68,25 @@ export class CiudadanoComponent implements OnInit {
   }
 
   readExcelPQRS(event: any) {
-    console.log('a1');
+    
     let file = event.target.files[0];
-    console.log('a2');
+   
     let fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
-    console.log('a3');
+   
     fileReader.onload = (e) => {
-      console.log('a4');
+     
       var workBook = XLSX.read(fileReader.result, { type: 'binary' });
-      console.log('a5');
+    
       var sheetNames = workBook.SheetNames;
-      console.log('a6');
+     
       let i: number;
       for (i = 1; i <= 5; i++) {  // porque son las 5 hojas de calculo
         this.excelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[i]])
-        console.log('a7');
-        console.log(this.excelData);
+        
         this.excelService.cargaDataEtiquetado(this.excelData).subscribe(x => { x; }
 
-          //  66666ddddddddddddddddddddddddddddddddddddddd 
+        
         );
       }
 
@@ -97,15 +96,14 @@ export class CiudadanoComponent implements OnInit {
 
   openDiagol_propietVehiculo(): void {
 
-    // 22222222222222222aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    console.log('Propietario Informacion del vehículo ... ');
+    
     this.infoVehiculo.placa = this.placa;
     const dialogRef = this.dialog.open(PropvehiculoComponent, {
       data: { dataVehiculo: this.infoVehiculo, },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+     
 
     });
   }
@@ -121,18 +119,13 @@ export class CiudadanoComponent implements OnInit {
 
     this.api.loginByEmail(form).subscribe(data => {
       data;
-      console.log('retorna estoo PANTALLA DE CIUDADANO ::: ', data);
+     
       let dataResponse: ResponseI = data;
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("username", CIUDADANO);
-      console.log('Hasta aqui va bien ... ');
-      // this.router.navigate(['dashboard']);  // si es un usuario válido debe ingresar al menú. 99999999
-      // this.router.navigate(['encabezado']);
+    
       this.errorStatus = false;
-      // if (dataResponse.status="ok") {
-
-      // }
-
+    
 
 
     });

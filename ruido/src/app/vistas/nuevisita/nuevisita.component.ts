@@ -65,7 +65,7 @@ export class NuevisitaComponent implements OnInit {
     this.profesionalService.consultaProfesionales(profesional).subscribe(x => {
 
       x;
-      console.log(x);
+    
       this.listProfesional = x;
     })
   }
@@ -75,7 +75,7 @@ export class NuevisitaComponent implements OnInit {
   }
 
   guardarVisita() {
-    console.log('xxxx :: zzzz Fecha Inicial::: >>>', this.fechaInicial);
+   
 
     let visita: Visitas = {
 
@@ -150,7 +150,7 @@ export class NuevisitaComponent implements OnInit {
 
     this.visitaRuidoService.guardaVisitaXX(visita).subscribe(x => {
       x;
-      console.log('guarda:: ', visita);
+     
       let contenido = "<div class='e-custom'>Take a look at our next generation <b>Javascript</b> <a href='https://ej2.syncfusion.com/home/index.html' target='_blank'>LEARN MORE</a></div>";
       let options = { closeButton: true, tapToDismiss: false, titleClass: 'red', timeOut: 3000, progressBar: true, enableHtml: true };
 
@@ -177,22 +177,14 @@ export class NuevisitaComponent implements OnInit {
       this.visitaRuidoService.setConsultaVisitaV(consultaVisita);
       this.visitaRuidoService.actualizaInfoVisiPorRadicado(consultaVisita);
 
-      // con esto actualiza el behavior subject ...
-      // y debería actualizarse el componente y en la pantalla aparece a este radicado el histórico de visitas.
-
-      //.subscribe(x => {
-      //x;
-      //console.log('actualizacion del objeto:: ',x);          
-      // });
-
-      // ******
+      
 
     });
 
   }
 
   toasterClickedHandler() {
-    console.log('Toastr clicked');
+   
   }
 
   dateFilter = (d: Date): boolean => {
@@ -208,7 +200,7 @@ export class NuevisitaComponent implements OnInit {
     const todaysDateObject = new Date();
     const today = todaysDateObject.getDate();
     const actualMonth = todaysDateObject.getMonth();
-    console.log(todays_date)
+   
 
     /** Prevent actual system date from being selected.*/
     if (month === actualMonth && todays_date === today) {

@@ -24,7 +24,7 @@ export class VarSesionService {
 
   encuentraModulo(username: string): Observable<VariableSesionI> {
     let direccion = this.url + "variableSesion";
-    console.log("estara el token ?  ", localStorage.getItem("token"));
+   
 
     let lineax = "Bearer " + localStorage.getItem("token");
 
@@ -35,7 +35,7 @@ export class VarSesionService {
     customHeaders = customHeaders.append('content-type', 'application/json');
     //  customHeaders =customHeaders.append('Access-Control-Allow-Origin', '*')
     customHeaders = customHeaders.append('Authorization', lineax);
-    console.log('004 ', customHeaders);
+   
 
 
     // return this.http.post<VariableSesionI>(direccion, JSON.stringify(username), {
@@ -83,8 +83,7 @@ export class VarSesionService {
   consultaVisita(consultaVisita: ConsultaVisita): Observable<PqrsDTO[]> {
 
    
-   // console.log('Miremos que visita es :::!!!!!!  ' , this.consultaVisita);
-
+  
     let direccion = this.url + "consultaVisita";
 
     if (consultaVisita.vistaSistema === CONS_POR_DIRECCION) {

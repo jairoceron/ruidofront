@@ -15,7 +15,8 @@
 
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="claseVehiculo" class="form-label">Tipología Vehicular</mat-label>
-            <mat-select [(ngModel)]="selectedTipologiaVehicular.nombre" id="tipologiaVehicular">
+            <mat-select [(ngModel)]="selectedTipologiaVehicular.nombre"
+                (ngModelChange)="calculoFactorVehiAmbientalTipoVehicular($event)" id="tipologiaVehicular">
                 <mat-option *ngFor="let lTipolVeh of listTipologiaVehicular" [value]="lTipolVeh.nombre">
                     {{lTipolVeh.nombre}}
                 </mat-option>
@@ -25,7 +26,8 @@
         &nbsp;
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="claseVehiculo" class="form-label">Clase de Vehículo</mat-label>
-            <mat-select [(ngModel)]="selectedClaseVehiculo.nombre" id="claseVehiculo" (clic)="calculoFactorVehiAmbiental($event)">
+            <mat-select [(ngModel)]="selectedClaseVehiculo.nombre" id="claseVehiculo"
+                (click)="calculoFactorVehiAmbiental($event)">
                 <mat-option *ngFor="let lClVeh of listClaVehi" [value]="lClVeh.nombre">
                     {{lClVeh.nombre}}
                 </mat-option>
@@ -40,7 +42,7 @@
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="tipoServicio" class="form-label">Tipo de Servicio</mat-label>
             <mat-select [(ngModel)]="selectedTipoServicio.nombre" id="tipoServicio"
-                (change)="onChangeTipoServicio(selectedTipoServicio)"  (clic)="calculoFactorVehiAmbiental($event)">
+                (change)="onChangeTipoServicio(selectedTipoServicio)" (click)="calculoFactorVehiAmbiental($event)">
                 <mat-option *ngFor="let lClVeh of listTipoServicio" [value]="lClVeh.nombre">
                     {{lClVeh.nombre}}
                 </mat-option>
@@ -49,11 +51,18 @@
         </mat-form-field>
         &nbsp;
 
+
+        <!-- (blur)="calculoFactorVehiAmbiental($event)"
+        (click)="calculoFactorVehiAmbiental($event)"  
+    (ngModelChange)="onChangeTipoServicio(selectedTipoServicio)"   ********************************
+    -->
+
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label for="tipoCombustible" class="form-label">Tipo de Combustible</mat-label>
 
             <mat-select [(ngModel)]="selectedTipoCombustible.nombre" id="tipoServicio"
-                (ngModelChange)="onChangeTipoServicio(selectedTipoServicio)" (blur)="calculoFactorVehiAmbiental($event)" (clic)="calculoFactorVehiAmbiental($event)">
+                
+                (ngModelChange)="calculoFactorVehiAmbTipoVehicularCombustible($event)" >
                 <mat-option *ngFor="let lClVeh of listTipoCom" [value]="lClVeh.nombre">
                     {{lClVeh.nombre}}
                 </mat-option>
@@ -72,7 +81,8 @@
                     {{lClVeh.nombre}}
                 </mat-option>
             </mat-select -->
-            <input matInput placeholder="" [(ngModel)]="selectedCilindrada.nombre" (blur)="calculoFactorVehiAmbiental($event)">
+            <input matInput placeholder="" [(ngModel)]="selectedCilindrada.nombre"
+                (blur)="calculoFactorVehiAmbiental($event)">
 
         </mat-form-field>
         &nbsp;
@@ -249,70 +259,7 @@
         </div>
         <div>&nbsp;</div -->
 
-
-
-
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
-        <table *ngIf="evaEtiquetado != null">
-            <tr>
-               
-                <th>Clase </th>
-                <th>Combustible </th>
-                <th>Modelo </th>
-                <th>Estandar Emisión </th>
-                <th>Cilindrada </th>
-                <th>Indice Etiquetado </th>
-                <th>fe co </th>
-                <th>fe thc </th>
-                <th>fe NOx </th>
-                <th>fe PM </th>
-                <th>fe CO2 </th>
-                <th>fe CO2eq </th>
-                <th>PN </th>
-                <th>PM llsp </th>
-                <th>OPA </th>
-                <th>FAV </th>
-                <th>Etiquetado </th>
-            </tr>
-            <tr [ngClass]="{'make-gold': evaEtiquetado.etiquetado == 'NARANJA', 'make-verde': evaEtiquetado.etiquetado == 'VERDE',  'make-amarillo': evaEtiquetado.etiquetado == 'AMARILLO', 'make-azul': evaEtiquetado.etiquetado == 'AZUL', 'make-gris': evaEtiquetado.etiquetado == 'GRIS' } ">
-                <!--td>{{evaEtiquetado.clasepapa }}</td -->
-                <td>{{evaEtiquetado.clase }}</td>
-                <td>{{evaEtiquetado.combustible }}</td>
-                <td>{{evaEtiquetado.modelo }}</td>
-                <td>{{evaEtiquetado.estandaremision }}</td>
-                <td>{{evaEtiquetado.cilindrada }}</td>
-                <td>{{evaEtiquetado.indiceetiquetado }}</td>
-                <td>{{evaEtiquetado.fe_co }}</td>
-                <td>{{evaEtiquetado.fe_thc }}</td>
-                <td>{{evaEtiquetado.fe_nox }}</td>
-                <td>{{evaEtiquetado.fe_pm }}</td>
-                <td>{{evaEtiquetado.fe_co2 }}</td>
-                <td>{{evaEtiquetado.fe_co2eq }}</td>
-                <td>{{evaEtiquetado.pn }}</td>
-                <td>{{evaEtiquetado.pm_llsp }}</td>
-                <td>{{evaEtiquetado.opa }}</td>
-                <td>{{evaEtiquetado.fav }}</td>
-                <td>{{evaEtiquetado.etiquetado }}</td>
-            </tr>
-        </table>
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" [ngClass]="{ 'is-invalid': submitted  }" />
-            <label for="acceptTerms" class="form-check-label">Autorización para el tratamiento de datos personales, en
-                cumplimiento de las disposiciones
-                de la Ley 1581 de 2012 y del Decreto reglamentario 1377 de 2013 que desarrollan el
-                derecho de habeas data.</label>
-            <div *ngIf="submitted " class="invalid-feedback">
-
-            </div>
-        </div>
-
-
-        <div>&nbsp;</div>
-
-
-
+       
     </div>
 </mat-card>
+<app-calculo></app-calculo>

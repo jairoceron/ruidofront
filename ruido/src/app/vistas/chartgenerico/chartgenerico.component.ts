@@ -66,33 +66,32 @@ export class ChartgenericoComponent implements OnInit {
   }
   //onResize(event:any) { this.view = [1900, 1080 ]; }
   onSelect(data:any): void {
-    console.log('ChartgenericoComponent   ::   Item clicked', JSON.parse(JSON.stringify(data)));
+    
   }
 
   onActivate(data:any): void {
-    console.log('ChartgenericoComponent   ::  Activate', JSON.parse(JSON.stringify(data)));
+    
   }
 
   onDeactivate(data:any): void {
-    console.log('ChartgenericoComponent   ::  Deactivate', JSON.parse(JSON.stringify(data)));
+    
   }
 
   loadData() {
-    console.log('ChartgenericoComponent   ::  a1');
+    
  
-    console.log('ChartgenericoComponent   ::  a2');
+    
 
 
 
 
     this.consultaService.consultaObserv.subscribe(x => {
-      console.log('ChartgenericoComponent   ::  a3');
-      console.log(x);
+    
       x;
       this.chartgenericoService.chartLoad(x).subscribe(x => {
-        console.log('ChartgenericoComponent   ::  a4');
+    
         this.single = x;
-        console.log('ChartgenericoComponent   ::  <<<<<<<<<< ');
+    
      });
 
     });

@@ -48,29 +48,29 @@ export class Chart2DgenericoComponent implements OnInit {
   }
 
  onSelect(data:any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+   
   }
 
   onActivate(data:any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+   
   }
 
   onDeactivate(data:any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+   
   }
 
   loadData() {
   
-    console.log('a2');
+  
     this.consultaService.consultaObserv.subscribe(x => {
-      console.log('a3');
-      console.log(x);
+  
+  
       x;
       this.chart2DgenericoService.chartLoad(x ).subscribe(x => {
-        console.log('a4');
+  
         x;
         this.multi = x;
-        console.log('<<<<<<<<<< ',x);
+  
      });
  
     });

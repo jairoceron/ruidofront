@@ -13,7 +13,7 @@ import { VarSesionService } from 'src/app/servicios/sesion.service';
 export class ChartpieComponent implements OnInit {
 
   ngOnInit(): void {
-    console.log('Inicializa el contenedor de ChartPieComponent...');
+  
     this.loadData();
   }
   single: ChartGenerico[] = [];
@@ -27,7 +27,7 @@ export class ChartpieComponent implements OnInit {
     domain: ['#01579b']
   };
 
-  view: [number,number] = [1000, 400];
+  view: [number, number] = [1000, 400];
 
   // options
   gradient: boolean = true;
@@ -36,11 +36,11 @@ export class ChartpieComponent implements OnInit {
   isDoughnut: boolean = false;
 
   //colorScheme = {
-   // domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  // domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   //};
 
   //colorScheme =  '#5AA454';
-  
+
 
   name = 'Angular';
 
@@ -60,48 +60,47 @@ export class ChartpieComponent implements OnInit {
   yAxisLabel = 'Número de PQRS';
   timeline = true;
   doughnut = true;
- 
+
 
   constructor(
-    private estadoService : EstadoService,
+    private estadoService: EstadoService,
     // private localidadService : LocalidadService,
-    private varSesionService : VarSesionService,
-    private consultaService : ConsultaService,
-    private chartgenericoService : ChartgenericoService,
+    private varSesionService: VarSesionService,
+    private consultaService: ConsultaService,
+    private chartgenericoService: ChartgenericoService,
 
-    ) {
-  //  Object.assign(this, { single });
+  ) {
+    //  Object.assign(this, { single });
   }
   //onResize(event:any) { this.view = [1900, 1080 ]; }
-  onSelect(data:any): void {
-    console.log('ChartgenericoComponent   ::   Item clicked', JSON.parse(JSON.stringify(data)));
+  onSelect(data: any): void {
+   
   }
 
-  onActivate(data:any): void {
-    console.log('ChartgenericoComponent   ::  Activate', JSON.parse(JSON.stringify(data)));
+  onActivate(data: any): void {
+   
   }
 
-  onDeactivate(data:any): void {
-    console.log('ChartgenericoComponent   ::  Deactivate', JSON.parse(JSON.stringify(data)));
+  onDeactivate(data: any): void {
+   
   }
 
   loadData() {
-    console.log('ChartgenericoComponent   ::  a1');
- 
-    console.log('ChartgenericoComponent   ::  a2');
+   
+
+   
 
 
 
 
     this.consultaService.consultaObserv.subscribe(x => {
-      console.log('ChartgenericoComponent   ::  a3');
-      console.log(x);
+   
       x;
       this.chartgenericoService.chartLoad(x).subscribe(x => {
-        console.log('ChartgenericoComponent   ::  a4');
+       
         this.single = x;
-        console.log('ChartgenericoComponent   ::  <<<<<<<<<< ');
-     });
+       
+      });
 
     });
 

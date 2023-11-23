@@ -55,18 +55,17 @@ export class AiresbcComponent implements OnInit {
         this.sbccalidad = x;
         this.detailDS = new MatTableDataSource(this.sbccalidad);
         this.detailDS.paginator = this.paginator;
-        console.log('Consulta de data ..... ', x);
-        console.log(x);
+     
       });
   }
 
   public correrProceso(variable:string) {
-    console.log("variable ::  ", variable);
+   
     
   }
 
   calidadDeDatos() {
-    console.log('Proceso de calidad de datos')
+   
     this.router.navigate(['microsensor/dataQuality']);
   }
 

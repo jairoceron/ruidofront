@@ -21,26 +21,26 @@ export class ConstipopredioComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("Consulta por localidad 1a ");
+   
     this.listLocalidad();
   }
 
   listLocalidad() {
-    console.log("Consulta por localidad 1b ");
+   
     let rdoTipoPredio: SectorReportadoPqrs  = { Id: 1, sector_reportado: '' }
-    console.log("Consulta por localidad 1c ");
+   
     this.tipoPredioService.consultaLocalidad(rdoTipoPredio).subscribe(
       x => {
         x;
         this.listTPredio = x;
-        console.log('las localidades :: ', x);
+   
 
       });
-    console.log("Consulta por localidad 1d ");
+   
   }
 
   onTipoPredioSelection() {
-    console.log("localidad seleccionada .... ", this.tipoPrediox);
+   
     this.consultaService.updateTipoPredio(this.tipoPrediox); // ***********
     this.consultaService.setVistaSistema(CONSUL_TIPO_PREDIO); // *****************
 

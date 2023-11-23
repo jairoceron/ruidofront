@@ -87,6 +87,8 @@ import { EstaticComponent } from './etiquetado/estatic/estatic.component';
 import { CiudadanoComponent } from './etiquetado/ciudadano/ciudadano.component';
 import { CalidaddataComponent } from './microsensor/calidaddata/calidaddata.component';
 import { PublicevaComponent } from './etiquetado/publiceva/publiceva.component';
+import { CalculoComponent } from './etiquetado/calculo/calculo.component';
+
 
 
 
@@ -125,11 +127,12 @@ import { PublicevaComponent } from './etiquetado/publiceva/publiceva.component';
     AlertDialogComponent,
     PlacaComponent,
     InfovehiculoComponent,
-    
     HeaderComponent, ObjetoplacaComponent,
-     DialogVisorPdfComponent, ExamplePdfViewerComponent, 
-     VariableComponent, DatabaseComponent,
-    DialogVisorPdfComponent, HeaderetiqueComponent, AyudaComponent, DatagenComponent, EstaticComponent, CiudadanoComponent, CalidaddataComponent, PublicevaComponent
+    DialogVisorPdfComponent, ExamplePdfViewerComponent,
+    VariableComponent, DatabaseComponent,
+    DialogVisorPdfComponent, HeaderetiqueComponent, AyudaComponent, DatagenComponent,
+    EstaticComponent, CiudadanoComponent, CalidaddataComponent, PublicevaComponent, CalculoComponent,
+
   ],
   imports: [
     DragDropModule,

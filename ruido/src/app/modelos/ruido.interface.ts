@@ -323,7 +323,8 @@ export const EVA_ETIQUETADO : EvaEtiquetado = {
   pm_llsp : -1,
   opa : -1,  
   fav : -1,
-  etiquetado : ''   
+  etiquetado : '',   
+  tipologiavehicular : ''
 }
 
 export const INFO_VEHICULO : Informacionvehiculo = {idevapropvehi: -1,

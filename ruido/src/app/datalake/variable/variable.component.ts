@@ -51,12 +51,12 @@ export class VariableComponent implements OnInit {
 
 
 onChangeVariable(selectedVariable :  VariableAmbientalI) {
-   console.log('Variable seleccionada ... ' , selectedVariable );
+   
 
 }
 
 onChangeFuenteDato(selectedFuenteDato : FuenteDatoI) {
-  console.log('Variable seleccionada ... ' , selectedFuenteDato );
+  
 
 }
 

@@ -35,7 +35,7 @@ export class ObjetoplacaComponent implements OnInit {
   }
 
   cargaDatosPlaca() {
-    console.log('this.placa ::: ' , this.placa);
+   
     this.etService.placaObserv.subscribe( x => {
       this.placa = x;
 
@@ -43,7 +43,7 @@ export class ObjetoplacaComponent implements OnInit {
         this.objPlaca = y;
         this.informacionvehiculo = y.informacionvehiculo;
         this.propiedadvehiculo = y.propietariovehiculo;
-        console.log(' :::::  ' , y);
+   
       });
 
     });

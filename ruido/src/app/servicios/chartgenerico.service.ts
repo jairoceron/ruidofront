@@ -31,7 +31,7 @@ export class ChartgenericoService {
     if (consultaVisita.vistaSistema === PREDIO2D_NORMATIVI) {
       direccion = this.url + "chartNormatividad";
     }
-    console.log("REaliza la solicitud del servicio en:::: " + direccion + "ConsultaVisita: " + consultaVisita);
+   
 
 
     let lineax = "Bearer " + localStorage.getItem("token");

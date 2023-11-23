@@ -50,7 +50,7 @@ private consultaBehSub : BehaviorSubject<ConsultaVisita> = new BehaviorSubject( 
   }
 
   updateDireccion(direccion: string) {
-    console.log('la consulta::: ', this.consultaVisita);
+    
     this.consultaVisita.direccion = direccion;
   }
 
